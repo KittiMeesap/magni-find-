@@ -2142,8 +2142,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1383975114}
   - component: {fileID: 1383975113}
-  - component: {fileID: 1383975111}
   - component: {fileID: 1383975115}
+  - component: {fileID: 1383975111}
   m_Layer: 0
   m_Name: Vase
   m_TagString: Untagged

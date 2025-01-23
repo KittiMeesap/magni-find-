@@ -445,6 +445,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: "\"It\u2019s so playful, loves running around, spends the day sleeping,
     eating, and catching mouse.\u201D"
+  hasMagnifierMessage: 0
+  dialogueTextSpecial: 
 --- !u!1 &188457855
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,7 +1509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e66c562d3615ec47b887bb4c278a481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eyeCursor: {fileID: 2800000, guid: 2146b20f94ff3b94e98f7206e3541391, type: 3}
 --- !u!114 &476194212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2686,6 +2687,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: 3
+  hasMagnifierMessage: 0
+  dialogueTextSpecial: 
 --- !u!1 &1383975110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2882,6 +2885,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: "\u201CGrandpa's vase, it was here before I was born. The pattern
     looks pretty, but also strange.\u201D"
+  hasMagnifierMessage: 1
+  dialogueTextSpecial: "\u201CEh, why isn't this working?\""
 --- !u!1 &1565297603
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,13 +12,29 @@ public class MagnifyingGlassController : MonoBehaviour
 
             if (targetObject != null)
             {
+                DialogueSystem dialogueSystem = targetObject.GetComponent<DialogueSystem>();
+
                 if (Input.GetMouseButtonDown(0))
                 {
-                    ModifyObjectScale(targetObject, zoomAmount);
+                    if (dialogueSystem != null && dialogueSystem.hasMagnifierMessage)
+                    {
+                        dialogueSystem.ShowDialogue(); 
+                    }
+                    else
+                    {
+                        ModifyObjectScale(targetObject, zoomAmount);
+                    }
                 }
-                else if (Input.GetMouseButtonDown(1)) 
+                else if (Input.GetMouseButtonDown(1))
                 {
-                    ModifyObjectScale(targetObject, -zoomAmount);
+                    if (dialogueSystem != null && dialogueSystem.hasMagnifierMessage)
+                    {
+                        dialogueSystem.ShowDialogue();
+                    }
+                    else
+                    {
+                        ModifyObjectScale(targetObject, -zoomAmount);
+                    }
                 }
             }
             else

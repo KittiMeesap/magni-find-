@@ -4,16 +4,32 @@ public class DialogueSystem : MonoBehaviour
 {
     [TextArea]
     public string dialogueText;
+    public bool hasMagnifierMessage; 
+    public string dialogueTextSpecial; 
 
     public void ShowDialogue()
     {
-        if (DialogueUI.Instance != null)
+        if (ToolManager.Instance.CurrentMode == "Magnifier" && hasMagnifierMessage)
         {
-            DialogueUI.Instance.ShowDialogue(dialogueText);
+            if (DialogueUI.Instance != null)
+            {
+                DialogueUI.Instance.ShowDialogue(dialogueTextSpecial);
+            }
+            else
+            {
+                Debug.LogError("DialogueUI instance not found in the scene.");
+            }
         }
         else
         {
-            Debug.LogError("DialogueUI instance not found in the scene.");
+            if (DialogueUI.Instance != null)
+            {
+                DialogueUI.Instance.ShowDialogue(dialogueText);
+            }
+            else
+            {
+                Debug.LogError("DialogueUI instance not found in the scene.");
+            }
         }
     }
 }

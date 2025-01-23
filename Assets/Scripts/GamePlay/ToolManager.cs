@@ -7,6 +7,7 @@ public class ToolManager : MonoBehaviour
     public string CurrentMode { get; private set; } = "Hand";
     public Texture2D handCursor;
     public Texture2D magnifierCursor;
+    public Texture2D eyeCursor;
 
     private GameObject selectedObject;
     private CollectibleItem[] collectibleItems;
@@ -36,6 +37,11 @@ public class ToolManager : MonoBehaviour
         {
             SelectObject();
         }
+
+        if (CurrentMode == "Eye" && Input.GetMouseButtonDown(0))
+        {
+            InspectObject();
+        }
     }
 
     public void Initialize(CollectibleItem[] items)
@@ -47,7 +53,19 @@ public class ToolManager : MonoBehaviour
     public void SetToolMode(string mode)
     {
         CurrentMode = mode;
-        Cursor.SetCursor(mode == "Hand" ? handCursor : magnifierCursor, Vector2.zero, CursorMode.Auto);
+        if (mode == "Hand")
+        {
+            Cursor.SetCursor(handCursor, Vector2.zero, CursorMode.Auto);
+        }
+        else if (mode == "Magnifier")
+        {
+            Cursor.SetCursor(magnifierCursor, Vector2.zero, CursorMode.Auto);
+        }
+        else if (mode == "Eye")
+        {
+            Cursor.SetCursor(eyeCursor, Vector2.zero, CursorMode.Auto);
+        }
+        Debug.Log($"Tool mode set to: {mode}");
     }
 
     private void ToggleToolMode()
@@ -55,6 +73,10 @@ public class ToolManager : MonoBehaviour
         if (CurrentMode == "Hand")
         {
             SetToolMode("Magnifier");
+        }
+        else if (CurrentMode == "Magnifier")
+        {
+            SetToolMode("Eye");
         }
         else
         {
@@ -84,9 +106,32 @@ public class ToolManager : MonoBehaviour
         }
     }
 
+    private void InspectObject()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+        if (hit.collider != null)
+        {
+            DialogueSystem dialogueSystem = hit.collider.GetComponent<DialogueSystem>();
+            if (dialogueSystem != null)
+            {
+                dialogueSystem.ShowDialogue();
+            }
+            else
+            {
+                Debug.LogWarning("No DialogueSystem attached to the object.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No object to inspect!");
+        }
+    }
+
     public GameObject GetSelectedObject()
     {
-        return selectedObject; 
+        return selectedObject;
     }
 
     private void ChangeObjectColor(GameObject obj, Color color)

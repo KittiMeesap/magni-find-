@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CollectibleItem : MonoBehaviour
 {
-    public int itemIndex; // ดัชนีของไอเท็มใน Quest UI
+    public int itemIndex;
     private ProgressManager progressManager;
 
     public void Initialize(ProgressManager manager)

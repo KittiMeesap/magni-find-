@@ -27,13 +27,9 @@ public class ToolManager : MonoBehaviour
     private void Update()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll > 0f)
+        if (scroll != 0f)
         {
-            SetToolMode("Magnifier");
-        }
-        else if (scroll < 0f)
-        {
-            SetToolMode("Hand");
+            ToggleToolMode();
         }
 
         if (CurrentMode == "Hand" && Input.GetMouseButtonDown(0))
@@ -52,6 +48,18 @@ public class ToolManager : MonoBehaviour
     {
         CurrentMode = mode;
         Cursor.SetCursor(mode == "Hand" ? handCursor : magnifierCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    private void ToggleToolMode()
+    {
+        if (CurrentMode == "Hand")
+        {
+            SetToolMode("Magnifier");
+        }
+        else
+        {
+            SetToolMode("Hand");
+        }
     }
 
     public void SelectObject()

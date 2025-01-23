@@ -4,12 +4,12 @@ public class ToolManager : MonoBehaviour
 {
     public static ToolManager Instance { get; private set; }
 
-    public string CurrentMode { get; private set; } = "Hand"; // โหมดเริ่มต้น
+    public string CurrentMode { get; private set; } = "Hand";
     public Texture2D handCursor;
     public Texture2D magnifierCursor;
 
     private GameObject selectedObject;
-    private CollectibleItem[] collectibleItems; // เก็บ CollectibleItems ที่ส่งมาจาก GameController
+    private CollectibleItem[] collectibleItems;
 
     private void Awake()
     {
@@ -26,7 +26,17 @@ public class ToolManager : MonoBehaviour
 
     private void Update()
     {
-        if (CurrentMode == "Hand" && Input.GetMouseButtonDown(0)) // ใช้มือเลือกวัตถุ
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll > 0f)
+        {
+            SetToolMode("Magnifier");
+        }
+        else if (scroll < 0f)
+        {
+            SetToolMode("Hand");
+        }
+
+        if (CurrentMode == "Hand" && Input.GetMouseButtonDown(0))
         {
             SelectObject();
         }
@@ -34,7 +44,7 @@ public class ToolManager : MonoBehaviour
 
     public void Initialize(CollectibleItem[] items)
     {
-        collectibleItems = items; // เก็บ CollectibleItems ที่ได้รับ
+        collectibleItems = items;
         Debug.Log("ToolManager initialized with collectible items.");
     }
 
@@ -53,11 +63,11 @@ public class ToolManager : MonoBehaviour
         {
             if (selectedObject != null)
             {
-                ChangeObjectColor(selectedObject, Color.white); // รีเซ็ตสีวัตถุเดิม
+                ChangeObjectColor(selectedObject, Color.white);
             }
 
-            selectedObject = hit.collider.gameObject; // กำหนดวัตถุที่เลือก
-            ChangeObjectColor(selectedObject, Color.yellow); // เปลี่ยนสีวัตถุที่เลือก
+            selectedObject = hit.collider.gameObject;
+            ChangeObjectColor(selectedObject, Color.yellow);
             Debug.Log($"Selected: {selectedObject.name}");
         }
         else
@@ -68,7 +78,7 @@ public class ToolManager : MonoBehaviour
 
     public GameObject GetSelectedObject()
     {
-        return selectedObject; // คืนค่าวัตถุที่ถูกเลือก
+        return selectedObject; 
     }
 
     private void ChangeObjectColor(GameObject obj, Color color)

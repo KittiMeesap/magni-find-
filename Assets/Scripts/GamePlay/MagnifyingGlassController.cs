@@ -2,22 +2,21 @@ using UnityEngine;
 
 public class MagnifyingGlassController : MonoBehaviour
 {
-    public float zoomAmount = 0.1f; // ปริมาณการย่อ/ขยายต่อคลิก
+    public float zoomAmount = 0.1f;
 
     void Update()
     {
-        // ตรวจสอบโหมด Magnifier
         if (ToolManager.Instance.CurrentMode == "Magnifier")
         {
-            GameObject targetObject = ToolManager.Instance.GetSelectedObject(); // ใช้วัตถุที่เลือกจาก ToolManager
+            GameObject targetObject = ToolManager.Instance.GetSelectedObject();
 
             if (targetObject != null)
             {
-                if (Input.GetMouseButtonDown(0)) // คลิกซ้าย -> ขยาย
+                if (Input.GetMouseButtonDown(0))
                 {
                     ModifyObjectScale(targetObject, zoomAmount);
                 }
-                else if (Input.GetMouseButtonDown(1)) // คลิกขวา -> ย่อ
+                else if (Input.GetMouseButtonDown(1)) 
                 {
                     ModifyObjectScale(targetObject, -zoomAmount);
                 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 436e0e1d0d5a7704eb60ca9ccd5adf0b
+guid: 6143512645e985e4ea069a7a1d0a1a5a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4893345104651483093
-    second: t_3_0
+      213: 1989015027829057303
+    second: interactIcon eye_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,9 +72,9 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 4
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: t_3_0
+      name: interactIcon eye_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 171
-        height: 200
+        x: 3
+        y: 16
+        width: 122
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d7f5265277a8e340800000000000000
-      internalID: 4893345104651483093
+      spriteID: 7172aaa21a66a9b10800000000000000
+      internalID: 1989015027829057303
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      t_3_0: 4893345104651483093
+      interactIcon eye_0: 1989015027829057303
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

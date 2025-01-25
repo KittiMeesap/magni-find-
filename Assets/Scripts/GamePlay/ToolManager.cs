@@ -91,20 +91,35 @@ public class ToolManager : MonoBehaviour
 
         if (hit.collider != null)
         {
-            if (selectedObject != null)
-            {
-                ChangeObjectColor(selectedObject, Color.white);
-            }
+            GameObject clickedObject = hit.collider.gameObject;
 
-            selectedObject = hit.collider.gameObject;
-            ChangeObjectColor(selectedObject, Color.yellow);
-            Debug.Log($"Selected: {selectedObject.name}");
+            // ถ้าคลิกวัตถุที่เลือกอยู่ ให้ยกเลิกการเลือก
+            if (selectedObject == clickedObject)
+            {
+                ChangeObjectColor(selectedObject, Color.white); // รีเซ็ตสีวัตถุเดิม
+                selectedObject = null; // ยกเลิกการเลือก
+                Debug.Log("Deselected the object.");
+            }
+            else
+            {
+                // ถ้ามีวัตถุอื่นถูกเลือกอยู่ ให้รีเซ็ตก่อน
+                if (selectedObject != null)
+                {
+                    ChangeObjectColor(selectedObject, Color.white); // รีเซ็ตสีวัตถุเดิม
+                }
+
+                // เลือกวัตถุใหม่
+                selectedObject = clickedObject;
+                ChangeObjectColor(selectedObject, Color.yellow); // เปลี่ยนสีวัตถุที่เลือก
+                Debug.Log($"Selected: {selectedObject.name}");
+            }
         }
         else
         {
             Debug.LogWarning("No object selected!");
         }
     }
+
 
     private void InspectObject()
     {

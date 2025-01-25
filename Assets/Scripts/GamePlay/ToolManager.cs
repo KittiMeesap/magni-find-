@@ -108,7 +108,7 @@ public class ToolManager : MonoBehaviour
 
     void ModifyObjectScale(GameObject target, float scaleChange)
     {
-        BreakableObject breakable = target.GetComponent<BreakableObject>();
+        InteractableObject breakable = target.GetComponent<InteractableObject>();
         if (breakable != null)
         {
             breakable.ModifyScale(scaleChange);

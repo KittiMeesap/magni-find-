@@ -288,6 +288,8 @@ MonoBehaviour:
   maxScale: 1.5
   minScale: 0.5
   hiddenItem: {fileID: 749684768}
+  canBreak: 1
+  canScale: 1
 --- !u!60 &110950020
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1117,7 +1119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &357184063
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2667,9 +2669,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredAction: 1
-  maxScale: 1.5
-  minScale: 0.5
+  maxScale: 1
+  minScale: 0.1
   hiddenItem: {fileID: 352665972}
+  canBreak: 1
+  canScale: 1
 --- !u!60 &1349162925
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2889,9 +2893,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredAction: 0
-  maxScale: 1.5
-  minScale: 0.5
+  maxScale: 1
+  minScale: 0.1
   hiddenItem: {fileID: 755485559}
+  canBreak: 1
+  canScale: 1
 --- !u!212 &1383975113
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -12,6 +12,11 @@ public class ToolManager : MonoBehaviour
     private GameObject selectedObject;
     private CollectibleItem[] collectibleItems;
 
+    public Material defaultMaterial;
+    public Material outlineMaterial;
+
+    public float zoomAmount = 0.1f;
+
     private void Awake()
     {
         SetToolMode("Hand");
@@ -38,9 +43,79 @@ public class ToolManager : MonoBehaviour
             SelectObject();
         }
 
-        if (CurrentMode == "Eye" && Input.GetMouseButtonDown(0))
+        if (CurrentMode == "Eye")
         {
-            InspectObject();
+            GameObject targetObject = Instance.GetSelectedObject();
+
+            if (targetObject != null)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    DialogueSystem dialogueSystem = targetObject.GetComponent<DialogueSystem>();
+                    if (dialogueSystem != null)
+                    {
+                        dialogueSystem.ShowDialogue();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("No DialogueSystem attached to the selected object.");
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No object selected! Use Hand mode to select an object first.");
+            }
+        }
+
+        if (CurrentMode == "Magnifier")
+        {
+            GameObject targetObject = Instance.GetSelectedObject();
+
+            if (targetObject != null)
+            {
+                DialogueSystem dialogueSystem = targetObject.GetComponent<DialogueSystem>();
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (dialogueSystem != null && dialogueSystem.hasMagnifierMessage)
+                    {
+                        dialogueSystem.ShowDialogue();
+                    }
+                    else
+                    {
+                        ModifyObjectScale(targetObject, zoomAmount);
+                    }
+                }
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    if (dialogueSystem != null && dialogueSystem.hasMagnifierMessage)
+                    {
+                        dialogueSystem.ShowDialogue();
+                    }
+                    else
+                    {
+                        ModifyObjectScale(targetObject, -zoomAmount);
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No object selected! Use Hand mode to select an object first.");
+            }
+        }
+    }
+
+    void ModifyObjectScale(GameObject target, float scaleChange)
+    {
+        BreakableObject breakable = target.GetComponent<BreakableObject>();
+        if (breakable != null)
+        {
+            breakable.ModifyScale(scaleChange);
+        }
+        else
+        {
+            Debug.LogWarning("Selected object is not breakable.");
         }
     }
 
@@ -96,7 +171,7 @@ public class ToolManager : MonoBehaviour
             // ถ้าคลิกวัตถุที่เลือกอยู่ ให้ยกเลิกการเลือก
             if (selectedObject == clickedObject)
             {
-                ChangeObjectColor(selectedObject, Color.white); // รีเซ็ตสีวัตถุเดิม
+                ApplyMaterial(selectedObject, defaultMaterial); // รีเซ็ต Material เป็นค่าเริ่มต้น
                 selectedObject = null; // ยกเลิกการเลือก
                 Debug.Log("Deselected the object.");
             }
@@ -105,18 +180,27 @@ public class ToolManager : MonoBehaviour
                 // ถ้ามีวัตถุอื่นถูกเลือกอยู่ ให้รีเซ็ตก่อน
                 if (selectedObject != null)
                 {
-                    ChangeObjectColor(selectedObject, Color.white); // รีเซ็ตสีวัตถุเดิม
+                    ApplyMaterial(selectedObject, defaultMaterial); // รีเซ็ต Material เป็นค่าเริ่มต้น
                 }
 
                 // เลือกวัตถุใหม่
                 selectedObject = clickedObject;
-                ChangeObjectColor(selectedObject, Color.yellow); // เปลี่ยนสีวัตถุที่เลือก
+                ApplyMaterial(selectedObject, outlineMaterial); // ใส่ Material แบบ Outline
                 Debug.Log($"Selected: {selectedObject.name}");
             }
         }
         else
         {
             Debug.LogWarning("No object selected!");
+        }
+    }
+
+    private void ApplyMaterial(GameObject obj, Material material)
+    {
+        SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.material = material; // เปลี่ยน Material ของ SpriteRenderer
         }
     }
 

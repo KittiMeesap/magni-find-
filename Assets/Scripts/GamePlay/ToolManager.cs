@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ToolManager : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class ToolManager : MonoBehaviour
 
         if (CurrentMode == "Eye")
         {
+
             GameObject targetObject = Instance.GetSelectedObject();
 
             if (targetObject != null)
@@ -59,6 +61,14 @@ public class ToolManager : MonoBehaviour
                     else
                     {
                         Debug.LogWarning("No DialogueSystem attached to the selected object.");
+                    }
+
+                    InteractableObject interactableObject = targetObject.GetComponent<InteractableObject>();
+
+                    if (interactableObject.IsMiniGameObject == true && interactableObject.minigameNumber == 1)
+                    {
+                        VaseMinigame.Instance.StartMinigame(3);
+                        SetToolMode("Hand");
                     }
                 }
             }
@@ -98,10 +108,6 @@ public class ToolManager : MonoBehaviour
                         ModifyObjectScale(targetObject, -zoomAmount);
                     }
                 }
-            }
-            else
-            {
-                Debug.LogWarning("No object selected! Use Hand mode to select an object first.");
             }
         }
     }
@@ -145,19 +151,38 @@ public class ToolManager : MonoBehaviour
 
     private void ToggleToolMode()
     {
-        if (CurrentMode == "Hand")
+        VaseMinigame vaseMinigame = FindFirstObjectByType<VaseMinigame>();
+
+        if (vaseMinigame.isPlayingVaseMinigame)
         {
-            SetToolMode("Magnifier");
-        }
-        else if (CurrentMode == "Magnifier")
-        {
-            SetToolMode("Eye");
+            // เงื่อนไขเมื่อกำลังเล่น Vase Minigame
+            if (CurrentMode == "Hand")
+            {
+                SetToolMode("Magnifier");
+            }
+            else if (CurrentMode == "Magnifier")
+            {
+                SetToolMode("Hand");
+            }
         }
         else
         {
-            SetToolMode("Hand");
+            // เงื่อนไขเมื่อไม่ได้เล่น Vase Minigame
+            if (CurrentMode == "Hand")
+            {
+                SetToolMode("Magnifier");
+            }
+            else if (CurrentMode == "Magnifier")
+            {
+                SetToolMode("Eye");
+            }
+            else
+            {
+                SetToolMode("Hand");
+            }
         }
     }
+
 
     public void SelectObject()
     {
@@ -168,25 +193,33 @@ public class ToolManager : MonoBehaviour
         {
             GameObject clickedObject = hit.collider.gameObject;
 
-            // ถ้าคลิกวัตถุที่เลือกอยู่ ให้ยกเลิกการเลือก
-            if (selectedObject == clickedObject)
+            // ตรวจสอบว่า GameObject มี Tag เป็น "SelectableObject"
+            if (clickedObject.CompareTag("Object"))
             {
-                ApplyMaterial(selectedObject, defaultMaterial); // รีเซ็ต Material เป็นค่าเริ่มต้น
-                selectedObject = null; // ยกเลิกการเลือก
-                Debug.Log("Deselected the object.");
+                // ถ้าคลิกวัตถุที่เลือกอยู่ ให้ยกเลิกการเลือก
+                if (selectedObject == clickedObject)
+                {
+                    ApplyMaterial(selectedObject, defaultMaterial); // รีเซ็ต Material เป็นค่าเริ่มต้น
+                    selectedObject = null; // ยกเลิกการเลือก
+                    Debug.Log("Deselected the object.");
+                }
+                else
+                {
+                    // ถ้ามีวัตถุอื่นถูกเลือกอยู่ ให้รีเซ็ตก่อน
+                    if (selectedObject != null)
+                    {
+                        ApplyMaterial(selectedObject, defaultMaterial); // รีเซ็ต Material เป็นค่าเริ่มต้น
+                    }
+
+                    // เลือกวัตถุใหม่
+                    selectedObject = clickedObject;
+                    ApplyMaterial(selectedObject, outlineMaterial); // ใส่ Material แบบ Outline
+                    Debug.Log($"Selected: {selectedObject.name}");
+                }
             }
             else
             {
-                // ถ้ามีวัตถุอื่นถูกเลือกอยู่ ให้รีเซ็ตก่อน
-                if (selectedObject != null)
-                {
-                    ApplyMaterial(selectedObject, defaultMaterial); // รีเซ็ต Material เป็นค่าเริ่มต้น
-                }
-
-                // เลือกวัตถุใหม่
-                selectedObject = clickedObject;
-                ApplyMaterial(selectedObject, outlineMaterial); // ใส่ Material แบบ Outline
-                Debug.Log($"Selected: {selectedObject.name}");
+                Debug.LogWarning($"Clicked object {clickedObject.name} does not have the correct tag.");
             }
         }
         else
@@ -204,41 +237,13 @@ public class ToolManager : MonoBehaviour
         }
     }
 
-
-    private void InspectObject()
-    {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-        if (hit.collider != null)
-        {
-            DialogueSystem dialogueSystem = hit.collider.GetComponent<DialogueSystem>();
-            if (dialogueSystem != null)
-            {
-                dialogueSystem.ShowDialogue();
-            }
-            else
-            {
-                Debug.LogWarning("No DialogueSystem attached to the object.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No object to inspect!");
-        }
-    }
-
     public GameObject GetSelectedObject()
     {
         return selectedObject;
     }
 
-    private void ChangeObjectColor(GameObject obj, Color color)
+    public void SetSelectedObject(GameObject obj)
     {
-        SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
-        if (sr != null)
-        {
-            sr.color = color;
-        }
+        selectedObject = obj;
     }
 }

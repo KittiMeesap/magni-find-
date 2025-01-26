@@ -1,16 +1,32 @@
 using UnityEngine;
+using static TMPro.Examples.TMP_ExampleScript_01;
 
 public class InteractableObject : MonoBehaviour
 {
-    [SerializeField] private enum ActionType { Expand, Shrink } // ประเภทการกระทำ
+    [Header("On/Off")]
+    [SerializeField] private bool canBreak = true; // กำหนดวัตถุนี้แตกได้หรือไม่
+    [SerializeField] private bool canScale = true;
+
+    [Header("Scale")]
     [SerializeField] private ActionType requiredAction; // การกระทำที่ต้องการ (ย่อหรือขยาย)
     [SerializeField] private float maxScale = 3f; // ขนาดสูงสุดที่สามารถขยายได้
     [SerializeField] private float minScale = 0.5f; // ขนาดต่ำสุดที่สามารถย่อได้
-    [SerializeField] private GameObject hiddenItem; // ไอเท็มที่ซ่อนอยู่
 
-    [SerializeField] private bool canBreak = true; // กำหนดวัตถุนี้แตกได้หรือไม่
-    [SerializeField] private bool canScale = true;
+    [Header("Reward")]
+    [SerializeField] private GameObject hiddenItem; // ไอเท็มที่ซ่อนอยู
+
+    [Header("MiniGame")]
+    [SerializeField] private bool MiniGameObject = false;
+    [SerializeField] private GameObject minigamePrefab;
+    public int minigameNumber;
+
+    public bool IsMiniGameObject => MiniGameObject;
+    public GameObject MinigamePrefab => minigamePrefab;
+
+
     private bool isActionComplete = false; // เช็คว่าการกระทำเสร็จสมบูรณ์แล้วหรือไม่
+
+    private enum ActionType { Expand, Shrink } // ประเภทการกระทำ
 
     public void ModifyScale(float scaleChange)
     {

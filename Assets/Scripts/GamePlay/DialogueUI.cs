@@ -7,6 +7,7 @@ public class DialogueUI : MonoBehaviour
 
     public GameObject dialoguePanel;
     public TMP_Text dialogueText;
+    private GameObject currentItemObject; // GameObject ปัจจุบันที่แสดงไอเท็ม
 
     private void Awake()
     {
@@ -21,26 +22,45 @@ public class DialogueUI : MonoBehaviour
         dialoguePanel.SetActive(false);
     }
 
-    public void ShowDialogue(string message)
+    public void ShowDialogue(string message, GameObject itemObject = null)
     {
-        dialogueText.text = message; 
-        dialoguePanel.SetActive(true); 
+        dialogueText.text = message;
+        dialoguePanel.SetActive(true);
+
+        // จัดการการแสดง/ซ่อนของไอเท็ม
+        if (currentItemObject != null)
+        {
+            currentItemObject.SetActive(false); // ซ่อนไอเท็มก่อนหน้า
+        }
+
+        if (itemObject != null)
+        {
+            itemObject.SetActive(true); // แสดงไอเท็มใหม่
+            currentItemObject = itemObject; // เก็บไอเท็มที่กำลังแสดง
+        }
     }
 
     public void HideDialogue()
     {
-        dialoguePanel.SetActive(false); 
+        dialoguePanel.SetActive(false);
+
+        // ซ่อนไอเท็มปัจจุบัน
+        if (currentItemObject != null)
+        {
+            currentItemObject.SetActive(false);
+            currentItemObject = null;
+        }
     }
 
     public void ToggleDialoguePanel()
     {
-        if (dialoguePanel.activeSelf)  
+        if (dialoguePanel.activeSelf)
         {
-            HideDialogue(); 
+            HideDialogue();
         }
         else
         {
-            ShowDialogue(dialogueText.text); 
+            ShowDialogue(dialogueText.text);
         }
     }
 }

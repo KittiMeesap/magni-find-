@@ -63,12 +63,22 @@ public class ToolManager : MonoBehaviour
                         Debug.LogWarning("No DialogueSystem attached to the selected object.");
                     }
 
+
+                    //MiniGame Start
                     InteractableObject interactableObject = targetObject.GetComponent<InteractableObject>();
 
-                    if (interactableObject.IsMiniGameObject == true && interactableObject.minigameNumber == 1)
+                    if (interactableObject.IsMiniGameObject == true)
                     {
-                        VaseMinigame.Instance.StartMinigame(3);
                         SetToolMode("Hand");
+
+                        if (interactableObject.minigameNumber == 1)
+                        {
+                            VaseMinigame.Instance.StartMinigame(3);
+                        }
+                        else if (interactableObject.minigameNumber == 2)
+                        {
+                            ClockMinigame.Instance.StartMinigame();
+                        }
                     }
                 }
             }
@@ -152,8 +162,9 @@ public class ToolManager : MonoBehaviour
     private void ToggleToolMode()
     {
         VaseMinigame vaseMinigame = FindFirstObjectByType<VaseMinigame>();
+        ClockMinigame clockeMinigame = FindFirstObjectByType<ClockMinigame>();
 
-        if (vaseMinigame.isPlayingVaseMinigame)
+        if (vaseMinigame.isPlayingVaseMinigame || clockeMinigame.isPlayingClockMinigame)
         {
             // เงื่อนไขเมื่อกำลังเล่น Vase Minigame
             if (CurrentMode == "Hand")

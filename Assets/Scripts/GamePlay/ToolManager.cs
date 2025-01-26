@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -80,6 +81,13 @@ public class ToolManager : MonoBehaviour
                     {
                         SetToolMode("Hand");
 
+                        if (selectedObject)
+                        {
+                            ApplyMaterial(selectedObject, defaultMaterial); // รีเซ็ต Material เป็นค่าเริ่มต้น
+                            selectedObject = null; // ยกเลิกการเลือก
+                            Debug.Log("Deselected the object.");
+                        }
+
                         if (interactableObject.minigameNumber == 1)
                         {
                             VaseMinigame.Instance.StartMinigame(3);
@@ -90,10 +98,6 @@ public class ToolManager : MonoBehaviour
                         }
                     }
                 }
-            }
-            else
-            {
-                Debug.LogWarning("No object selected! Use Hand mode to select an object first.");
             }
         }
 

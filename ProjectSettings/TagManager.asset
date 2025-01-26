@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BG
   - Object
+  - ClockNumber
   layers:
   - Default
   - TransparentFX

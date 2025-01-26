@@ -1,4 +1,5 @@
 // InteractableClockHand.cs
+using System;
 using UnityEngine;
 
 public class InteractableClockHand : MonoBehaviour
@@ -172,4 +173,21 @@ public class InteractableClockHand : MonoBehaviour
             renderer.material = material;
         }
     }
+
+    public void ResetToInitialPosition(int initialPositionIndex)
+    {
+        // รีเซ็ตตำแหน่งปัจจุบันให้ตรงกับตำแหน่งเริ่มต้น
+        if (positions != null && positions.Length > initialPositionIndex)
+        {
+            currentPositionIndex = initialPositionIndex;
+            transform.localPosition = positions[currentPositionIndex].position;
+            transform.localRotation = Quaternion.Euler(positions[currentPositionIndex].rotation);
+            Debug.Log($"{gameObject.name} reset to initial position: {currentPositionIndex}");
+        }
+        else
+        {
+            Debug.LogError($"{gameObject.name}: Invalid initial position index or positions array.");
+        }
+    }
+
 }

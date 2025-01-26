@@ -31,6 +31,12 @@ public class ToolManager : MonoBehaviour
         }
     }
 
+    private bool IsMinigameActive()
+    {
+        // ตรวจสอบว่ามี Minigame กำลังทำงานอยู่หรือไม่
+        return (ClockMinigame.Instance != null && ClockMinigame.Instance.isPlayingClockMinigame) ||
+               (VaseMinigame.Instance != null && VaseMinigame.Instance.isPlayingVaseMinigame);
+    }
     private void Update()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -41,7 +47,10 @@ public class ToolManager : MonoBehaviour
 
         if (CurrentMode == "Hand" && Input.GetMouseButtonDown(0))
         {
-            SelectObject();
+            if (!IsMinigameActive())
+            {
+                SelectObject();
+            }
         }
 
         if (CurrentMode == "Eye")
@@ -156,7 +165,7 @@ public class ToolManager : MonoBehaviour
         {
             Cursor.SetCursor(eyeCursor, Vector2.zero, CursorMode.Auto);
         }
-        Debug.Log($"Tool mode set to: {mode}");
+        //Debug.Log($"Tool mode set to: {mode}");
     }
 
     private void ToggleToolMode()
@@ -227,10 +236,6 @@ public class ToolManager : MonoBehaviour
                     ApplyMaterial(selectedObject, outlineMaterial); // ใส่ Material แบบ Outline
                     Debug.Log($"Selected: {selectedObject.name}");
                 }
-            }
-            else
-            {
-                Debug.LogWarning($"Clicked object {clickedObject.name} does not have the correct tag.");
             }
         }
         else

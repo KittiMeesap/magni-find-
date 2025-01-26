@@ -10,6 +10,7 @@ public class InteractableClockNumber : MonoBehaviour
 
     private bool isSnapped = false;
     private bool isDragging = false;
+    private static InteractableClockNumber selectedNumber; // ตัวเลขที่กำลังถูกเลือก
 
     private void Update()
     {
@@ -23,7 +24,7 @@ public class InteractableClockNumber : MonoBehaviour
             }
         }
 
-        if (ToolManager.Instance.CurrentMode == "Magnifier" && !isSnapped)
+        if (ToolManager.Instance.CurrentMode == "Magnifier" && !isSnapped && selectedNumber == this)
         {
             HandleScaling();
         }
@@ -34,6 +35,11 @@ public class InteractableClockNumber : MonoBehaviour
         if (ToolManager.Instance.CurrentMode == "Hand" && !isSnapped)
         {
             isDragging = true;
+            selectedNumber = this; // ตั้งค่าตัวเลขที่ถูกเลือก
+        }
+        else if (ToolManager.Instance.CurrentMode == "Magnifier" && !isSnapped)
+        {
+            selectedNumber = this; // ตั้งค่าตัวเลขที่ถูกเลือกเมื่อกดในโหมด Magnifier
         }
     }
 
@@ -86,6 +92,14 @@ public class InteractableClockNumber : MonoBehaviour
     {
         transform.position = targetPosition.transform.position;
         isSnapped = true;
+
+        // ปรับ Order in Layer ลดลง 1
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sortingOrder -= 1;
+        }
+
         Debug.Log($"{gameObject.name} snapped to target successfully!");
         ClockMinigame.Instance.CompletePart();
     }

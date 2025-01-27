@@ -9,9 +9,14 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
     public float scaleStep = 0.1f; // ค่าการเพิ่ม/ลดของการขยาย
     public Vector3 minScale = new Vector3(0.5f, 0.5f, 0.5f); // ขนาดต่ำสุด
     public Vector3 maxScale = new Vector3(3f, 3f, 3f); // ขนาดสูงสุด
+    public float snapYOffset = 0.0f; // Offset แกน Y สำหรับตำแหน่ง Snap
 
     private bool isDragging = false;
     private bool isSnapped = false; // เพิ่มตัวแปรสถานะเพื่อบล็อกการ drag เมื่อ snap แล้ว
+
+    [SerializeField] private Material defaultMaterial; // วัสดุเริ่มต้น
+    [SerializeField] private Material highlightMaterial; // วัสดุเมื่อ Drag หรือ Resize
+
 
     void Update()
     {
@@ -43,19 +48,30 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
             {
                 // Start dragging only if clicked on this object
                 isDragging = true;
+
+                // เปลี่ยนวัสดุเป็น highlightMaterial เมื่อ Drag เริ่มต้น
+                ChangeMaterial(highlightMaterial);
             }
             else if (ToolManager.Instance.CurrentMode == "Magnifier")
             {
                 // Set this object as the target for magnifying
                 ToolManager.Instance.SetSelectedObject(gameObject);
+
+                // เปลี่ยนวัสดุเป็น highlightMaterial เมื่อเลือก Resize
+                ChangeMaterial(highlightMaterial);
             }
         }
     }
 
+
     private void OnMouseUp()
     {
         isDragging = false;
+
+        // เปลี่ยนวัสดุกลับเป็น defaultMaterial เมื่อปล่อยวัตถุ
+        ChangeMaterial(defaultMaterial);
     }
+
 
     private void HandleMagnify()
     {
@@ -84,8 +100,22 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
 
         transform.localScale = newScale;
 
+        // เปลี่ยนวัสดุเป็น highlightMaterial ระหว่างการ Resize
+        ChangeMaterial(highlightMaterial);
+
         Debug.Log($"Modified scale of {gameObject.name} to {newScale}");
     }
+
+    private void ChangeMaterial(Material newMaterial)
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null && newMaterial != null)
+        {
+            spriteRenderer.material = newMaterial;
+        }
+    }
+
+
 
     private bool IsScaleCorrect()
     {
@@ -101,20 +131,20 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
 
     private void SnapToTarget()
     {
+        // คำนวณตำแหน่ง Snap ด้วย Offset แกน Y
+        Vector3 snapPosition = targetObject.transform.position;
+        snapPosition.y += snapYOffset;
+
         // Snap ไปยังตำแหน่งเป้าหมาย
-        transform.position = targetObject.transform.position;
+        transform.position = snapPosition;
 
         // ตรวจสอบว่ามีการประกอบและขนาดถูกต้องหรือไม่
-        if (IsScaleCorrect() && IsWithinSnapDistance())
+        if (IsScaleCorrect())
         {
             Debug.Log($"Snapped to target {targetObject.name} successfully!");
             isSnapped = true; // ตั้งค่า isSnapped เป็น true เพื่อบล็อกการ drag
             VaseMinigame.Instance.CompletePart(); // แจ้งว่าชิ้นนี้สำเร็จแล้ว
-            //gameObject.SetActive(false); // ซ่อนวัตถุหลังจาก snap (หรือเปลี่ยนการแสดงผลตามต้องการ)
-        }
-        else
-        {
-            Debug.Log($"Snapped to target {targetObject.name}, but conditions are not fully met.");
         }
     }
+
 }

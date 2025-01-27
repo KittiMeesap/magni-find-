@@ -122,6 +122,13 @@ public class ClockMinigame : MonoBehaviour
             clockMinigameObject.SetActive(true);
             isPlayingClockMinigame = true;
             completedParts = 0;
+
+            // เริ่ม Animation ให้เล็กก่อนแล้วขยาย
+            if (clockTransform != null)
+            {
+                StartCoroutine(AnimateClockStart());
+            }
+
             Debug.Log("Clock Minigame started.");
         }
         else
@@ -129,6 +136,59 @@ public class ClockMinigame : MonoBehaviour
             Debug.LogError("Clock Minigame Object not assigned.");
         }
     }
+
+    private IEnumerator AnimateClockStart()
+    {
+        // เก็บค่าเริ่มต้น
+        Vector3 smallScale = initialClockScale * 0.1f; // ขนาดเล็กตั้งต้น
+        float elapsedTime = 0f;
+
+        // เก็บ SpriteRenderer ทั้งหมดในนาฬิกาและลูกของมัน
+        SpriteRenderer[] spriteRenderers = clockTransform.GetComponentsInChildren<SpriteRenderer>();
+
+        // เก็บค่าความสว่างเริ่มต้น (alpha)
+        float[] initialAlphas = new float[spriteRenderers.Length];
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            initialAlphas[i] = spriteRenderers[i].color.a; // เก็บค่าความสว่างเดิม
+            Color color = spriteRenderers[i].color;
+            color.a = 0f; // ตั้ง alpha เป็น 0 (จาง)
+            spriteRenderers[i].color = color;
+        }
+
+        // เริ่มต้นด้วยขนาดเล็กและจาง
+        clockTransform.localScale = smallScale;
+
+        // Animation ขยายขนาดและเพิ่มความสว่าง
+        while (elapsedTime < animationDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / animationDuration;
+
+            // Lerp ขนาดและ Alpha
+            clockTransform.localScale = Vector3.Lerp(smallScale, initialClockScale, t);
+            for (int i = 0; i < spriteRenderers.Length; i++)
+            {
+                Color color = spriteRenderers[i].color;
+                color.a = Mathf.Lerp(0f, initialAlphas[i], t); // เพิ่ม alpha กลับไปที่ค่าดั้งเดิม
+                spriteRenderers[i].color = color;
+            }
+
+            yield return null;
+        }
+
+        // ตั้งค่าให้แน่ใจว่าขนาดและ alpha สมบูรณ์
+        clockTransform.localScale = initialClockScale;
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            Color color = spriteRenderers[i].color;
+            color.a = initialAlphas[i]; // คืนค่าความสว่างเดิม
+            spriteRenderers[i].color = color;
+        }
+
+        Debug.Log("Clock Minigame start animation completed.");
+    }
+
 
     public void CompletePart()
     {

@@ -15,6 +15,13 @@ public class VaseMinigame : MonoBehaviour
     // สำหรับ Animation
     [SerializeField] private Transform vaseTransform;
     [SerializeField] private float animationDuration = 1f;
+    [SerializeField] private Transform frogKingTransform;
+    [SerializeField] private Transform frogQueenTransform;
+    [SerializeField] private Transform frogKnightTransform;
+
+    private Vector3 frogKingInitialPosition;
+    private Vector3 frogQueenInitialPosition;
+    private Vector3 frogKnightInitialPosition;
 
 
     private Vector3 initialScale;
@@ -35,6 +42,21 @@ public class VaseMinigame : MonoBehaviour
         {
             initialScale = vaseTransform.localScale;
             initialPosition = vaseTransform.localPosition;
+        }
+
+        if (frogKingTransform != null)
+        {
+            frogKingInitialPosition = frogKingTransform.localPosition;
+        }
+
+        if (frogQueenTransform != null)
+        {
+            frogQueenInitialPosition = frogQueenTransform.localPosition;
+        }
+
+        if (frogKnightTransform != null)
+        {
+            frogKnightInitialPosition = frogKnightTransform.localPosition;
         }
     }
 
@@ -213,6 +235,23 @@ public class VaseMinigame : MonoBehaviour
             vaseTransform.localScale = initialScale;
             vaseTransform.localPosition = initialPosition;
         }
+
+        // ??????????????????
+        if (frogKingTransform != null)
+        {
+            frogKingTransform.localPosition = frogKingInitialPosition;
+        }
+
+        if (frogQueenTransform != null)
+        {
+            frogQueenTransform.localPosition = frogQueenInitialPosition;
+        }
+
+        if (frogKnightTransform != null)
+        {
+            frogKnightTransform.localPosition = frogKnightInitialPosition;
+        }
+
         completedParts = 0;
         Debug.Log("Vase Minigame reset.");
     }
@@ -220,8 +259,9 @@ public class VaseMinigame : MonoBehaviour
     public void EndMinigameClick()
     {
         isPlayingVaseMinigame = false;
-        vaseminigame.SetActive(false); 
+        vaseminigame.SetActive(false);
 
-        Debug.Log("Clock Minigame ended by player.");
+        ResetMinigame();
+
     }
 }

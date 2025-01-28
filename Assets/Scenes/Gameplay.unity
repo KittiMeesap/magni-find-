@@ -9584,6 +9584,9 @@ MonoBehaviour:
   targetDialogueSystem: {fileID: 1383975116}
   vaseTransform: {fileID: 1725279292}
   animationDuration: 1
+  frogKingTransform: {fileID: 1533289765}
+  frogQueenTransform: {fileID: 1899142808}
+  frogKnightTransform: {fileID: 160556211}
 --- !u!114 &1860011840
 MonoBehaviour:
   m_ObjectHideFlags: 0

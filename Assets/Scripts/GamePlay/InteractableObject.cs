@@ -1,19 +1,19 @@
-using UnityEngine;
-using static TMPro.Examples.TMP_ExampleScript_01;
+Ôªøusing UnityEngine;
+using System.Collections;
 
 public class InteractableObject : MonoBehaviour
 {
     [Header("On/Off")]
-    [SerializeField] private bool canBreak = true; // °”Àπ¥«—µ∂ÿπ’È·µ°‰¥ÈÀ√◊Õ‰¡Ë
+    [SerializeField] private bool canBreak = true; // ‡∏Å‡∏≥‡∏´‡∏ô‡∏î‡∏ß‡∏±‡∏ï‡∏ñ‡∏∏‡∏ô‡∏µ‡πâ‡πÅ‡∏ï‡∏Å‡πÑ‡∏î‡πâ‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà
     [SerializeField] private bool canScale = true;
 
     [Header("Scale")]
-    [SerializeField] private ActionType requiredAction; // °“√°√–∑”∑’ËµÈÕß°“√ (¬ËÕÀ√◊Õ¢¬“¬)
-    [SerializeField] private float maxScale = 3f; // ¢π“¥ Ÿß ÿ¥∑’Ë “¡“√∂¢¬“¬‰¥È
-    [SerializeField] private float minScale = 0.5f; // ¢π“¥µË” ÿ¥∑’Ë “¡“√∂¬ËÕ‰¥È
+    [SerializeField] private ActionType requiredAction; // ‡∏Å‡∏≤‡∏£‡∏Å‡∏£‡∏∞‡∏ó‡∏≥‡∏ó‡∏µ‡πà‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£ (‡∏¢‡πà‡∏≠‡∏´‡∏£‡∏∑‡∏≠‡∏Ç‡∏¢‡∏≤‡∏¢)
+    [SerializeField] public float maxScale = 3f; // ‡∏Ç‡∏ô‡∏≤‡∏î‡∏™‡∏π‡∏á‡∏™‡∏∏‡∏î‡∏ó‡∏µ‡πà‡∏™‡∏≤‡∏°‡∏≤‡∏£‡∏ñ‡∏Ç‡∏¢‡∏≤‡∏¢‡πÑ‡∏î‡πâ
+    [SerializeField] public float minScale = 0.5f; // ‡∏Ç‡∏ô‡∏≤‡∏î‡∏ï‡πà‡∏≥‡∏™‡∏∏‡∏î‡∏ó‡∏µ‡πà‡∏™‡∏≤‡∏°‡∏≤‡∏£‡∏ñ‡∏¢‡πà‡∏≠‡πÑ‡∏î‡πâ
 
     [Header("Reward")]
-    [SerializeField] private GameObject hiddenItem; // ‰Õ‡∑Á¡∑’Ë´ËÕπÕ¬Ÿ
+    [SerializeField] public GameObject hiddenItem; // ‡πÑ‡∏≠‡πÄ‡∏ó‡πá‡∏°‡∏ó‡∏µ‡πà‡∏ã‡πà‡∏≠‡∏ô‡∏≠‡∏¢‡∏π
 
     [Header("MiniGame")]
     [SerializeField] private bool MiniGameObject = false;
@@ -24,54 +24,54 @@ public class InteractableObject : MonoBehaviour
     public GameObject MinigamePrefab => minigamePrefab;
 
 
-    private bool isActionComplete = false; // ‡™Á§«Ë“°“√°√–∑”‡ √Á® ¡∫Ÿ√≥Ï·≈È«À√◊Õ‰¡Ë
+    private bool isActionComplete = false; // ‡πÄ‡∏ä‡πá‡∏Ñ‡∏ß‡πà‡∏≤‡∏Å‡∏≤‡∏£‡∏Å‡∏£‡∏∞‡∏ó‡∏≥‡πÄ‡∏™‡∏£‡πá‡∏à‡∏™‡∏°‡∏ö‡∏π‡∏£‡∏ì‡πå‡πÅ‡∏•‡πâ‡∏ß‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà
 
-    private enum ActionType { Expand, Shrink } // ª√–‡¿∑°“√°√–∑”
+    private enum ActionType { Expand, Shrink } // ‡∏õ‡∏£‡∏∞‡πÄ‡∏†‡∏ó‡∏Å‡∏≤‡∏£‡∏Å‡∏£‡∏∞‡∏ó‡∏≥
 
     public void ModifyScale(float scaleChange)
     {
         if (canScale)
         {
-            // ‡™Á§«Ë“«—µ∂ÿπ’È‡ªÁπ«—µ∂ÿ∑’Ë∂Ÿ°‡≈◊Õ°À√◊Õ‰¡Ë
+            // ‡πÄ‡∏ä‡πá‡∏Ñ‡∏ß‡πà‡∏≤‡∏ß‡∏±‡∏ï‡∏ñ‡∏∏‡∏ô‡∏µ‡πâ‡πÄ‡∏õ‡πá‡∏ô‡∏ß‡∏±‡∏ï‡∏ñ‡∏∏‡∏ó‡∏µ‡πà‡∏ñ‡∏π‡∏Å‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà
             if (ToolManager.Instance.GetSelectedObject() != gameObject)
             {
                 Debug.LogWarning($"{gameObject.name} is not the currently selected object!");
                 return;
             }
 
-            // À“°°“√°√–∑”‡ √Á® ¡∫Ÿ√≥Ï·≈È« ‰¡Ë∑”Õ–‰√µËÕ
+            // ‡∏´‡∏≤‡∏Å‡∏Å‡∏≤‡∏£‡∏Å‡∏£‡∏∞‡∏ó‡∏≥‡πÄ‡∏™‡∏£‡πá‡∏à‡∏™‡∏°‡∏ö‡∏π‡∏£‡∏ì‡πå‡πÅ‡∏•‡πâ‡∏ß ‡πÑ‡∏°‡πà‡∏ó‡∏≥‡∏≠‡∏∞‡πÑ‡∏£‡∏ï‡πà‡∏≠
             if (isActionComplete) return;
 
-            // ª√—∫¢π“¥«—µ∂ÿ
+            // ‡∏õ‡∏£‡∏±‡∏ö‡∏Ç‡∏ô‡∏≤‡∏î‡∏ß‡∏±‡∏ï‡∏ñ‡∏∏
             Vector3 newScale = transform.localScale + Vector3.one * scaleChange;
 
-            // ®”°—¥¢π“¥„ÀÈÕ¬ŸË„π™Ë«ß maxScale ·≈– minScale
+            // ‡∏à‡∏≥‡∏Å‡∏±‡∏î‡∏Ç‡∏ô‡∏≤‡∏î‡πÉ‡∏´‡πâ‡∏≠‡∏¢‡∏π‡πà‡πÉ‡∏ô‡∏ä‡πà‡∏ß‡∏á maxScale ‡πÅ‡∏•‡∏∞ minScale
             if (newScale.x > maxScale) newScale = Vector3.one * maxScale;
             if (newScale.x < minScale) newScale = Vector3.one * minScale;
 
             transform.localScale = newScale;
 
-            // µ√«® Õ∫°“√°√–∑”
-            if (requiredAction == ActionType.Expand) // À“°µÈÕß°“√ "¢¬“¬"
+            // ‡∏ï‡∏£‡∏ß‡∏à‡∏™‡∏≠‡∏ö‡∏Å‡∏≤‡∏£‡∏Å‡∏£‡∏∞‡∏ó‡∏≥
+            if (requiredAction == ActionType.Expand) // ‡∏´‡∏≤‡∏Å‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£ "‡∏Ç‡∏¢‡∏≤‡∏¢"
             {
                 if (scaleChange > 0 && newScale.x >= maxScale)
                 {
-                    RevealItem(); // °“√°√–∑”∂Ÿ°µÈÕß
+                    RevealItem(); // ‡∏Å‡∏≤‡∏£‡∏Å‡∏£‡∏∞‡∏ó‡∏≥‡∏ñ‡∏π‡∏Å‡∏ï‡πâ‡∏≠‡∏á
                 }
                 else if (scaleChange < 0 && newScale.x <= minScale && canBreak)
                 {
-                    HandleWrongAction(); // °“√°√–∑”º‘¥
+                    HandleWrongAction(); // ‡∏Å‡∏≤‡∏£‡∏Å‡∏£‡∏∞‡∏ó‡∏≥‡∏ú‡∏¥‡∏î
                 }
             }
-            else if (requiredAction == ActionType.Shrink) // À“°µÈÕß°“√ "¬ËÕ"
+            else if (requiredAction == ActionType.Shrink) // ‡∏´‡∏≤‡∏Å‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£ "‡∏¢‡πà‡∏≠"
             {
                 if (scaleChange < 0 && newScale.x <= minScale)
                 {
-                    RevealItem(); // °“√°√–∑”∂Ÿ°µÈÕß
+                    RevealItem(); // ‡∏Å‡∏≤‡∏£‡∏Å‡∏£‡∏∞‡∏ó‡∏≥‡∏ñ‡∏π‡∏Å‡∏ï‡πâ‡∏≠‡∏á
                 }
                 else if (scaleChange > 0 && newScale.x >= maxScale && canBreak)
                 {
-                    HandleWrongAction(); // °“√°√–∑”º‘¥
+                    HandleWrongAction(); // ‡∏Å‡∏≤‡∏£‡∏Å‡∏£‡∏∞‡∏ó‡∏≥‡∏ú‡∏¥‡∏î
                 }
             }
         }
@@ -85,11 +85,12 @@ public class InteractableObject : MonoBehaviour
             Debug.Log($"Correct action! {gameObject.name} revealed an item.");
             if (hiddenItem != null)
             {
-                hiddenItem.SetActive(true); // · ¥ß‰Õ‡∑Á¡∑’Ë´ËÕπÕ¬ŸË
+                hiddenItem.SetActive(true);
             }
-            Destroy(gameObject); // ≈∫«—µ∂ÿ∑’Ë·µ°
+            Destroy(gameObject); // ‡∏•‡∏ö‡∏ß‡∏±‡∏ï‡∏ñ‡∏∏‡∏ó‡∏µ‡πà‡πÅ‡∏ï‡∏Å
         }
     }
+
 
     private void HandleWrongAction()
     {
@@ -99,9 +100,13 @@ public class InteractableObject : MonoBehaviour
             Debug.Log($"Wrong action! {gameObject.name} destroyed and item lost.");
             if (hiddenItem != null)
             {
-                Destroy(hiddenItem); // ≈∫‰Õ‡∑Á¡∑’Ë´ËÕπÀ“°∑”º‘¥
+                Destroy(hiddenItem); // ‡∏•‡∏ö‡πÑ‡∏≠‡πÄ‡∏ó‡πá‡∏°‡∏ó‡∏µ‡πà‡∏ã‡πà‡∏≠‡∏ô‡∏´‡∏≤‡∏Å‡∏ó‡∏≥‡∏ú‡∏¥‡∏î
             }
-            Destroy(gameObject); // ≈∫«—µ∂ÿ∑’Ë·µ°
+            Destroy(gameObject); // ‡∏•‡∏ö‡∏ß‡∏±‡∏ï‡∏ñ‡∏∏‡∏ó‡∏µ‡πà‡πÅ‡∏ï‡∏Å
         }
     }
+
+  
+
+
 }

@@ -4,7 +4,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ToolManager : MonoBehaviour
 {
-    public static ToolManager Instance { get; private set; }
+    public static ToolManager Instance { get;  set; }
 
     public string CurrentMode { get; private set; } = "Hand";
     public Texture2D handCursor;

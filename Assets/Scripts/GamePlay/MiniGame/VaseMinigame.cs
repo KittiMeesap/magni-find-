@@ -120,12 +120,15 @@ public class VaseMinigame : MonoBehaviour
 
         if (completedParts >= totalParts)
         {
+
             StartCoroutine(HandleMinigameCompletion());
         }
     }
 
     private IEnumerator HandleMinigameCompletion()
     {
+        yield return new WaitForSeconds(1);
+
         isPlayingVaseMinigame = false;
         Debug.Log("Vase Minigame completed successfully! Starting fade-out animation...");
 

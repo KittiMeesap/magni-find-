@@ -18,40 +18,64 @@ public class Cat : MonoBehaviour
     private SpriteRenderer catRenderer;
     private bool isProcessing = false; // ป้องกันการเรียกซ้ำ
     private InteractableObject interactableObject;
+    private Vector3 previousRatScale; // เก็บค่า scale ก่อนหน้าของหนู
 
     private void Start()
     {
         if (ratObject != null)
         {
             ratObject.SetActive(false); // ซ่อนหนูไว้ก่อน
+            previousRatScale = ratObject.transform.localScale; // เก็บค่า scale เริ่มต้นของหนู
         }
 
         catRenderer = GetComponent<SpriteRenderer>();
-
         interactableObject = GetComponent<InteractableObject>(); // หา InteractableObject ที่อยู่บนแมว
     }
 
     private void Update()
     {
-        // ตรวจจับการเปลี่ยนแปลงขนาดของแมว
+        // เมื่อขนาดของแมวเปลี่ยนแปลง ให้แสดงตัวหนูออกมา
         if (!isProcessing && transform.localScale.x != 1.0f)
         {
+            if (ratObject != null) ratObject.SetActive(true); // แสดงหนูออกมา
+
+            if (DFMaterial != null)
+            {
+                GetComponent<SpriteRenderer>().material = DFMaterial;
+
+                Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
+                foreach (var collider in colliders)
+                {
+                    collider.enabled = false; // Disable each collider
+                }
+
+            }
+        }
+
+        // เมื่อขนาดของหนูเปลี่ยนแปลง ให้เริ่มการวิ่ง
+        if (ratObject != null && ratObject.transform.localScale != previousRatScale)
+        {
+            previousRatScale = ratObject.transform.localScale; // อัปเดตค่า scale
             StartCoroutine(HandleRatAndCatMovement());
+            if (DFMaterial != null)
+            {
+                ratObject.GetComponent<SpriteRenderer>().material = DFMaterial;
+
+                Collider2D[] colliders = ratObject.GetComponentsInChildren<Collider2D>();
+                foreach (var collider in colliders)
+                {
+                    collider.enabled = false; // Disable each collider
+                }
+            }
         }
     }
 
     private IEnumerator HandleRatAndCatMovement()
     {
-        if (DFMaterial != null)
-        {
-            GetComponent<SpriteRenderer>().material = DFMaterial;
-        }
-
         isProcessing = true;
 
         if (ratObject != null && ratWaypoints.Length > 1)
         {
-            ratObject.SetActive(true); // แสดงหนูออกมา
             yield return StartCoroutine(MoveAlongCurve(ratObject, ratWaypoints, ratMoveSpeed));
         }
 
@@ -62,7 +86,7 @@ public class Cat : MonoBehaviour
             {
                 catRenderer.sprite = SmallCatSprite; // เปลี่ยน Sprite ของแมว
             }
-            
+
             StartCoroutine(MoveCatToPosition(false));
         }
         else if (transform.localScale.x == 1.1f)
@@ -130,9 +154,8 @@ public class Cat : MonoBehaviour
         // แสดง Reward Hidden Item จาก InteractableObject.cs
         if (interactableObject != null && interactableObject.hiddenItem != null)
         {
-            StartCoroutine(FadeInHiddenItem(interactableObject.hiddenItem, 1f)); //
+            StartCoroutine(FadeInHiddenItem(interactableObject.hiddenItem, 1f));
         }
-
     }
 
     private IEnumerator FadeInHiddenItem(GameObject hiddenItem, float duration)
@@ -159,7 +182,6 @@ public class Cat : MonoBehaviour
 
         spriteRenderer.color = targetColor; // ตั้งค่า alpha ให้เต็ม 1
     }
-
 
     private IEnumerator MoveAlongCurve(GameObject obj, Transform[] waypoints, float speed)
     {

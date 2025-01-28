@@ -9,7 +9,7 @@ public class DialogueUI : MonoBehaviour
     public GameObject dialoguePanel;
     public TMP_Text dialogueText;
     public Button closeButton;
-    private GameObject currentItemObject; 
+    private GameObject currentItemObject;
 
     private void Awake()
     {

@@ -94,7 +94,7 @@ public class InteractableObject : MonoBehaviour
 
     private void HandleWrongAction()
     {
-        if(canBreak)
+        if (canBreak)
         {
             isActionComplete = true;
             Debug.Log($"Wrong action! {gameObject.name} destroyed and item lost.");
@@ -106,7 +106,25 @@ public class InteractableObject : MonoBehaviour
         }
     }
 
-  
+    public void ExitMiniGame()
+    {
+        if (MiniGameObject)
+        {
+            Debug.Log($"Exiting mini-game for {gameObject.name}");
+            if (minigamePrefab != null)
+            {
+                Destroy(minigamePrefab); // ปิดมินิเกม
+                minigamePrefab = null; // ล้างอ้างอิง
+            }
 
+            // เพิ่มการรีเซ็ตสถานะถ้าจำเป็น
+            ResetMiniGameState();
+        }
+    }
 
+    private void ResetMiniGameState()
+    {
+        isActionComplete = false;
+        Debug.Log($"Mini-game for {gameObject.name} has been reset.");
+    }
 }

@@ -54,7 +54,6 @@ public class DialogueUI : MonoBehaviour
 
         if (itemObject != null)
         {
-            itemObject.SetActive(true);
             currentItemObject = itemObject;
         }
     }
@@ -65,20 +64,12 @@ public class DialogueUI : MonoBehaviour
 
         if (currentItemObject != null)
         {
-            currentItemObject.SetActive(false);
+            InteractableObject interactable = currentItemObject.GetComponent<InteractableObject>();
+            if (interactable != null && interactable.IsMiniGameObject)
+            {
+                interactable.ExitMiniGame();
+            }
             currentItemObject = null;
-        }
-    }
-
-    public void ToggleDialoguePanel()
-    {
-        if (dialoguePanel.activeSelf)
-        {
-            HideDialogue();
-        }
-        else
-        {
-            ShowDialogue(dialogueText.text);
         }
     }
 }

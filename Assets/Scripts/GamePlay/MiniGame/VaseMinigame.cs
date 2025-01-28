@@ -216,4 +216,12 @@ public class VaseMinigame : MonoBehaviour
         completedParts = 0;
         Debug.Log("Vase Minigame reset.");
     }
+
+    public void EndMinigameClick()
+    {
+        isPlayingVaseMinigame = false;
+        vaseminigame.SetActive(false); 
+
+        Debug.Log("Clock Minigame ended by player.");
+    }
 }

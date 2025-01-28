@@ -3,11 +3,11 @@ using UnityEngine;
 public class DialogueSystem : MonoBehaviour
 {
     [TextArea]
-    public string dialogueText; // ข้อความทั่วไป
-    public bool hasMagnifierMessage; // ระบุว่ามีข้อความเฉพาะของ Magnifier หรือไม่
-    public string dialogueTextSpecial; // ข้อความเฉพาะของ Magnifier
+    public string dialogueText; 
+    public bool hasMagnifierMessage; 
+    public string dialogueTextSpecial; 
 
-    public GameObject itemObject; // GameObject ที่จะใช้แสดงไอเท็ม
+    public GameObject itemObject;
 
 
     public void ShowDialogue()

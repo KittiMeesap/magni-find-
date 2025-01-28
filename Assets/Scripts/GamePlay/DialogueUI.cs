@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -7,7 +8,8 @@ public class DialogueUI : MonoBehaviour
 
     public GameObject dialoguePanel;
     public TMP_Text dialogueText;
-    private GameObject currentItemObject; // GameObject ปัจจุบันที่แสดงไอเท็ม
+    public Button closeButton;
+    private GameObject currentItemObject; 
 
     private void Awake()
     {
@@ -19,7 +21,25 @@ public class DialogueUI : MonoBehaviour
         {
             Instance = this;
         }
+
         dialoguePanel.SetActive(false);
+
+        if (closeButton != null)
+        {
+            closeButton.onClick.AddListener(HideDialogue);
+        }
+        else
+        {
+            Debug.LogWarning("Close button not assigned in the inspector.");
+        }
+    }
+
+    private void Update()
+    {
+        if (dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        {
+            HideDialogue();
+        }
     }
 
     public void ShowDialogue(string message, GameObject itemObject = null)
@@ -27,16 +47,15 @@ public class DialogueUI : MonoBehaviour
         dialogueText.text = message;
         dialoguePanel.SetActive(true);
 
-        // จัดการการแสดง/ซ่อนของไอเท็ม
         if (currentItemObject != null)
         {
-            currentItemObject.SetActive(false); // ซ่อนไอเท็มก่อนหน้า
+            currentItemObject.SetActive(false);
         }
 
         if (itemObject != null)
         {
-            itemObject.SetActive(true); // แสดงไอเท็มใหม่
-            currentItemObject = itemObject; // เก็บไอเท็มที่กำลังแสดง
+            itemObject.SetActive(true);
+            currentItemObject = itemObject;
         }
     }
 
@@ -44,7 +63,6 @@ public class DialogueUI : MonoBehaviour
     {
         dialoguePanel.SetActive(false);
 
-        // ซ่อนไอเท็มปัจจุบัน
         if (currentItemObject != null)
         {
             currentItemObject.SetActive(false);

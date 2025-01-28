@@ -1,21 +1,23 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
     [TextArea]
-    public string dialogueText; 
-    public bool hasMagnifierMessage; 
-    public string dialogueTextSpecial; 
+    public string dialogueText;
+    public bool hasMagnifierMessage;
+    public string dialogueTextSpecial;
 
-    public GameObject itemObject;
-
+    public GameObject itemObject; // ?????? GameObject ????? SpriteRenderer ???? Image
 
     public void ShowDialogue()
     {
+        // ????????????? Magnifier ?????????????????
         if (ToolManager.Instance.CurrentMode == "Magnifier" && hasMagnifierMessage)
         {
             if (DialogueUI.Instance != null)
             {
+                // ??????????????????????????? itemObject
                 DialogueUI.Instance.ShowDialogue(dialogueTextSpecial, itemObject);
             }
             else
@@ -34,7 +36,5 @@ public class DialogueSystem : MonoBehaviour
                 Debug.LogError("DialogueUI instance not found in the scene.");
             }
         }
-
-
     }
 }

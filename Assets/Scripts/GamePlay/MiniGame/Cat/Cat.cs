@@ -11,13 +11,13 @@ public class Cat : MonoBehaviour
     [SerializeField] private float catMoveSpeed = 2.0f; // ความเร็วของแมว
     [SerializeField] private Sprite BigCatSprite; // Sprite ใหม่ของแมวหลังหนูวิ่งเสร็จ
     [SerializeField] private Sprite SmallCatSprite; // Sprite ใหม่ของแมวหลังหนูวิ่งเสร็จ
-    [SerializeField] private bool shouldSpin = false; // ตัวแปรเช็คว่าต้องหมุนหรือไม่
+    //[SerializeField] private bool shouldSpin = false; // ตัวแปรเช็คว่าต้องหมุนหรือไม่
     [SerializeField] private float spinDuration = 1.0f; // ระยะเวลาที่หมุน
     [SerializeField] private float curveSmoothness = 0.02f; // ค่าความโค้งของเส้น (0 - 1)
 
     private SpriteRenderer catRenderer;
     private bool isProcessing = false; // ป้องกันการเรียกซ้ำ
-    private InteractableObject interactableObject;
+    //private InteractableObject interactableObject;
     private Vector3 previousRatScale; // เก็บค่า scale ก่อนหน้าของหนู
 
     private void Start()
@@ -29,7 +29,7 @@ public class Cat : MonoBehaviour
         }
 
         catRenderer = GetComponent<SpriteRenderer>();
-        interactableObject = GetComponent<InteractableObject>(); // หา InteractableObject ที่อยู่บนแมว
+        //interactableObject = GetComponent<InteractableObject>(); // หา InteractableObject ที่อยู่บนแมว
     }
 
     private void Update()
@@ -152,10 +152,10 @@ public class Cat : MonoBehaviour
         }
 
         // แสดง Reward Hidden Item จาก InteractableObject.cs
-        if (interactableObject != null && interactableObject.hiddenItem != null)
+        /*if (interactableObject != null && interactableObject.hiddenItem != null)
         {
             StartCoroutine(FadeInHiddenItem(interactableObject.hiddenItem, 1f));
-        }
+        }*/
     }
 
     private IEnumerator FadeInHiddenItem(GameObject hiddenItem, float duration)

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CollectibleItem : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class CollectibleItem : MonoBehaviour
 
     void OnMouseDown()
     {
+        MinigameManager.Instance.OnRewardCollected();
+
         if (ToolManager.Instance.CurrentMode == "Hand")
         {
             if (progressManager != null)
@@ -20,14 +22,6 @@ public class CollectibleItem : MonoBehaviour
                 Debug.Log($"Item {name} collected!");
                 Destroy(gameObject);
             }
-            else
-            {
-                Debug.LogError("ProgressManager not assigned!");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("You must be in Hand mode to collect items!");
         }
     }
 }

@@ -101,16 +101,9 @@ public class DialogueUI : MonoBehaviour
     {
         dialoguePanel.SetActive(false);
 
-        // ??????????????? itemObject
         if (currentItemObject != null)
         {
             currentItemObject.SetActive(false); // ??????????????????????? itemObject
-
-            InteractableObject interactable = currentItemObject.GetComponent<InteractableObject>();
-            if (interactable != null && interactable.IsMiniGameObject)
-            {
-                interactable.ExitMiniGame();
-            }
             currentItemObject = null;
         }
 

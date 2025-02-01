@@ -19,7 +19,7 @@ public class InteractableClockHand : MonoBehaviour
     public Material selectedMaterial; // วัสดุเมื่อเลือก
 
     private int currentPositionIndex; // ตำแหน่งปัจจุบัน
-    private bool isSnapped = false;
+    public bool isSnapped = false;
     private static GameObject selectedObject; // บันทึกเข็มที่ถูกเลือก
 
     private void Start()
@@ -33,7 +33,7 @@ public class InteractableClockHand : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (ClockMinigame.Instance.isPlayingClockMinigame && ToolManager.Instance.CurrentMode == "Hand")
+        if (MinigameManager.Instance.IsPlayingMinigame && ToolManager.Instance.CurrentMode == "Hand")
         {
             // ยกเลิกวัสดุของเข็มที่เลือกก่อนหน้า
             if (selectedObject != null && selectedObject != gameObject)
@@ -50,7 +50,7 @@ public class InteractableClockHand : MonoBehaviour
 
     private void Update()
     {
-        if (ClockMinigame.Instance.isPlayingClockMinigame)
+        if (MinigameManager.Instance.IsPlayingMinigame)
         {
             // ตรวจสอบว่าคลิกพื้นที่ว่าง
             if (Input.GetMouseButtonDown(0) && !IsMouseOverAnyObject())

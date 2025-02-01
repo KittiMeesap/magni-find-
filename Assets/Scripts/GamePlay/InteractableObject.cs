@@ -1,9 +1,67 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractableObject : MonoBehaviour
+public class InteractObject : MonoBehaviour
 {
-    [Header("On/Off")]
+    [SerializeField] private MinigameType minigameType;
+    public enum MinigameType
+    {
+        Null,
+        Clock,
+        Vase,
+        Camera,
+        Cat
+
+    }
+
+    private void OnMouseDown()
+    {
+        if (MinigameManager.Instance.IsPlayingMinigame == false && ToolManager.Instance.CurrentMode == "Eye")
+        {
+            ToolManager.Instance.SetToolMode("Hand");
+
+            DialogueSystem dialogueSystem = GetComponent<DialogueSystem>();
+            if (dialogueSystem != null)
+            {
+                dialogueSystem.ShowDialogue();
+            }
+            if (minigameType != MinigameType.Null)
+            {
+                StartMinigame();
+            }
+        }
+    }
+
+    private void StartMinigame()
+    {
+        switch (minigameType)
+        {
+            case MinigameType.Clock:
+                ClockMinigame.Instance.StartMinigame();
+                break;
+
+            case MinigameType.Vase:
+                VaseMinigame.Instance.StartMinigame();
+                break;
+
+            case MinigameType.Camera:
+                CameraMinigame.Instance.StartMinigame();
+                break;
+            case MinigameType.Cat:
+                CatMinigame.Instance.StartMinigame();
+                break;
+
+            default:
+                Debug.LogWarning("Not Minigame Object");
+                break;
+        }
+    }
+}
+
+
+
+
+    /*[Header("On/Off")]
     [SerializeField] private bool canBreak = true; // กำหนดวัตถุนี้แตกได้หรือไม่
     [SerializeField] private bool canScale = true;
 
@@ -28,7 +86,9 @@ public class InteractableObject : MonoBehaviour
 
     private enum ActionType { Expand, Shrink } // ประเภทการกระทำ
 
-    public void ModifyScale(float scaleChange)
+
+
+        public void ModifyScale(float scaleChange)
     {
         if (canScale)
         {
@@ -126,5 +186,4 @@ public class InteractableObject : MonoBehaviour
     {
         isActionComplete = false;
         Debug.Log($"Mini-game for {gameObject.name} has been reset.");
-    }
-}
+    }*/

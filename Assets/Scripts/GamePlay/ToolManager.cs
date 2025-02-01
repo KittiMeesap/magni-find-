@@ -21,7 +21,8 @@ public class ToolManager : MonoBehaviour
 
     private void Awake()
     {
-        SetToolMode("Hand");
+        SetToolMode("Eye");
+
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -32,12 +33,6 @@ public class ToolManager : MonoBehaviour
         }
     }
 
-    private bool IsMinigameActive()
-    {
-        // ตรวจสอบว่ามี Minigame กำลังทำงานอยู่หรือไม่
-        return (ClockMinigame.Instance != null && ClockMinigame.Instance.isPlayingClockMinigame) ||
-               (VaseMinigame.Instance != null && VaseMinigame.Instance.isPlayingVaseMinigame);
-    }
     private void Update()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -46,9 +41,9 @@ public class ToolManager : MonoBehaviour
             ToggleToolMode();
         }
 
-        if (CurrentMode == "Hand" && Input.GetMouseButtonDown(0))
+        /*if (CurrentMode == "Hand" && Input.GetMouseButtonDown(0))
         {
-            if (!IsMinigameActive())
+            if (!MinigameManager.Instance.IsPlayingMinigame)
             {
                 SelectObject();
             }
@@ -56,8 +51,12 @@ public class ToolManager : MonoBehaviour
 
         if (CurrentMode == "Eye")
         {
-
-            GameObject targetObject = Instance.GetSelectedObject();
+            DialogueSystem dialogueSystem = GetComponent<DialogueSystem>();
+            if (dialogueSystem != null)
+            {
+                dialogueSystem.ShowDialogue();
+            }
+            /*GameObject targetObject = Instance.GetSelectedObject();
 
             if (targetObject != null)
             {
@@ -103,6 +102,7 @@ public class ToolManager : MonoBehaviour
 
         if (CurrentMode == "Magnifier")
         {
+            
             GameObject targetObject = Instance.GetSelectedObject();
 
             if (targetObject != null)
@@ -132,10 +132,10 @@ public class ToolManager : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 
-    void ModifyObjectScale(GameObject target, float scaleChange)
+    /*void ModifyObjectScale(GameObject target, float scaleChange)
     {
         InteractableObject breakable = target.GetComponent<InteractableObject>();
         if (breakable != null)
@@ -146,7 +146,7 @@ public class ToolManager : MonoBehaviour
         {
             Debug.LogWarning("Selected object is not breakable.");
         }
-    }
+    }*/
 
     public void Initialize(CollectibleItem[] items)
     {
@@ -169,45 +169,35 @@ public class ToolManager : MonoBehaviour
         {
             Cursor.SetCursor(eyeCursor, Vector2.zero, CursorMode.Auto);
         }
-        //Debug.Log($"Tool mode set to: {mode}");
+
+        Debug.Log($"Tool mode set to: {mode}");
     }
 
     private void ToggleToolMode()
     {
-        VaseMinigame vaseMinigame = FindFirstObjectByType<VaseMinigame>();
-        ClockMinigame clockeMinigame = FindFirstObjectByType<ClockMinigame>();
-
-        if (vaseMinigame.isPlayingVaseMinigame || clockeMinigame.isPlayingClockMinigame)
+        if(!MinigameManager.Instance.IsPlayingMinigame)
         {
-            // เงื่อนไขเมื่อกำลังเล่น Vase Minigame
-            if (CurrentMode == "Hand")
-            {
-                SetToolMode("Magnifier");
-            }
-            else if (CurrentMode == "Magnifier")
-            {
-                SetToolMode("Hand");
-            }
-        }
-        else
-        {
-            // เงื่อนไขเมื่อไม่ได้เล่น Vase Minigame
-            if (CurrentMode == "Hand")
-            {
-                SetToolMode("Magnifier");
-            }
-            else if (CurrentMode == "Magnifier")
+            if (CurrentMode != "Eye")
             {
                 SetToolMode("Eye");
             }
-            else
+        }
+        
+        else
+        {
+            if (CurrentMode == "Hand")
+            {
+                SetToolMode("Magnifier");
+            }
+            else if (CurrentMode == "Magnifier")
             {
                 SetToolMode("Hand");
             }
         }
+        
     }
 
-
+    
     public void SelectObject()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -217,7 +207,6 @@ public class ToolManager : MonoBehaviour
         {
             GameObject clickedObject = hit.collider.gameObject;
 
-            // ตรวจสอบว่า GameObject มี Tag เป็น "SelectableObject"
             if (clickedObject.CompareTag("Object"))
             {
                 // ถ้าคลิกวัตถุที่เลือกอยู่ ให้ยกเลิกการเลือก

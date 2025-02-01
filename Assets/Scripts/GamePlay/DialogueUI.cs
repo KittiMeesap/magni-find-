@@ -100,7 +100,7 @@ public class DialogueUI : MonoBehaviour
     public void HideDialogue()
     {
         dialoguePanel.SetActive(false);
-
+        ToolManager.Instance.SetToolMode("Eye");
         if (currentItemObject != null)
         {
             currentItemObject.SetActive(false); // ??????????????????????? itemObject

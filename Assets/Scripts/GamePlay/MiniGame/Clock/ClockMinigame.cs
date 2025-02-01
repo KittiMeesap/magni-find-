@@ -30,8 +30,8 @@ public class ClockMinigame : MonoBehaviour
 
     private Dictionary<GameObject, Vector3> savedClockNumbersPositions = new Dictionary<GameObject, Vector3>();
     private Dictionary<GameObject, Vector3> savedClockNumbersScales = new Dictionary<GameObject, Vector3>();
-    private int completedParts = 0;
-    private int savedCompletedParts = 0; // ✅ บันทึก Part ที่ทำไปแล้ว
+    public int completedParts = 0;
+    public int savedCompletedParts = 0; // ✅ บันทึก Part ที่ทำไปแล้ว
 
     private void Awake()
     {

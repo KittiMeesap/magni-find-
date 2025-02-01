@@ -1,3 +1,4 @@
+using SpriteGlow;
 using UnityEngine;
 
 public class InteractableClockNumber : MonoBehaviour
@@ -7,17 +8,14 @@ public class InteractableClockNumber : MonoBehaviour
     public float scaleTolerance = 0.05f; // เพิ่มความยืดหยุ่นเล็กน้อยสำหรับการตรวจสอบขนาด
     public float snapDistance = 0.5f; // ระยะ Snap
 
-    public Material defaultMaterial; // วัสดุปกติ
-    public Material draggingMaterial; // วัสดุระหว่างการลาก
-    public Material magnifierMaterial; // วัสดุเมื่อย่อขยาย
-
     public bool isSnapped = false;
     private bool isDragging = false;
     private static InteractableClockNumber selectedNumber; // ตัวเลขที่กำลังถูกเลือก
     private SpriteRenderer spriteRenderer; // Sprite Renderer ของ Object
-
+    private SpriteGlowEffect glowEffect;
     private void Awake()
     {
+        glowEffect = GetComponent<SpriteGlowEffect>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null)
         {
@@ -45,10 +43,6 @@ public class InteractableClockNumber : MonoBehaviour
             isDragging = true;
             selectedNumber = this;
 
-            if (spriteRenderer != null && draggingMaterial != null)
-            {
-                spriteRenderer.material = draggingMaterial;
-            }
         }
         else if (ToolManager.Instance.CurrentMode == "Magnifier" && !isSnapped)
         {
@@ -59,11 +53,6 @@ public class InteractableClockNumber : MonoBehaviour
     private void OnMouseUp()
     {
         isDragging = false;
-
-        if (spriteRenderer != null && defaultMaterial != null)
-        {
-            spriteRenderer.material = defaultMaterial;
-        }
     }
 
     private void OnMouseOver()
@@ -79,6 +68,21 @@ public class InteractableClockNumber : MonoBehaviour
                 ModifyScale(-0.1f); // ย่อ
             }
         }
+
+        if (MinigameManager.Instance.IsPlayingMinigame && ToolManager.Instance.CurrentMode == "Hand" || ToolManager.Instance.CurrentMode == "Magnifier")
+        {
+            if (glowEffect != null)
+            {
+                glowEffect.enabled = true; // เปิดเอฟเฟกต์ Glow
+            }
+        }
+        else
+        {
+            if (glowEffect != null)
+            {
+                glowEffect.enabled = false; // ปิดเอฟเฟกต์ Glow
+            }
+        }
     }
 
     private void OnMouseExit()
@@ -88,9 +92,9 @@ public class InteractableClockNumber : MonoBehaviour
             selectedNumber = null;
         }
 
-        if (spriteRenderer != null && defaultMaterial != null)
+        if (glowEffect != null)
         {
-            spriteRenderer.material = defaultMaterial;
+            glowEffect.enabled = false; // ปิดเอฟเฟกต์ Glow
         }
     }
 

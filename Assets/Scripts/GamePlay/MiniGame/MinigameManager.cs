@@ -41,6 +41,8 @@ public class MinigameManager : MonoBehaviour
 
     public void StartMinigame(GameObject minigameObject, Transform objectTransform, GameObject reward, bool useFadeIn = false)
     {
+        Camera.main.GetComponent<CameraController>().EnterMinigame();
+
         if (pausedMinigames.ContainsKey(minigameObject) && pausedMinigames[minigameObject])
         {
             ResumeMinigame(minigameObject, objectTransform, reward, useFadeIn);
@@ -115,6 +117,7 @@ public class MinigameManager : MonoBehaviour
 
     public void PauseMinigame()
     {
+        Camera.main.GetComponent<CameraController>().ExitMinigame();
         if (currentMinigame == null) return;
 
         pausedMinigames[currentMinigame] = true; // บันทึกว่ามินิเกมนี้ถูกพัก
@@ -203,6 +206,7 @@ public class MinigameManager : MonoBehaviour
 
         DisableMinigameTrigger();
         DialogueUI.Instance.HideDialogue();
+        Camera.main.GetComponent<CameraController>().ExitMinigame();
         Debug.Log("Minigame ended.");
     }
     private GameObject minigameTrigger;

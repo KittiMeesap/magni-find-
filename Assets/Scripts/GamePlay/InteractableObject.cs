@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using SpriteGlow;
 
 public class InteractObject : MonoBehaviour
 {
@@ -17,15 +16,24 @@ public class InteractObject : MonoBehaviour
         Bird
     }
 
-    private SpriteGlowEffect glowEffect;
+    private SpriteRenderer spriteRenderer;
+    private Sprite defaultSprite;       // ✅ Sprite ปกติ
+    [SerializeField] private Sprite highlightedSprite;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
+
     private bool isHovering = false;
-    private float oscillationSpeed = 3f; // ความเร็วในการแกว่ง
-    private float oscillationAmount = 0.05f; // ขนาดของการแกว่ง
-    private Vector3 initialPosition; // ตำแหน่งเริ่มต้นของ Object
+    private float oscillationSpeed = 3f;
+    private float oscillationAmount = 0.05f;
+    private Vector3 initialPosition;
 
     private void Awake()
     {
-        glowEffect = GetComponent<SpriteGlowEffect>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            defaultSprite = spriteRenderer.sprite; // ตั้งค่า Sprite เริ่มต้น
+        }
+
         initialPosition = transform.position;
     }
 
@@ -33,9 +41,9 @@ public class InteractObject : MonoBehaviour
     {
         if (MinigameManager.Instance.IsPlayingMinigame == false && ToolManager.Instance.CurrentMode == "Eye")
         {
-            if (glowEffect != null)
+            if (spriteRenderer != null && highlightedSprite != null)
             {
-                glowEffect.enabled = true; // เปิดเอฟเฟกต์ Glow
+                spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
             }
 
             if (!isHovering)
@@ -43,31 +51,28 @@ public class InteractObject : MonoBehaviour
                 isHovering = true;
                 StartCoroutine(SwingObject());
             }
-            
         }
         else
         {
-            if (glowEffect != null)
-            {
-                glowEffect.enabled = false; // ปิดเอฟเฟกต์ Glow
-            }
-
-            isHovering = false;
-            StopCoroutine(SwingObject());
-            transform.position = initialPosition; // คืนค่าเป็นตำแหน่งเริ่มต้น
+            ResetObject();
         }
     }
 
     private void OnMouseExit()
     {
-        if (glowEffect != null)
+        ResetObject();
+    }
+
+    private void ResetObject()
+    {
+        if (spriteRenderer != null)
         {
-            glowEffect.enabled = false; // ปิดเอฟเฟกต์ Glow
+            spriteRenderer.sprite = defaultSprite; // ✅ กลับเป็น Sprite ปกติ
         }
 
         isHovering = false;
         StopCoroutine(SwingObject());
-        transform.position = initialPosition; // คืนค่าเป็นตำแหน่งเริ่มต้น
+        transform.position = initialPosition;
     }
 
     private IEnumerator SwingObject()
@@ -80,26 +85,34 @@ public class InteractObject : MonoBehaviour
             float offset = Mathf.Sin(elapsedTime) * oscillationAmount;
             transform.position = new Vector3(initialPosition.x + offset, initialPosition.y, initialPosition.z);
 
-            yield return null; // รอเฟรมถัดไป
+            yield return null;
         }
     }
 
-
-private void OnMouseDown()
+    private void OnMouseDown()
     {
         if (MinigameManager.Instance.IsPlayingMinigame == false && ToolManager.Instance.CurrentMode == "Eye")
         {
             ToolManager.Instance.SetToolMode("Hand");
 
-            DialogueSystem dialogueSystem = GetComponent<DialogueSystem>();
-            if (dialogueSystem != null)
+            bool isMinigame = minigameType != MinigameType.Null;
+
+            // ✅ **ให้กล้องซูมไปที่ Object ก่อนทำงาน**
+            CameraController.Instance.ZoomToObject(transform, () =>
             {
-                dialogueSystem.ShowDialogue();
-            }
-            if (minigameType != MinigameType.Null)
-            {
-                StartMinigame();
-            }
+                // ✅ เปิด Dialogue ก่อน Minigame
+                DialogueSystem dialogueSystem = GetComponent<DialogueSystem>();
+                if (dialogueSystem != null)
+                {
+                    dialogueSystem.ShowDialogue();
+                }
+
+                if (isMinigame)
+                {
+                    CameraController.Instance.EnterMinigame();
+                    StartMinigame();
+                }
+            });
         }
     }
 
@@ -133,4 +146,6 @@ private void OnMouseDown()
                 break;
         }
     }
+
+    public Transform centerPoint; // ✅ จุดศูนย์กลางที่ให้กล้องโฟกัส
 }

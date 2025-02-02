@@ -1,4 +1,4 @@
-using SpriteGlow;
+﻿using SpriteGlow;
 using UnityEngine;
 
 public class InteractableClockHand : MonoBehaviour
@@ -6,15 +6,15 @@ public class InteractableClockHand : MonoBehaviour
     [System.Serializable]
     public struct ClockPosition
     {
-        public Vector3 position; // ���˹觢ͧ���
-        public Vector3 rotation; // �����ع�ͧ���
+        public Vector3 position; // ตำแหน่งของเข็ม
+        public Vector3 rotation; // การหมุนของเข็ม
     }
 
-    public ClockPosition[] positions; // ���˹���С����ع������ (1-12)
-    public int correctPositionIndex; // ���˹觷��١��ͧ (0-11)
-    public int initialPositionIndex = 0; // ���˹�������鹢ͧ���
+    public ClockPosition[] positions; // ตำแหน่งและการหมุนทั้งหมด (1-12)
+    public int correctPositionIndex; // ตำแหน่งที่ถูกต้อง (0-11)
+    public int initialPositionIndex = 0; // ตำแหน่งเริ่มต้นของเข็ม
 
-    private int currentPositionIndex; // ���˹觻Ѩ�غѹ
+    private int currentPositionIndex; // ตำแหน่งปัจจุบัน
     public bool isSnapped = false;
 
     private SpriteGlowEffect glowEffect;
@@ -26,7 +26,7 @@ public class InteractableClockHand : MonoBehaviour
 
     private void Start()
     {
-        // ��駤�ҵ��˹��������
+        // ตั้งค่าตำแหน่งเริ่มต้น
         currentPositionIndex = initialPositionIndex;
         transform.localPosition = positions[currentPositionIndex].position;
         transform.localRotation = Quaternion.Euler(positions[currentPositionIndex].rotation);
@@ -34,19 +34,23 @@ public class InteractableClockHand : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (ClockMinigame.Instance != null && ClockMinigame.Instance.CompletedParts >= ClockMinigame.Instance.TotalParts)
+        {
+            return; //  ถ้ามินิเกมจบแล้ว ให้ return ออกทันที
+        }
         if (MinigameManager.Instance.IsPlayingMinigame && ToolManager.Instance.CurrentMode == "Hand")
         {
             if (glowEffect != null)
             {
-                glowEffect.enabled = true; // �Դ�Ϳ࿡�� Glow
+                glowEffect.enabled = true; // เปิดเอฟเฟกต์ Glow
             }
 
-            // ��Ǩ�Ѻ��á��������������躹������ԡ�
-            if (Input.GetMouseButtonDown(0)) // ��ԡ����������ع仢�ҧ˹��
+            // ตรวจจับการกดเมาส์เมื่ออยู่บนเข็มนาฬิกา
+            if (Input.GetMouseButtonDown(0)) // คลิกซ้ายเพื่อหมุนไปข้างหน้า
             {
                 HandleLeftClick();
             }
-            else if (Input.GetMouseButtonDown(1)) // ��ԡ���������ع��͹��Ѻ
+            else if (Input.GetMouseButtonDown(1)) // คลิกขวาเพื่อหมุนย้อนกลับ
             {
                 HandleRightClick();
             }
@@ -55,7 +59,7 @@ public class InteractableClockHand : MonoBehaviour
         {
             if (glowEffect != null)
             {
-                glowEffect.enabled = false; // �Դ�Ϳ࿡�� Glow
+                glowEffect.enabled = false; // ปิดเอฟเฟกต์ Glow
             }
         }
     }
@@ -64,7 +68,7 @@ public class InteractableClockHand : MonoBehaviour
     {
         if (glowEffect != null)
         {
-            glowEffect.enabled = false; // �Դ�Ϳ࿡�� Glow
+            glowEffect.enabled = false; // ปิดเอฟเฟกต์ Glow
         }
     }
 
@@ -73,7 +77,7 @@ public class InteractableClockHand : MonoBehaviour
         if (isSnapped)
         {
             isSnapped = false;
-            ClockMinigame.Instance.DecreaseCompletedParts(); // Ŵ�ӹǹ��������
+            ClockMinigame.Instance.DecreaseCompletedParts(); // ลดจำนวนชิ้นสำเร็จ
         }
 
         AdvancePosition();
@@ -89,7 +93,7 @@ public class InteractableClockHand : MonoBehaviour
         if (isSnapped)
         {
             isSnapped = false;
-            ClockMinigame.Instance.DecreaseCompletedParts(); // Ŵ�ӹǹ��������
+            ClockMinigame.Instance.DecreaseCompletedParts(); // ลดจำนวนชิ้นสำเร็จ
         }
 
         ReversePosition();
@@ -102,10 +106,10 @@ public class InteractableClockHand : MonoBehaviour
 
     private void AdvancePosition()
     {
-        // ����͹仵��˹觶Ѵ� (ǹ�ٻ 0-11)
+        // เลื่อนไปตำแหน่งถัดไป (วนลูป 0-11)
         currentPositionIndex = (currentPositionIndex + 1) % positions.Length;
 
-        // ��駤�ҵ��˹���С����ع������˹觻Ѩ�غѹ
+        // ตั้งค่าตำแหน่งและการหมุนตามตำแหน่งปัจจุบัน
         transform.localPosition = positions[currentPositionIndex].position;
         transform.localRotation = Quaternion.Euler(positions[currentPositionIndex].rotation);
 
@@ -114,10 +118,10 @@ public class InteractableClockHand : MonoBehaviour
 
     private void ReversePosition()
     {
-        // ����͹仵��˹觡�͹˹�� (ǹ�ٻ 11-0)
+        // เลื่อนไปตำแหน่งก่อนหน้า (วนลูป 11-0)
         currentPositionIndex = (currentPositionIndex - 1 + positions.Length) % positions.Length;
 
-        // ��駤�ҵ��˹���С����ع������˹觻Ѩ�غѹ
+        // ตั้งค่าตำแหน่งและการหมุนตามตำแหน่งปัจจุบัน
         transform.localPosition = positions[currentPositionIndex].position;
         transform.localRotation = Quaternion.Euler(positions[currentPositionIndex].rotation);
 

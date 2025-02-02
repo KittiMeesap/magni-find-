@@ -42,14 +42,6 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Space))
-        {
-            HideDialogue();
-        }
-    }
-
     public void ShowDialogue(string message, GameObject itemObject = null)
     {
         dialogueText.text = message;
@@ -100,13 +92,13 @@ public class DialogueUI : MonoBehaviour
     public void HideDialogue()
     {
         dialoguePanel.SetActive(false);
-        ToolManager.Instance.SetToolMode("Eye");
+        Camera.main.GetComponent<CameraController>().ExitMinigame();
         if (currentItemObject != null)
         {
-            currentItemObject.SetActive(false); // ??????????????????????? itemObject
+            currentItemObject.SetActive(false);
             currentItemObject = null;
         }
 
-        itemImage.gameObject.SetActive(false); // ??????????????? dialogue
+        itemImage.gameObject.SetActive(false);
     }
 }

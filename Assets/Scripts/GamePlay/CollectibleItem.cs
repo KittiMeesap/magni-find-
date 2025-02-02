@@ -12,8 +12,6 @@ public class CollectibleItem : MonoBehaviour
 
     void OnMouseDown()
     {
-        MinigameManager.Instance.OnRewardCollected();
-
         if (ToolManager.Instance.CurrentMode == "Hand")
         {
             if (progressManager != null)
@@ -21,6 +19,7 @@ public class CollectibleItem : MonoBehaviour
                 progressManager.MarkAsFound(itemIndex);
                 Debug.Log($"Item {name} collected!");
                 Destroy(gameObject);
+                MinigameManager.Instance.OnRewardCollected();
             }
         }
     }

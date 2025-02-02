@@ -34,5 +34,7 @@ public class DialogueSystem : MonoBehaviour
                 Debug.LogError("DialogueUI instance not found in the scene.");
             }
         }
+
+        Camera.main.GetComponent<CameraController>().EnterMinigame();
     }
 }

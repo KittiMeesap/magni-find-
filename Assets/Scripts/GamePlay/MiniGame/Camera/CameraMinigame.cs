@@ -17,11 +17,15 @@ public class CameraMinigame : MonoBehaviour
     [SerializeField] private GameObject rightButton;
     [SerializeField] private float fadeDuration = 1.0f;
 
-    private bool hasBatteryInserted = false; // ✅ จำว่าถ่านใหม่ถูกใส่ไปแล้วหรือยัง
-    private bool oldBatteryRemoved = false; // ✅ จำว่าถ่านเก่าถูกถอดออกไปหรือยัง
-    private Vector3 initialOldBatteryPosition; // ✅ บันทึกตำแหน่งเดิมของถ่านเก่า
+    private bool hasBatteryInserted = false;
+    private bool oldBatteryRemoved = false;
+    private Vector3 initialOldBatteryPosition;
     private int currentPhotoIndex = 0;
     private bool isSliding = false;
+
+    // ✅ กำหนดขนาดของถ่าน (สามารถตั้งค่าได้ใน Inspector)
+    [SerializeField] private Vector3 batterySize = new Vector3(1f, 1f, 1f);
+    [SerializeField] private float sizeTolerance = 0.05f; // ✅ ค่า tolerance ของขนาดที่อนุญาตให้ใส่ได้
 
     private void Awake()
     {
@@ -36,7 +40,7 @@ public class CameraMinigame : MonoBehaviour
 
         if (oldBattery != null)
         {
-            initialOldBatteryPosition = oldBattery.transform.position; // ✅ บันทึกตำแหน่งถ่านเก่าตอนเริ่มเกม
+            initialOldBatteryPosition = oldBattery.transform.position;
         }
     }
 
@@ -45,15 +49,14 @@ public class CameraMinigame : MonoBehaviour
         isSliding = false;
         MinigameManager.Instance.StartMinigame(cameraMinigame, cameraObject, null, true);
 
-        CheckOldBatteryState(); // ✅ เช็คว่าถ่านเก่ายังอยู่ที่เดิมไหม
+        CheckOldBatteryState();
 
         if (hasBatteryInserted)
         {
-            // ✅ ถ้าถ่านใหม่ถูกใส่แล้ว แสดงผลกล้องได้เลย
             cameraScreen.color = Color.white;
             cameraScreen.sprite = photos[currentPhotoIndex];
             newBattery.SetActive(false);
-            if(oldBattery != null)
+            if (oldBattery != null)
             {
                 oldBattery.SetActive(false);
             }
@@ -62,7 +65,6 @@ public class CameraMinigame : MonoBehaviour
         }
         else
         {
-            // ✅ ถ้ายังไม่ใส่ถ่านใหม่ ให้แสดงสถานะเริ่มต้น
             cameraScreen.color = Color.black;
             cameraScreen.sprite = null;
             leftButton.SetActive(false);
@@ -77,9 +79,9 @@ public class CameraMinigame : MonoBehaviour
             if (oldBattery != null)
             {
                 oldBatteryRemoved = true;
-                Destroy(oldBattery); // ✅ ถ่านเก่าถูกย้ายออก -> ลบทิ้งจริง ๆ
+                Destroy(oldBattery);
                 oldBattery = null;
-                newBattery.SetActive(true); // ✅ แสดงถ่านใหม่ให้ใช้งาน
+                newBattery.SetActive(true);
                 Debug.Log("Old battery removed, new battery available.");
             }
         }
@@ -87,19 +89,26 @@ public class CameraMinigame : MonoBehaviour
 
     public void InsertNewBattery()
     {
-        if (!hasBatteryInserted && oldBatteryRemoved && IsBatteryInCorrectPosition())
+        if (!hasBatteryInserted && oldBatteryRemoved && IsBatterySizeCorrect())
         {
-            hasBatteryInserted = true; // ✅ จำว่าถ่านถูกใส่ไปแล้ว
+            hasBatteryInserted = true;
             newBattery.transform.position = batterySlot.transform.position;
             newBattery.SetActive(false);
             StartCoroutine(FadeInCameraScreen());
         }
+        else
+        {
+            Debug.LogWarning("Battery insertion failed: Incorrect size.");
+        }
     }
 
-    private bool IsBatteryInCorrectPosition()
+    // ✅ ตรวจสอบว่าขนาดของถ่านถูกต้องหรือไม่
+    private bool IsBatterySizeCorrect()
     {
-        float distance = Vector3.Distance(newBattery.transform.position, batterySlot.transform.position);
-        return distance < 0.5f;
+        Vector3 batteryScale = newBattery.transform.localScale;
+        return Mathf.Abs(batteryScale.x - batterySize.x) <= sizeTolerance &&
+               Mathf.Abs(batteryScale.y - batterySize.y) <= sizeTolerance &&
+               Mathf.Abs(batteryScale.z - batterySize.z) <= sizeTolerance;
     }
 
     [SerializeField] private float fadeSpeed = 2.5f;
@@ -132,7 +141,7 @@ public class CameraMinigame : MonoBehaviour
 
     public void ResumeMinigame()
     {
-        MinigameManager.Instance.ResumeMinigame(cameraMinigame, cameraObject, null,true);
+        MinigameManager.Instance.ResumeMinigame(cameraMinigame, cameraObject, null, true);
     }
 
     private void CheckOldBatteryState()
@@ -140,13 +149,13 @@ public class CameraMinigame : MonoBehaviour
         if (oldBattery != null)
         {
             float distance = Vector3.Distance(oldBattery.transform.position, initialOldBatteryPosition);
-            if (distance > 0.1f) // ✅ ถ่านเก่าไม่อยู่ตำแหน่งเดิม
+            if (distance > 0.1f)
             {
                 Debug.Log("Old battery moved! Removing it.");
                 Destroy(oldBattery);
                 oldBattery = null;
                 oldBatteryRemoved = true;
-                newBattery.SetActive(true); // ✅ เปิดให้ใช้ถ่านใหม่ทันที
+                newBattery.SetActive(true);
             }
         }
 

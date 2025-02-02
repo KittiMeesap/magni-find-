@@ -101,7 +101,13 @@ public class DialogueUI : MonoBehaviour
     public void HideDialogue()
     {
         dialoguePanel.SetActive(false);
-        Camera.main.GetComponent<CameraController>().ExitMinigame();
+
+        // พักมินิเกมและออกจากมินิเกมเมื่อปิดไดอะล็อก
+        if (MinigameManager.Instance != null && MinigameManager.Instance.IsPlayingMinigame)
+        {
+            MinigameManager.Instance.PauseMinigame();
+        }
+
         if (currentItemObject != null)
         {
             currentItemObject.SetActive(false);
@@ -110,4 +116,5 @@ public class DialogueUI : MonoBehaviour
 
         itemImage.gameObject.SetActive(false);
     }
+
 }

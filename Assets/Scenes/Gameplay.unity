@@ -657,9 +657,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dcdcf3a4d45e86478565001b06cb868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueText: '"Is the clock broken? Should I take a closer look?"'
+  dialogueText: "\"This is my dad\u2019s camera. It seems like the battery is too
+    old. What should I do?\""
   hasMagnifierMessage: 0
-  dialogueTextSpecial: Eh, why isn't this working?
+  dialogueTextSpecial: 
   itemObject: {fileID: 0}
 --- !u!114 &60279848
 MonoBehaviour:
@@ -7370,9 +7371,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dcdcf3a4d45e86478565001b06cb868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueText: '"Is the clock broken? Should I take a closer look?"'
+  dialogueText: "\"This is a photo of my parents\u2019 wedding, framed by my grandfather.
+    But the frame looks a bit strange.\""
   hasMagnifierMessage: 0
-  dialogueTextSpecial: Eh, why isn't this working?
+  dialogueTextSpecial: 
   itemObject: {fileID: 0}
 --- !u!114 &959446297
 MonoBehaviour:
@@ -12755,6 +12757,7 @@ MonoBehaviour:
   fadeDuration: 2
   batterySize: {x: 1, y: 1, z: 1}
   sizeTolerance: 0.05
+  snapDistance: 0.5
   fadeSpeed: 2
 --- !u!114 &1860011843
 MonoBehaviour:

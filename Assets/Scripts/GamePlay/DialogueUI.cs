@@ -42,6 +42,15 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        {
+            HideDialogue();
+        }
+    }
+
+
     public void ShowDialogue(string message, GameObject itemObject = null)
     {
         dialogueText.text = message;

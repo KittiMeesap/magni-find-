@@ -115,6 +115,7 @@ public class DialogueUI : MonoBehaviour
         }
 
         itemImage.gameObject.SetActive(false);
+        Camera.main.GetComponent<CameraController>().ExitMinigame();
     }
 
 }

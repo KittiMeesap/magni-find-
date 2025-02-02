@@ -24,8 +24,9 @@ public class CameraMinigame : MonoBehaviour
     private bool isSliding = false;
 
     // ✅ กำหนดขนาดของถ่าน (สามารถตั้งค่าได้ใน Inspector)
-    [SerializeField] private Vector3 batterySize = new Vector3(1f, 1f, 1f);
+    [SerializeField] private Vector3 batterySize = new Vector3(1f, 1f, 0.2f);
     [SerializeField] private float sizeTolerance = 0.05f; // ✅ ค่า tolerance ของขนาดที่อนุญาตให้ใส่ได้
+    [SerializeField] private float snapDistance = 0.5f;
 
     private void Awake()
     {
@@ -89,7 +90,7 @@ public class CameraMinigame : MonoBehaviour
 
     public void InsertNewBattery()
     {
-        if (!hasBatteryInserted && oldBatteryRemoved && IsBatterySizeCorrect())
+        if (!hasBatteryInserted && oldBatteryRemoved && IsBatterySizeCorrect() && IsBatteryPositionCorrect())
         {
             hasBatteryInserted = true;
             newBattery.transform.position = batterySlot.transform.position;
@@ -100,6 +101,13 @@ public class CameraMinigame : MonoBehaviour
         {
             Debug.LogWarning("Battery insertion failed: Incorrect size.");
         }
+    }
+
+    // ✅ ตรวจสอบว่าถ่านถูกลากไปตำแหน่งที่ใส่ถ่านหรือไม่
+    private bool IsBatteryPositionCorrect()
+    {
+        float distance = Vector3.Distance(newBattery.transform.position, batterySlot.transform.position);
+        return distance <= snapDistance;
     }
 
     // ✅ ตรวจสอบว่าขนาดของถ่านถูกต้องหรือไม่

@@ -59,6 +59,7 @@ public class MinigameManager : MonoBehaviour
             currentMinigame.SetActive(true);
         }
 
+        /*
         if (minigameTransform != null)
         {
             if (useFadeIn)
@@ -70,6 +71,7 @@ public class MinigameManager : MonoBehaviour
                 StartCoroutine(ZoomIn(minigameTransform));
             }
         }
+        */
 
         Debug.Log("Minigame started!");
     }
@@ -94,7 +96,17 @@ public class MinigameManager : MonoBehaviour
     private IEnumerator FadeIn(Transform obj)
     {
         SpriteRenderer[] spriteRenderers = obj.GetComponentsInChildren<SpriteRenderer>();
-        foreach (var sr in spriteRenderers) sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f);
+
+        // ✅ **เก็บค่า Alpha ดั้งเดิมของแต่ละ SpriteRenderer**
+        Dictionary<SpriteRenderer, float> originalAlphas = new Dictionary<SpriteRenderer, float>();
+        foreach (var sr in spriteRenderers)
+        {
+            if (sr != null)
+            {
+                originalAlphas[sr] = sr.color.a; // 🔹 บันทึกค่า Alpha เดิม
+                sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f); // 🔹 ตั้งค่าเริ่มต้นเป็น 0
+            }
+        }
 
         float elapsedTime = 0f;
         while (elapsedTime < animationDuration)
@@ -104,16 +116,29 @@ public class MinigameManager : MonoBehaviour
 
             foreach (var sr in spriteRenderers)
             {
-                if (sr != null)
+                if (sr != null && originalAlphas.ContainsKey(sr))
                 {
                     Color color = sr.color;
-                    color.a = Mathf.Lerp(0f, 1f, t);
+                    float targetAlpha = originalAlphas[sr]; // 🔹 ใช้ค่า Alpha ดั้งเดิมเป็นเป้าหมาย
+                    color.a = Mathf.Lerp(0f, targetAlpha, t);
                     sr.color = color;
                 }
             }
             yield return null;
         }
+
+        // ✅ **ตรวจสอบให้แน่ใจว่า Alpha ถูกต้องหลังจบ Animation**
+        foreach (var sr in spriteRenderers)
+        {
+            if (sr != null && originalAlphas.ContainsKey(sr))
+            {
+                Color color = sr.color;
+                color.a = originalAlphas[sr];
+                sr.color = color;
+            }
+        }
     }
+
 
     public void PauseMinigame()
     {
@@ -138,6 +163,20 @@ public class MinigameManager : MonoBehaviour
         minigameObject.SetActive(true);
         pausedMinigames[minigameObject] = false; // ล้างสถานะพัก
         Debug.Log($"Minigame resumed: {minigameObject.name}");
+        
+        /*
+        if (minigameTransform != null)
+        {
+            if (useFadeIn)
+            {
+                StartCoroutine(FadeIn(minigameTransform));
+            }
+            else
+            {
+                StartCoroutine(ZoomIn(minigameTransform));
+            }
+        }
+        */
     }
 
     public void CompleteMinigame()

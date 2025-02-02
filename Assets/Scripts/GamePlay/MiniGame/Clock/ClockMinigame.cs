@@ -99,7 +99,7 @@ public class ClockMinigame : MonoBehaviour
         }
 
         RestoreGameState(); // ✅ โหลดสถานะก่อนสุ่ม
-        MinigameManager.Instance.StartMinigame(clockMinigameObject, clockTransform, rewardItemPrefab);
+        MinigameManager.Instance.StartMinigame(clockMinigameObject, clockTransform, rewardItemPrefab,true);
         MinigameManager.Instance.SetMinigameTrigger(triggerObject);
         ShuffleClockNumbers();
         SaveGameState(); // ✅ บันทึกสถานะหลังจากสุ่มเสร็จ
@@ -116,7 +116,7 @@ public class ClockMinigame : MonoBehaviour
     {
         isPaused = false;
         RestoreGameState(); // ✅ โหลดค่า `completedParts`
-        MinigameManager.Instance.ResumeMinigame(clockMinigameObject, clockTransform, rewardItemPrefab);
+        MinigameManager.Instance.ResumeMinigame(clockMinigameObject, clockTransform, rewardItemPrefab, true);
     }
 
     private void SaveGameState()

@@ -64,7 +64,7 @@ public class VaseMinigame : MonoBehaviour
         }
 
         completedParts = savedCompletedParts; // ✅ โหลดค่าที่ทำสำเร็จแล้ว
-        MinigameManager.Instance.StartMinigame(vaseMinigameObject, vaseTransform, rewardItemPrefab);
+        MinigameManager.Instance.StartMinigame(vaseMinigameObject, vaseTransform, rewardItemPrefab, true);
         MinigameManager.Instance.SetMinigameTrigger(triggerObject);
     }
 
@@ -80,7 +80,7 @@ public class VaseMinigame : MonoBehaviour
     {
         isPaused = false;
         completedParts = savedCompletedParts; // ✅ โหลดค่าที่บันทึกไว้
-        MinigameManager.Instance.ResumeMinigame(vaseMinigameObject, vaseTransform, rewardItemPrefab);
+        MinigameManager.Instance.ResumeMinigame(vaseMinigameObject, vaseTransform, rewardItemPrefab, true);
         Debug.Log($"Vase Minigame Resumed. Loaded completed parts: {completedParts}");
     }
 

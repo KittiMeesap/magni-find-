@@ -923,70 +923,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1891837873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &100685707
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 100685708}
-  - component: {fileID: 100685709}
-  - component: {fileID: 100685710}
-  m_Layer: 0
-  m_Name: HintManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &100685708
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100685707}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.71171427, y: -0.53346515, z: -0.07079338}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &100685709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100685707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7edbd087f70579747b87d3e84dd9b093, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsPlayingHint: 0
-  animationDuration: 1
-  hintTargetScale: {x: 1, y: 1, z: 1}
-  hintTargetPositionOffset: {x: 0, y: 2, z: 0}
---- !u!114 &100685710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100685707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd02455763cbe24988ba8384bff7b2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bookObject: {fileID: 1811931570}
-  targetDialogueSystem: {fileID: 0}
-  message: "\"The old books of grandpa, I\u2019ve never picked them up to read.\""
 --- !u!1 &107568169
 GameObject:
   m_ObjectHideFlags: 0
@@ -5012,6 +4948,7 @@ GameObject:
   - component: {fileID: 476194208}
   - component: {fileID: 476194210}
   - component: {fileID: 476194209}
+  - component: {fileID: 476194212}
   - component: {fileID: 476194213}
   m_Layer: 0
   m_Name: GameController
@@ -5071,6 +5008,22 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: f585a56c973b4d6449ddc7c83242badc, type: 2}
   outlineMaterial: {fileID: 2100000, guid: a1c91971d0375eb48909c21a86625c2e, type: 2}
   zoomAmount: 0.1
+--- !u!114 &476194212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476194206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 484cb4ffb790dab4985d4e21a2ced22b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 357184062}
+  dialogueText: {fileID: 372471673}
+  closeButton: {fileID: 1511583671}
+  itemImage: {fileID: 775596525}
 --- !u!114 &476194213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7382,7 +7335,7 @@ GameObject:
   - component: {fileID: 959446299}
   - component: {fileID: 959446298}
   - component: {fileID: 959446297}
-  - component: {fileID: 959446301}
+  - component: {fileID: 959446296}
   - component: {fileID: 959446300}
   m_Layer: 0
   m_Name: Picture
@@ -7406,6 +7359,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1753817884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &959446296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959446294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dcdcf3a4d45e86478565001b06cb868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueText: "\"This is a photo of my parents\u2019 wedding, framed by my grandfather.
+    But the frame looks a bit strange.\""
+  hasMagnifierMessage: 0
+  dialogueTextSpecial: 
+  itemObject: {fileID: 0}
 --- !u!114 &959446297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7553,23 +7523,6 @@ MonoBehaviour:
   alphaThreshold: 0
   drawOutside: 0
   enableInstancing: 0
---- !u!114 &959446301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 959446294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14771e53a5b14394980f67f8d0fb061f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueText: {fileID: 0}
-  dialogueTextSpecial: {fileID: 0}
-  hasMagnifierMessage: 0
-  dialogueTextSpecialMessage: 
-  dialogueTextMessage: 
 --- !u!1 &960785459
 GameObject:
   m_ObjectHideFlags: 0
@@ -8906,7 +8859,7 @@ GameObject:
   - component: {fileID: 1347089455}
   - component: {fileID: 1347089459}
   - component: {fileID: 1347089458}
-  - component: {fileID: 1347089461}
+  - component: {fileID: 1347089457}
   - component: {fileID: 1347089456}
   - component: {fileID: 1347089460}
   m_Layer: 0
@@ -8947,6 +8900,21 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 1811931570}
+--- !u!114 &1347089457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347089454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e1d7bec5d6f234897d7e44126db632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minigameType: 0
+  highlightedSprite: {fileID: -5782964110557395482, guid: de5062cd9b6b2de46b5ef2aca0a5b0c5, type: 3}
+  centerPoint: {fileID: 0}
 --- !u!60 &1347089458
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -9078,21 +9046,6 @@ MonoBehaviour:
   alphaThreshold: 0
   drawOutside: 0
   enableInstancing: 0
---- !u!114 &1347089461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347089454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b4962ed72a9f5419f66fa737179878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintType: 1
-  highlightedSprite: {fileID: -5782964110557395482, guid: de5062cd9b6b2de46b5ef2aca0a5b0c5, type: 3}
-  centerPoint: {fileID: 0}
 --- !u!1 &1360700770
 GameObject:
   m_ObjectHideFlags: 0
@@ -9989,7 +9942,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 476194212}
         m_TargetAssemblyTypeName: DialogueUI, Assembly-CSharp
         m_MethodName: HideDialogue
         m_Mode: 1
@@ -14636,7 +14589,7 @@ GameObject:
   - component: {fileID: 2102446673}
   - component: {fileID: 2102446672}
   - component: {fileID: 2102446675}
-  - component: {fileID: 2102446678}
+  - component: {fileID: 2102446676}
   - component: {fileID: 2102446674}
   - component: {fileID: 2102446677}
   m_Layer: 0
@@ -14669,7 +14622,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: f585a56c973b4d6449ddc7c83242badc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14792,6 +14745,21 @@ PolygonCollider2D:
       - {x: 0.29078612, y: -0.20416719}
       - {x: 0.44376463, y: -0.06295625}
   m_UseDelaunayMesh: 0
+--- !u!114 &2102446676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102446671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e1d7bec5d6f234897d7e44126db632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minigameType: 0
+  highlightedSprite: {fileID: 4055095327267945682, guid: de5062cd9b6b2de46b5ef2aca0a5b0c5, type: 3}
+  centerPoint: {fileID: 0}
 --- !u!114 &2102446677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14810,21 +14778,6 @@ MonoBehaviour:
   alphaThreshold: 0
   drawOutside: 0
   enableInstancing: 0
---- !u!114 &2102446678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102446671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b4962ed72a9f5419f66fa737179878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintType: 2
-  highlightedSprite: {fileID: 4055095327267945682, guid: de5062cd9b6b2de46b5ef2aca0a5b0c5, type: 3}
-  centerPoint: {fileID: 0}
 --- !u!1 &2115530397
 GameObject:
   m_ObjectHideFlags: 0
@@ -15079,7 +15032,6 @@ SceneRoots:
   - {fileID: 829215129}
   - {fileID: 476194208}
   - {fileID: 1860011838}
-  - {fileID: 100685708}
   - {fileID: 1685710012}
   - {fileID: 962424660}
   - {fileID: 1746846204}

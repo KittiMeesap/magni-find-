@@ -14,7 +14,7 @@ public class VaseMinigame : MonoBehaviour
     [SerializeField] private GameObject triggerObject;
     [SerializeField] private GameObject vaseMinigameObject;
     [SerializeField] private Transform vaseTransform;
-    [SerializeField] private DialogueManager targetDialogueSystem;
+    [SerializeField] private DialogueSystem targetDialogueSystem;
     [SerializeField] private GameObject rewardItemPrefab;
     [SerializeField] private float rewardItemSlideDistance = 2.0f;
     [SerializeField] private float animationDuration = 1f;

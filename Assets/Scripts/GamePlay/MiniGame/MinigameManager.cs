@@ -244,7 +244,7 @@ public class MinigameManager : MonoBehaviour
         ToolManager.Instance.SetToolMode("Eye");
 
         DisableMinigameTrigger();
-        DialogueUI.Instance.HideDialogue();
+        DialogueManager.Instance.HideDialogue();
         Camera.main.GetComponent<CameraController>().ExitMinigame();
         Debug.Log("Minigame ended.");
     }

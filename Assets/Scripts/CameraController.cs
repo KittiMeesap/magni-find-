@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
     private Vector3 zoomedCameraPosition; // ✅ ตำแหน่งที่ซูมเข้าไป
     private float zoomedCameraSize;       // ✅ ขนาดที่ซูมเข้าไป
     private bool isMinigameActive = false;
+    private bool isHintActive = false;
     private bool isZooming = false;
     [SerializeField] private float duration = 1f;
 
@@ -61,6 +62,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         if (isMinigameActive || isZooming) return;
+        if (isHintActive || isZooming) return;
 
         Vector3 mousePos = Input.mousePosition;
         float screenWidth = Screen.width;
@@ -128,6 +130,31 @@ public class CameraController : MonoBehaviour
     {
         if (!isMinigameActive) return;
         isMinigameActive = false;
+
+        transform.position = zoomedCameraPosition;
+        mainCamera.orthographicSize = zoomedCameraSize;
+
+        StartCoroutine(MoveAndZoomCoroutine(lastCameraPosition, lastCameraSize, () =>
+        {
+            ToolManager.Instance.SetToolMode("Eye"); // ✅ เรียกใช้หลังจากซูมออกเสร็จ
+        }));
+    }
+
+    public void EnterHint()
+    {
+        if (isHintActive) return;
+        isHintActive = true;
+
+        // ✅ **ตัดไปที่ `(0,0)` ทันที**
+        transform.position = new Vector3(0, 0, transform.position.z);
+        mainCamera.orthographicSize = defaultCameraSize;
+    }
+
+    // ✅ **ซูมออกจาก Object (คำใบ้)**
+    public void ExitHint()
+    {
+        if (!isHintActive) return;
+        isHintActive = false;
 
         transform.position = zoomedCameraPosition;
         mainCamera.orthographicSize = zoomedCameraSize;

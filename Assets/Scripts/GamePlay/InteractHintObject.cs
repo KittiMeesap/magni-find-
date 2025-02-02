@@ -1,19 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractObject : MonoBehaviour
+public class InteractHintObject : MonoBehaviour
 {
-    [SerializeField] private MinigameType minigameType;
-    public enum MinigameType
+    [SerializeField] private HintType hintType;
+
+    public enum HintType
     {
         Null,
-        Clock,
-        Vase,
-        Camera,
-        Cat,
-        Picture,
-        Instrument,
-        Bird
+        Book,
+        Note
     }
 
     private SpriteRenderer spriteRenderer;
@@ -39,7 +35,7 @@ public class InteractObject : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (MinigameManager.Instance.IsPlayingMinigame == false && ToolManager.Instance.CurrentMode == "Eye")
+        if (HintManager.Instance.IsPlayingHint == false && ToolManager.Instance.CurrentMode == "Eye")
         {
             if (spriteRenderer != null && highlightedSprite != null)
             {
@@ -91,56 +87,50 @@ public class InteractObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (MinigameManager.Instance.IsPlayingMinigame == false && ToolManager.Instance.CurrentMode == "Eye")
+        if (HintManager.Instance.IsPlayingHint == false && ToolManager.Instance.CurrentMode == "Eye")
         {
             ToolManager.Instance.SetToolMode("Hand");
 
-            bool isMinigame = minigameType != MinigameType.Null;
+            bool isHint = hintType != HintType.Null;
 
             // ✅ **ให้กล้องซูมไปที่ Object ก่อนทำงาน**
             CameraController.Instance.ZoomToObject(transform, () =>
             {
                 // ✅ เปิด Dialogue ก่อน Minigame
-                DialogueSystem dialogueSystem = GetComponent<DialogueSystem>();
+                Dialogue dialogueSystem = GetComponent<Dialogue>();  // ใช้ Dialogue แทน DialogueManager
+
                 if (dialogueSystem != null)
                 {
-                    dialogueSystem.ShowDialogue();
+                    // เช็คว่าใช้ Magnifier หรือไม่ และเลือกข้อความที่ต้องการ
+                    string messageToShow = ToolManager.Instance.CurrentMode == "Magnifier" && dialogueSystem.hasMagnifierMessage
+                        ? dialogueSystem.dialogueText.text
+                        : dialogueSystem.dialogueText.text;
+
+                    // ส่งข้อความไปยัง DialogueManager เพื่อแสดง
+                    DialogueManager.Instance.ShowDialogue(messageToShow, gameObject);
                 }
 
-                if (isMinigame)
+                if (isHint)
                 {
-                    CameraController.Instance.EnterMinigame();
-                    StartMinigame();
+                    CameraController.Instance.EnterHint();
+                    StartHint();
                 }
             });
         }
     }
 
-    private void StartMinigame()
+    
+
+    private void StartHint()
     {
-        switch (minigameType)
+        switch (hintType)
         {
-            case MinigameType.Clock:
-                ClockMinigame.Instance.StartMinigame();
+            case HintType.Book:
+                BookHint.Instance.StartHint();
                 break;
-            case MinigameType.Vase:
-                VaseMinigame.Instance.StartMinigame();
-                break;
-            case MinigameType.Camera:
-                CameraMinigame.Instance.StartMinigame();
-                break;
-            case MinigameType.Cat:
-                CatMinigame.Instance.StartMinigame();
-                break;
-            case MinigameType.Picture:
-                PictureMinigame.Instance.StartMinigame();
-                break;
-            case MinigameType.Instrument:
-                // InstrumentMinigame.Instance.StartMinigame();
-                break;
-            case MinigameType.Bird:
-                // BirdMinigame.Instance.StartMinigame();
-                break;
+            //case HintType.Note:
+                //NoteHint.Instance.StartMinigame();
+                //break;
             default:
                 Debug.LogWarning("Not Minigame Object");
                 break;

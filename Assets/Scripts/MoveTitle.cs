@@ -7,6 +7,7 @@ public class MoveTitle : MonoBehaviour
     public GameObject gameTitle; // ชื่อเกมที่จะแสดงในเมนูหลัก
     public float targetYPosition = 250f; // ตำแหน่ง Y ที่ชื่อเกมจะขยับไป
     public float speed = 50f; // ความเร็วในการขยับชื่อเกม
+    public GameObject playMinigameObject; // ปุ่มเล่นมินิเกม
 
     private bool isToolChanged = false;
     private bool isTitleMoving = false; // ใช้เพื่อบอกว่าชื่อเกมเริ่มขยับหรือยัง
@@ -62,6 +63,9 @@ public class MoveTitle : MonoBehaviour
             {
                 isToolChanged = true;
                 toolManager.SetToolMode("Hand");
+
+                // แสดงปุ่มเล่นมินิเกม
+                playMinigameObject.SetActive(true);
             }
         }
     }

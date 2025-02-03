@@ -1,7 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class InteractableObjectPlayMinigame : MonoBehaviour
+public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     public GameObject targetObject; // Target object to snap to
     public float snapDistance = 0.5f; // Distance threshold for snapping
@@ -19,28 +20,22 @@ public class InteractableObjectPlayMinigame : MonoBehaviour
     [SerializeField] private Material defaultMaterial; // Default material
     [SerializeField] private Material highlightMaterial; // Highlight material during interaction
 
-    private void Update()
-    {
-        // Handle dragging in Hand mode (only if object is not snapped)
-        if (ToolManager.Instance.CurrentMode == "Hand" && isDragging && !isSnapped)
-        {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePos;
+    private TextMeshProUGUI textComponent; // Reference to TextMeshPro component
+    private Vector2 originalPointerPosition;
 
-            // Check for snap conditions (correct scale and within snap distance)
-            if (IsScaleCorrect() && IsWithinSnapDistance())
-            {
-                SnapToTarget(); // Snap to target if conditions met
-            }
-        }
+    private void Start()
+    {
+        textComponent = GetComponent<TextMeshProUGUI>(); // Initialize TextMeshPro reference
     }
 
-    private void OnMouseDown()
+    public void OnPointerDown(PointerEventData eventData)
     {
-        // Only allow selection in "Hand" mode and if not snapped
+        // Record the position where the pointer clicked
+        originalPointerPosition = eventData.position;
+        isDragging = true;
+
         if (!isSnapped && ToolManager.Instance.CurrentMode == "Hand")
         {
-            isDragging = true; // Start dragging
             isSelected = true; // Mark as selected
             ToolManager.Instance.SetSelectedObject(gameObject); // Set selected object
             ChangeMaterial(highlightMaterial); // Highlight object during dragging
@@ -48,7 +43,24 @@ public class InteractableObjectPlayMinigame : MonoBehaviour
         }
     }
 
-    private void OnMouseUp()
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (isDragging)
+        {
+            // Update the position of the object as we drag the pointer
+            Vector2 dragDelta = eventData.position - originalPointerPosition;
+
+            // Increase or decrease the font size based on drag movement
+            if (dragDelta.y > 0)
+                IncreaseFontSize(0.1f); // Increase font size
+            else if (dragDelta.y < 0)
+                DecreaseFontSize(0.1f); // Decrease font size
+
+            originalPointerPosition = eventData.position; // Update the position for next frame
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
     {
         if (ToolManager.Instance.CurrentMode == "Hand")
         {
@@ -68,38 +80,23 @@ public class InteractableObjectPlayMinigame : MonoBehaviour
         }
     }
 
-    private bool IsScaleCorrect()
+    public void IncreaseFontSize(float value)
     {
-        // Check if the object scale matches the correct scale within tolerance
-        return Vector3.Distance(transform.localScale, correctScale) <= scaleTolerance;
-    }
-
-    private bool IsWithinSnapDistance()
-    {
-        // Check if the object is within snap distance of the target
-        return targetObject != null && Vector3.Distance(transform.position, targetObject.transform.position) <= snapDistance;
-    }
-
-    private void SnapToTarget()
-    {
-        // Calculate snap position with Y offset
-        Vector3 snapPosition = targetObject.transform.position;
-        snapPosition.y += snapYOffset;
-
-        transform.position = snapPosition;
-
-        // Snap successful if scale is correct
-        if (IsScaleCorrect())
+        if (textComponent != null)
         {
-            Debug.Log($"Snapped to target {targetObject.name} successfully!");
-            isSnapped = true; // Block further dragging after snapping
-            PlayMinigame.Instance.CompletePart(); // Notify the game that this part is complete
+            // Increase font size in TextMeshPro
+            textComponent.fontSize += value;
+            textComponent.fontSize = Mathf.Clamp(textComponent.fontSize, 10f, 100f); // Clamp font size
         }
-        else
+    }
+
+    public void DecreaseFontSize(float value)
+    {
+        if (textComponent != null)
         {
-            // Optional: Change material or log feedback if scale is incorrect
-            ChangeMaterial(defaultMaterial); // Reset material if scale is incorrect
-            Debug.Log("Scale is incorrect, unable to snap.");
+            // Decrease font size in TextMeshPro
+            textComponent.fontSize -= value;
+            textComponent.fontSize = Mathf.Clamp(textComponent.fontSize, 10f, 100f); // Clamp font size
         }
     }
 }

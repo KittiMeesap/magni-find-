@@ -38,7 +38,7 @@ public class ToolManager : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0f)
         {
-            ToggleToolMode();
+                ToggleToolMode();
         }
 
         /*if (CurrentMode == "Hand" && Input.GetMouseButtonDown(0))
@@ -175,7 +175,33 @@ public class ToolManager : MonoBehaviour
 
     private void ToggleToolMode()
     {
-        if(!MinigameManager.Instance.IsPlayingMinigame)
+        //กันเปลี่ยนเครื่องมือตอนออกเข้ามินิเกม
+        if (CameraController.Instance != null && CameraController.Instance.isZooming) return;
+
+        
+
+        if (DialogueUI.Instance != null && DialogueUI.Instance.IsOpenDialog)
+        {
+            if (MinigameManager.Instance != null && MinigameManager.Instance.IsPlayingMinigame)
+            {
+                if (CurrentMode == "Hand")
+                {
+                    SetToolMode("Magnifier");
+                }
+                else if (CurrentMode == "Magnifier")
+                {
+                    SetToolMode("Hand");
+                }
+                
+                return;
+            }
+            if (CurrentMode != "Eye" || CurrentMode == "Magnifier")
+            {
+                SetToolMode("Hand");
+            }
+        }
+
+        else
         {
             if (CurrentMode != "Eye")
             {
@@ -183,17 +209,6 @@ public class ToolManager : MonoBehaviour
             }
         }
         
-        else
-        {
-            if (CurrentMode == "Hand")
-            {
-                SetToolMode("Magnifier");
-            }
-            else if (CurrentMode == "Magnifier")
-            {
-                SetToolMode("Hand");
-            }
-        }
         
     }
 

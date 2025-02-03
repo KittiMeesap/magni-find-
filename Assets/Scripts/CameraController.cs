@@ -18,8 +18,8 @@ public class CameraController : MonoBehaviour
     private float lastCameraSize;         // ✅ ขนาดก่อนซูม
     private Vector3 zoomedCameraPosition; // ✅ ตำแหน่งที่ซูมเข้าไป
     private float zoomedCameraSize;       // ✅ ขนาดที่ซูมเข้าไป
-    private bool isMinigameActive = false;
-    private bool isZooming = false;
+    public bool isMinigameActive = false;
+    public bool isZooming = false;
     [SerializeField] private float duration = 1f;
 
     private Camera mainCamera;
@@ -132,8 +132,10 @@ public class CameraController : MonoBehaviour
         transform.position = zoomedCameraPosition;
         mainCamera.orthographicSize = zoomedCameraSize;
 
+        isZooming = true;
         StartCoroutine(MoveAndZoomCoroutine(lastCameraPosition, lastCameraSize, () =>
         {
+            isZooming = false;
             ToolManager.Instance.SetToolMode("Eye"); // ✅ เรียกใช้หลังจากซูมออกเสร็จ
         }));
     }

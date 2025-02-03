@@ -11,6 +11,7 @@ public class DialogueUI : MonoBehaviour
     public Button closeButton;
     public Image CharImage;
     private GameObject currentItemObject;
+    public bool IsOpenDialog = false;
 
 
     public Image itemImage;
@@ -54,6 +55,7 @@ public class DialogueUI : MonoBehaviour
 
     public void ShowDialogue(string message, GameObject itemObject = null)
     {
+        IsOpenDialog = true;
         dialogueText.text = message;
         dialoguePanel.SetActive(true);
 
@@ -101,6 +103,7 @@ public class DialogueUI : MonoBehaviour
 
     public void HideDialogue()
     {
+        IsOpenDialog = false;
         dialoguePanel.SetActive(false);
 
         // พักมินิเกมและออกจากมินิเกมเมื่อปิดไดอะล็อก

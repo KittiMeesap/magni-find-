@@ -7,6 +7,7 @@ public class DialogueSystem : MonoBehaviour
     public string dialogueText;
     public bool hasMagnifierMessage;
     public string dialogueTextSpecial;
+    
 
     public GameObject itemObject;
 

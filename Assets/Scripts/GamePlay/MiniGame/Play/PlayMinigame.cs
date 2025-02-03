@@ -22,6 +22,9 @@ public class PlayMinigame : MonoBehaviour
     [SerializeField] private Transform aShadowTransform;
     [SerializeField] private Transform yShadowTransform;
 
+    [SerializeField] private GameObject startButton; // ปุ่ม Start
+    [SerializeField] private GameObject exitButton; // ปุ่ม Exit
+
     private bool isMinigameCompleted = false;
     private Transform draggingLetter = null;
 
@@ -35,6 +38,10 @@ public class PlayMinigame : MonoBehaviour
         {
             Instance = this;
         }
+
+        // ซ่อนปุ่ม Start และ Exit ตั้งแต่แรก
+        startButton.SetActive(false);
+        exitButton.SetActive(false);
     }
 
     private void Update()
@@ -43,8 +50,14 @@ public class PlayMinigame : MonoBehaviour
 
         if (isMinigameCompleted && Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Starting the next level...");
-            MainMenuManager.Instance.LoadNextLevel(); // Load next level
+            // แสดงปุ่ม Start และ Exit เมื่อกด Spacebar
+            startButton.SetActive(true);
+            exitButton.SetActive(true);
+
+            // ทำลาย PlayMinigame
+            Destroy(gameObject);  // ลบ object ของ PlayMinigame หลังจากกด Spacebar
+
+            Debug.Log("All letters placed correctly. Press Spacebar to continue.");
         }
     }
 

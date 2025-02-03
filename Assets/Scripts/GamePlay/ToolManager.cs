@@ -256,10 +256,4 @@ public class ToolManager : MonoBehaviour
         selectedObject = obj;
     }
 
-    // ฟังก์ชันสำหรับการเปลี่ยนโหมดเครื่องมือ
-    public void SetCurrentMode(string mode)
-    {
-        CurrentMode = mode;
-    }
-
 }

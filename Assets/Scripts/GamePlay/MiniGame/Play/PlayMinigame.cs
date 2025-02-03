@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PlayMinigame : MonoBehaviour
 {
@@ -49,7 +48,7 @@ public class PlayMinigame : MonoBehaviour
         }
     }
 
-    private Transform GetShadowForLetter(DraggableTextUI letter)
+    private Transform GetShadowForLetter(InteractableObjectPlayMinigame letter)
     {
         if (letter.name.StartsWith("P")) return pShadowTransform;
         if (letter.name.StartsWith("L")) return lShadowTransform;
@@ -130,7 +129,7 @@ public class PlayMinigame : MonoBehaviour
         }
     }
 
-    public void CheckLetterPlacement(DraggableTextUI letter)
+    public void CheckLetterPlacement(InteractableObjectPlayMinigame letter)
     {
         // Check if the letter is near its shadow
         float snapDistance = 50f; // Set the snap distance threshold

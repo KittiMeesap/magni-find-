@@ -13,8 +13,7 @@ public class InteractObject : MonoBehaviour
         Cat,
         Picture,
         Instrument,
-        Bird,
-        Play
+        Bird
     }
 
     private SpriteRenderer spriteRenderer;

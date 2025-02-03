@@ -20,12 +20,15 @@ public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Material defaultMaterial; // Default material
     [SerializeField] private Material highlightMaterial; // Highlight material during interaction
 
-    private TextMeshProUGUI textComponent; // Reference to TextMeshPro component
+    private RectTransform rectTransform;
+    private Canvas canvas;
+
     private Vector2 originalPointerPosition;
 
     private void Start()
     {
-        textComponent = GetComponent<TextMeshProUGUI>(); // Initialize TextMeshPro reference
+        rectTransform = GetComponent<RectTransform>(); // Get RectTransform component
+        canvas = GetComponentInParent<Canvas>(); // Get the Canvas that's the parent
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -34,6 +37,7 @@ public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler
         originalPointerPosition = eventData.position;
         isDragging = true;
 
+        // Check if the current mode is "Hand"
         if (!isSnapped && ToolManager.Instance.CurrentMode == "Hand")
         {
             isSelected = true; // Mark as selected
@@ -41,20 +45,31 @@ public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler
             ChangeMaterial(highlightMaterial); // Highlight object during dragging
             Debug.Log("Object clicked: " + gameObject.name); // Log when clicked
         }
+
+        // If in "Magnifier" mode and the object is selected, handle zoom
+        if (ToolManager.Instance.CurrentMode == "Magnifier" && isSelected)
+        {
+            HandleMagnify(); // Start zoom functionality
+            isDragging = false; // Prevent dragging in magnifier mode
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        // Prevent dragging in Magnifier mode unless selected
+        if (ToolManager.Instance.CurrentMode == "Magnifier" && isSelected)
+        {
+            HandleMagnify(); // Handle zoom in magnifier mode
+            return; // Do nothing for dragging
+        }
+
         if (isDragging)
         {
             // Update the position of the object as we drag the pointer
             Vector2 dragDelta = eventData.position - originalPointerPosition;
 
-            // Increase or decrease the font size based on drag movement
-            if (dragDelta.y > 0)
-                IncreaseFontSize(0.1f); // Increase font size
-            else if (dragDelta.y < 0)
-                DecreaseFontSize(0.1f); // Decrease font size
+            // Update the position while dragging using event data and canvas scale factor
+            rectTransform.anchoredPosition += dragDelta / canvas.scaleFactor;
 
             originalPointerPosition = eventData.position; // Update the position for next frame
         }
@@ -67,6 +82,13 @@ public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler
             isDragging = false; // Stop dragging
             ChangeMaterial(defaultMaterial); // Revert material when dragging stops
             Debug.Log("Object released: " + gameObject.name); // Log when released
+
+            // Check letter placement when dragging ends
+            if (PlayMinigame.Instance != null)
+            {
+                // ส่งตัวเองเป็น `InteractableObjectPlayMinigame` แทน
+                PlayMinigame.Instance.CheckLetterPlacement(this);
+            }
         }
     }
 
@@ -80,23 +102,37 @@ public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public void IncreaseFontSize(float value)
+    private void ModifyScale(float scaleChange)
     {
-        if (textComponent != null)
-        {
-            // Increase font size in TextMeshPro
-            textComponent.fontSize += value;
-            textComponent.fontSize = Mathf.Clamp(textComponent.fontSize, 10f, 100f); // Clamp font size
-        }
+        Vector3 newScale = transform.localScale + Vector3.one * scaleChange;
+
+        // Clamp scale within min and max
+        newScale.x = Mathf.Clamp(newScale.x, minScale.x, maxScale.x);
+        newScale.y = Mathf.Clamp(newScale.y, minScale.y, maxScale.y);
+        newScale.z = Mathf.Clamp(newScale.z, minScale.z, maxScale.z);
+
+        transform.localScale = newScale;
+
+        // เปลี่ยนวัสดุเป็น highlightMaterial ระหว่างการ Resize
+        ChangeMaterial(highlightMaterial);
+
+        Debug.Log($"Modified scale of {gameObject.name} to {newScale}");
     }
 
-    public void DecreaseFontSize(float value)
+    // Function to zoom the UI object
+    private void HandleMagnify()
     {
-        if (textComponent != null)
+        GameObject selectedObject = ToolManager.Instance.GetSelectedObject();
+        if (selectedObject == gameObject && !isSnapped) // ตรวจสอบว่า snap แล้วหรือยัง
         {
-            // Decrease font size in TextMeshPro
-            textComponent.fontSize -= value;
-            textComponent.fontSize = Mathf.Clamp(textComponent.fontSize, 10f, 100f); // Clamp font size
+            if (Input.GetMouseButtonDown(0)) // คลิกซ้ายเพื่อขยาย
+            {
+                ModifyScale(scaleStep);
+            }
+            else if (Input.GetMouseButtonDown(1)) // คลิกขวาเพื่อลดขนาด
+            {
+                ModifyScale(-scaleStep);
+            }
         }
     }
 }

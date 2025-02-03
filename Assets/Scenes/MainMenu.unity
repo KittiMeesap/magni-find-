@@ -247,7 +247,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321424152}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20b9ee2b0b392b64aac23873b2059af7, type: 3}
   m_Name: 
@@ -858,9 +858,7 @@ GameObject:
   - component: {fileID: 994415774}
   - component: {fileID: 994415776}
   - component: {fileID: 994415775}
-  - component: {fileID: 994415777}
   - component: {fileID: 994415778}
-  - component: {fileID: 994415780}
   - component: {fileID: 994415779}
   m_Layer: 0
   m_Name: P
@@ -987,21 +985,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994415773}
   m_CullTransparentMesh: 1
---- !u!114 &994415777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994415773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e1d7bec5d6f234897d7e44126db632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minigameType: 8
-  highlightedSprite: {fileID: 0}
-  centerPoint: {fileID: 0}
 --- !u!114 &994415778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,14 +1000,15 @@ MonoBehaviour:
   targetObject: {fileID: 1688734881}
   snapDistance: 1
   correctScale: {x: 1, y: 1, z: 1}
+  scaleTolerance: 0.1
+  scaleStep: 0.1
+  minScale: {x: 0.5, y: 0.5, z: 0.5}
+  maxScale: {x: 3, y: 3, z: 3}
   snapYOffset: 0
   defaultMaterial: {fileID: 2100000, guid: f585a56c973b4d6449ddc7c83242badc, type: 2}
   highlightMaterial: {fileID: 2100000, guid: a1c91971d0375eb48909c21a86625c2e, type: 2}
-  minScale: {x: 0.5, y: 0.5, z: 0.5}
-  maxScale: {x: 3, y: 3, z: 3}
-  scaleStep: 0.1
---- !u!60 &994415779
-PolygonCollider2D:
+--- !u!61 &994415779
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1067,31 +1051,8 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 16.541397, y: -0.8033447}
-      - {x: 20.214233, y: 9.83139}
-      - {x: 16.23973, y: 20.227661}
-      - {x: 8.699173, y: 24.027222}
-      - {x: -17.881157, y: 24.343502}
-      - {x: -18.071413, y: -24.689114}
-      - {x: -11.455444, y: -24.631042}
-      - {x: -11.114761, y: -6.2970276}
-      - {x: -2.311934, y: -6.011471}
-      - {x: 8.370963, y: -5.490452}
-  m_UseDelaunayMesh: 0
---- !u!114 &994415780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994415773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d07b4f3ee53b4643ab2927e58114442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1032147843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,7 +1410,7 @@ MonoBehaviour:
   toolManager: {fileID: 321424155}
   gameTitle: {fileID: 1454924557}
   targetYPosition: 250
-  speed: 50
+  speed: 100
   playMinigameObject: {fileID: 1032147843}
 --- !u!114 &1454924562
 MonoBehaviour:
@@ -1518,9 +1479,7 @@ GameObject:
   - component: {fileID: 1619686605}
   - component: {fileID: 1619686607}
   - component: {fileID: 1619686606}
-  - component: {fileID: 1619686608}
   - component: {fileID: 1619686609}
-  - component: {fileID: 1619686611}
   - component: {fileID: 1619686610}
   m_Layer: 0
   m_Name: A
@@ -1647,21 +1606,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619686604}
   m_CullTransparentMesh: 1
---- !u!114 &1619686608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619686604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e1d7bec5d6f234897d7e44126db632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minigameType: 8
-  highlightedSprite: {fileID: 0}
-  centerPoint: {fileID: 0}
 --- !u!114 &1619686609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,14 +1621,15 @@ MonoBehaviour:
   targetObject: {fileID: 1209622885}
   snapDistance: 1
   correctScale: {x: 1, y: 1, z: 1}
+  scaleTolerance: 0.1
+  scaleStep: 0.1
+  minScale: {x: 0.5, y: 0.5, z: 0.5}
+  maxScale: {x: 3, y: 3, z: 3}
   snapYOffset: 0
   defaultMaterial: {fileID: 2100000, guid: f585a56c973b4d6449ddc7c83242badc, type: 2}
   highlightMaterial: {fileID: 2100000, guid: a1c91971d0375eb48909c21a86625c2e, type: 2}
-  minScale: {x: 0.5, y: 0.5, z: 0.5}
-  maxScale: {x: 3, y: 3, z: 3}
-  scaleStep: 0.1
---- !u!60 &1619686610
-PolygonCollider2D:
+--- !u!61 &1619686610
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1727,26 +1672,8 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
-  m_UseDelaunayMesh: 0
---- !u!114 &1619686611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619686604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d07b4f3ee53b4643ab2927e58114442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1688734881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,9 +1821,7 @@ GameObject:
   - component: {fileID: 1867125357}
   - component: {fileID: 1867125359}
   - component: {fileID: 1867125358}
-  - component: {fileID: 1867125360}
   - component: {fileID: 1867125361}
-  - component: {fileID: 1867125363}
   - component: {fileID: 1867125362}
   m_Layer: 0
   m_Name: Y
@@ -2023,21 +1948,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867125356}
   m_CullTransparentMesh: 1
---- !u!114 &1867125360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867125356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e1d7bec5d6f234897d7e44126db632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minigameType: 8
-  highlightedSprite: {fileID: 0}
-  centerPoint: {fileID: 0}
 --- !u!114 &1867125361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2053,14 +1963,15 @@ MonoBehaviour:
   targetObject: {fileID: 1883249483}
   snapDistance: 1
   correctScale: {x: 1, y: 1, z: 1}
+  scaleTolerance: 0.1
+  scaleStep: 0.1
+  minScale: {x: 0.5, y: 0.5, z: 0.5}
+  maxScale: {x: 3, y: 3, z: 3}
   snapYOffset: 0
   defaultMaterial: {fileID: 2100000, guid: f585a56c973b4d6449ddc7c83242badc, type: 2}
   highlightMaterial: {fileID: 2100000, guid: a1c91971d0375eb48909c21a86625c2e, type: 2}
-  minScale: {x: 0.5, y: 0.5, z: 0.5}
-  maxScale: {x: 3, y: 3, z: 3}
-  scaleStep: 0.1
---- !u!60 &1867125362
-PolygonCollider2D:
+--- !u!61 &1867125362
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2103,26 +2014,8 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
-  m_UseDelaunayMesh: 0
---- !u!114 &1867125363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867125356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d07b4f3ee53b4643ab2927e58114442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1883249483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,9 +2163,7 @@ GameObject:
   - component: {fileID: 2075698885}
   - component: {fileID: 2075698887}
   - component: {fileID: 2075698886}
-  - component: {fileID: 2075698888}
   - component: {fileID: 2075698889}
-  - component: {fileID: 2075698891}
   - component: {fileID: 2075698890}
   m_Layer: 0
   m_Name: L
@@ -2399,21 +2290,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075698884}
   m_CullTransparentMesh: 1
---- !u!114 &2075698888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2075698884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e1d7bec5d6f234897d7e44126db632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minigameType: 8
-  highlightedSprite: {fileID: 0}
-  centerPoint: {fileID: 0}
 --- !u!114 &2075698889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2429,14 +2305,15 @@ MonoBehaviour:
   targetObject: {fileID: 927935962}
   snapDistance: 1
   correctScale: {x: 1, y: 1, z: 1}
+  scaleTolerance: 0.1
+  scaleStep: 0.1
+  minScale: {x: 0.5, y: 0.5, z: 0.5}
+  maxScale: {x: 3, y: 3, z: 3}
   snapYOffset: 0
   defaultMaterial: {fileID: 2100000, guid: f585a56c973b4d6449ddc7c83242badc, type: 2}
   highlightMaterial: {fileID: 2100000, guid: a1c91971d0375eb48909c21a86625c2e, type: 2}
-  minScale: {x: 0.5, y: 0.5, z: 0.5}
-  maxScale: {x: 3, y: 3, z: 3}
-  scaleStep: 0.1
---- !u!60 &2075698890
-PolygonCollider2D:
+--- !u!61 &2075698890
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2479,26 +2356,8 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
-  m_UseDelaunayMesh: 0
---- !u!114 &2075698891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2075698884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d07b4f3ee53b4643ab2927e58114442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

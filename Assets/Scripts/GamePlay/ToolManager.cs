@@ -1,4 +1,4 @@
-using Unity.Burst.CompilerServices;
+﻿using Unity.Burst.CompilerServices;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -82,8 +82,8 @@ public class ToolManager : MonoBehaviour
 
                         if (selectedObject)
                         {
-                            ApplyMaterial(selectedObject, defaultMaterial); // ���� Material �繤���������
-                            selectedObject = null; // ¡��ԡ������͡
+                            ApplyMaterial(selectedObject, defaultMaterial); // ÃÕà«çµ Material à»ç¹¤èÒàÃÔèÁµé¹
+                            selectedObject = null; // Â¡àÅÔ¡¡ÒÃàÅ×Í¡
                             Debug.Log("Deselected the object.");
                         }
 
@@ -209,24 +209,24 @@ public class ToolManager : MonoBehaviour
 
             if (clickedObject.CompareTag("Object"))
             {
-                // ��Ҥ�ԡ�ѵ�ط�����͡���� ���¡��ԡ������͡
+                // ¶éÒ¤ÅÔ¡ÇÑµ¶Ø·ÕèàÅ×Í¡ÍÂÙè ãËéÂ¡àÅÔ¡¡ÒÃàÅ×Í¡
                 if (selectedObject == clickedObject)
                 {
-                    ApplyMaterial(selectedObject, defaultMaterial); // ���� Material �繤���������
-                    selectedObject = null; // ¡��ԡ������͡
+                    ApplyMaterial(selectedObject, defaultMaterial); // ÃÕà«çµ Material à»ç¹¤èÒàÃÔèÁµé¹
+                    selectedObject = null; // Â¡àÅÔ¡¡ÒÃàÅ×Í¡
                     Debug.Log("Deselected the object.");
                 }
                 else
                 {
-                    // ������ѵ����蹶١���͡���� ������絡�͹
+                    // ¶éÒÁÕÇÑµ¶ØÍ×è¹¶Ù¡àÅ×Í¡ÍÂÙè ãËéÃÕà«çµ¡èÍ¹
                     if (selectedObject != null)
                     {
-                        ApplyMaterial(selectedObject, defaultMaterial); // ���� Material �繤���������
+                        ApplyMaterial(selectedObject, defaultMaterial); // ÃÕà«çµ Material à»ç¹¤èÒàÃÔèÁµé¹
                     }
 
-                    // ���͡�ѵ������
+                    // àÅ×Í¡ÇÑµ¶ØãËÁè
                     selectedObject = clickedObject;
-                    ApplyMaterial(selectedObject, outlineMaterial); // ��� Material Ẻ Outline
+                    ApplyMaterial(selectedObject, outlineMaterial); // ãÊè Material áºº Outline
                     Debug.Log($"Selected: {selectedObject.name}");
                 }
             }
@@ -242,7 +242,7 @@ public class ToolManager : MonoBehaviour
         SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
-            sr.material = material; // ����¹ Material �ͧ SpriteRenderer
+            sr.material = material; // à»ÅÕèÂ¹ Material ¢Í§ SpriteRenderer
         }
     }
 
@@ -255,4 +255,11 @@ public class ToolManager : MonoBehaviour
     {
         selectedObject = obj;
     }
+
+    // ฟังก์ชันสำหรับการเปลี่ยนโหมดเครื่องมือ
+    public void SetCurrentMode(string mode)
+    {
+        CurrentMode = mode;
+    }
+
 }

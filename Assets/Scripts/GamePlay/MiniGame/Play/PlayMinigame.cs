@@ -45,7 +45,7 @@ public class PlayMinigame : MonoBehaviour
         if (isMinigameCompleted && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Starting the next level...");
-            MainMenuManager.Instance.LoadNextLevel(); // เรียกใช้ MainMenuManager ให้โหลดด่านต่อไป
+            MainMenuManager.Instance.LoadNextLevel(); // Load next level
         }
     }
 
@@ -56,26 +56,25 @@ public class PlayMinigame : MonoBehaviour
         if (letter.name.StartsWith("A")) return aShadowTransform;
         if (letter.name.StartsWith("Y")) return yShadowTransform;
 
-        return null; // ถ้าไม่มีตัวอักษรที่ตรงกัน
+        return null; // If no matching letter
     }
-
 
     private void HandleDragging()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            // ตรวจสอบว่าคลิกโดนตัวอักษรหรือไม่
+            // Check if clicked on a letter
             draggingLetter = GetLetterUnderMouse();
         }
         else if (Input.GetMouseButton(0) && draggingLetter != null)
         {
-            // ลากตัวอักษร
+            // Drag the letter if selected
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             draggingLetter.position = mousePos;
         }
         else if (Input.GetMouseButtonUp(0) && draggingLetter != null)
         {
-            // ปล่อยเมาส์ → ตรวจสอบการ Snap
+            // Check snap on mouse release
             CheckForSnap(draggingLetter);
             draggingLetter = null;
         }
@@ -101,31 +100,54 @@ public class PlayMinigame : MonoBehaviour
     {
         Transform shadowTarget = null;
 
+        // Map the letter to its corresponding shadow target
         if (letter == pTransform) shadowTarget = pShadowTransform;
         else if (letter == lTransform) shadowTarget = lShadowTransform;
         else if (letter == aTransform) shadowTarget = aShadowTransform;
         else if (letter == yTransform) shadowTarget = yShadowTransform;
 
+        // If shadow target exists
         if (shadowTarget != null)
         {
-            if (Vector3.Distance(letter.position, shadowTarget.position) <= snapDistance && letter.localScale == correctScale)
+            // Check if the letter is close enough to its shadow
+            if (Vector3.Distance(letter.position, shadowTarget.position) <= snapDistance)
             {
-                letter.position = shadowTarget.position; // Snap เข้าตำแหน่งเงา
-                CompletePart();
+                // Only snap if the scale is correct
+                if (letter.localScale == correctScale)
+                {
+                    letter.position = shadowTarget.position; // Snap to shadow position
+                    CompletePart(); // Mark the part as completed
+                }
+                else
+                {
+                    Debug.Log("The scale is incorrect. Cannot snap.");
+                }
+            }
+            else
+            {
+                Debug.Log("Letter is not close enough to snap.");
             }
         }
     }
 
     public void CheckLetterPlacement(DraggableTextUI letter)
     {
-        // ตรวจสอบว่าตัวอักษรอยู่ใกล้เงาของมันหรือไม่
-        float snapDistance = 50f; // กำหนดระยะที่ถือว่า "วางถูกต้อง"
+        // Check if the letter is near its shadow
+        float snapDistance = 50f; // Set the snap distance threshold
         Transform shadowTransform = GetShadowForLetter(letter);
 
         if (shadowTransform != null && Vector2.Distance(letter.transform.position, shadowTransform.position) <= snapDistance)
         {
-            letter.transform.position = shadowTransform.position; // Snap เข้าที่
-            CompletePart(); // นับว่าเสร็จไปหนึ่งตัว
+            // Only snap if scale matches the correct scale
+            if (letter.transform.localScale == correctScale)
+            {
+                letter.transform.position = shadowTransform.position; // Snap to shadow
+                CompletePart(); // Mark this part as completed
+            }
+            else
+            {
+                Debug.Log("The scale is incorrect. Cannot snap.");
+            }
         }
     }
 
@@ -139,7 +161,7 @@ public class PlayMinigame : MonoBehaviour
         {
             isMinigameCompleted = true;
             Debug.Log("All letters placed correctly. Press Spacebar to continue.");
-            playTransform.gameObject.SetActive(true);
+            playTransform.gameObject.SetActive(true); // Activate the completion screen
         }
     }
 }

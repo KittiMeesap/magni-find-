@@ -12,12 +12,12 @@ public class DraggableTextUI : MonoBehaviour, IPointerDownHandler, IDragHandler,
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        canvas = GetComponentInParent<Canvas>(); // หา Canvas ที่เป็น Parent
+        canvas = GetComponentInParent<Canvas>(); // Get the Canvas that's the parent
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        // บันทึกตำแหน่งเริ่มต้น
+        // Record the initial position
         originalPosition = rectTransform.anchoredPosition;
         isDragging = true;
     }
@@ -26,7 +26,7 @@ public class DraggableTextUI : MonoBehaviour, IPointerDownHandler, IDragHandler,
     {
         if (isDragging && canvas != null)
         {
-            // คำนวณตำแหน่งใหม่โดยใช้ eventData และ ScaleFactor ของ Canvas
+            // Update the position while dragging using event data and canvas scale factor
             rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         }
     }
@@ -35,11 +35,15 @@ public class DraggableTextUI : MonoBehaviour, IPointerDownHandler, IDragHandler,
     {
         isDragging = false;
 
-        // ตรวจสอบว่าถูกวางในตำแหน่งที่ถูกต้องหรือไม่
+        // Check letter placement when dragging ends
         if (PlayMinigame.Instance != null)
         {
             PlayMinigame.Instance.CheckLetterPlacement(this);
         }
+        else
+        {
+            // Reset position if not placed correctly (optional)
+            rectTransform.anchoredPosition = originalPosition;
+        }
     }
-
 }

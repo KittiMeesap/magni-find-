@@ -1,53 +1,66 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class InteractableObjectPlayMinigame : MonoBehaviour
 {
-    public GameObject targetObject; // วัตถุเป้าหมาย (ที่ต้องประกอบเข้าด้วยกัน)
-    public float snapDistance = 0.5f; // ระยะที่ดึงวัตถุเข้าไป
-    public Vector3 correctScale; // ขนาดที่ถูกต้อง
-    public float snapYOffset = 0.0f; // Offset แกน Y สำหรับตำแหน่ง Snap
+    public GameObject targetObject; // Target object to snap to
+    public float snapDistance = 0.5f; // Distance threshold for snapping
+    public Vector3 correctScale; // Correct scale of the object
+    public float scaleTolerance = 0.1f; // Acceptable scale tolerance
+    public float scaleStep = 0.1f; // Scale change per click
+    public Vector3 minScale = new Vector3(0.5f, 0.5f, 0.5f); // Minimum scale
+    public Vector3 maxScale = new Vector3(3f, 3f, 3f); // Maximum scale
+    public float snapYOffset = 0.0f; // Y offset for snap position
 
-    private bool isDragging = false;  // ตัวแปรเช็คว่ากำลังลากอยู่หรือไม่
-    private bool isSnapped = false;   // ตัวแปรเช็คว่าวัตถุถูก Snap แล้วหรือไม่
+    private bool isDragging = false;
+    private bool isSnapped = false; // Block dragging after snapping
+    private bool isSelected = false; // Flag to track if object is selected
 
-    [SerializeField] private Material defaultMaterial;  // วัสดุเริ่มต้น
-    [SerializeField] private Material highlightMaterial; // วัสดุเมื่อ Drag หรือ Resize
+    [SerializeField] private Material defaultMaterial; // Default material
+    [SerializeField] private Material highlightMaterial; // Highlight material during interaction
 
-    private void OnMouseDown()
+    private void Update()
     {
-        // เมื่อผู้เล่นคลิกที่วัตถุ, ให้เริ่มลาก
-        if (!isSnapped)
+        // Handle dragging in Hand mode (only if object is not snapped)
+        if (ToolManager.Instance.CurrentMode == "Hand" && isDragging && !isSnapped)
         {
-            isDragging = true;
-            ChangeMaterial(highlightMaterial); // เปลี่ยนวัสดุเมื่อเริ่มลาก
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = mousePos;
+
+            // Check for snap conditions (correct scale and within snap distance)
+            if (IsScaleCorrect() && IsWithinSnapDistance())
+            {
+                SnapToTarget(); // Snap to target if conditions met
+            }
         }
     }
 
-    private void OnMouseDrag()
+    private void OnMouseDown()
     {
-        // เมื่อเริ่มลากแล้ว, วัตถุจะตามมือลาก
-        if (isDragging && !isSnapped)
+        // Only allow selection in "Hand" mode and if not snapped
+        if (!isSnapped && ToolManager.Instance.CurrentMode == "Hand")
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePos; // เคลื่อนที่ไปตามตำแหน่งของเมาส์
+            isDragging = true; // Start dragging
+            isSelected = true; // Mark as selected
+            ToolManager.Instance.SetSelectedObject(gameObject); // Set selected object
+            ChangeMaterial(highlightMaterial); // Highlight object during dragging
+            Debug.Log("Object clicked: " + gameObject.name); // Log when clicked
         }
     }
 
     private void OnMouseUp()
     {
-        // เมื่อปล่อยเมาส์, ให้ตรวจสอบว่าต้องการ Snap หรือไม่
-        isDragging = false;
-        ChangeMaterial(defaultMaterial); // เปลี่ยนวัสดุกลับเป็น default
-
-        if (IsWithinSnapDistance() && IsScaleCorrect())
+        if (ToolManager.Instance.CurrentMode == "Hand")
         {
-            SnapToTarget(); // Snap วัตถุไปยังตำแหน่งเป้าหมาย
+            isDragging = false; // Stop dragging
+            ChangeMaterial(defaultMaterial); // Revert material when dragging stops
+            Debug.Log("Object released: " + gameObject.name); // Log when released
         }
     }
 
     private void ChangeMaterial(Material newMaterial)
     {
-        // เปลี่ยนวัสดุของวัตถุ
+        // Update material of the object
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null && newMaterial != null)
         {
@@ -57,48 +70,36 @@ public class InteractableObjectPlayMinigame : MonoBehaviour
 
     private bool IsScaleCorrect()
     {
-        // ตรวจสอบว่า Scale ของวัตถุตรงกับที่กำหนดหรือไม่
-        return transform.localScale == correctScale;
+        // Check if the object scale matches the correct scale within tolerance
+        return Vector3.Distance(transform.localScale, correctScale) <= scaleTolerance;
     }
 
     private bool IsWithinSnapDistance()
     {
-        // ตรวจสอบว่าระยะห่างระหว่างตำแหน่งวัตถุและเป้าหมาย <= snapDistance
-        if (targetObject != null)
-        {
-            return Vector3.Distance(transform.position, targetObject.transform.position) <= snapDistance;
-        }
-        return false;
+        // Check if the object is within snap distance of the target
+        return targetObject != null && Vector3.Distance(transform.position, targetObject.transform.position) <= snapDistance;
     }
 
     private void SnapToTarget()
     {
-        if (targetObject == null)
-        {
-            Debug.LogWarning("targetObject is not assigned!");
-            return;
-        }
-
-        // คำนวณตำแหน่ง Snap ด้วย Offset แกน Y
+        // Calculate snap position with Y offset
         Vector3 snapPosition = targetObject.transform.position;
         snapPosition.y += snapYOffset;
 
-        // Snap ไปยังตำแหน่งที่กำหนด
         transform.position = snapPosition;
 
-        // ถ้าวัตถุวางในตำแหน่งที่ถูกต้องแล้ว, จะตั้งค่า isSnapped เป็น true
-        isSnapped = true;
-
-        Debug.Log($"Snapped to target {targetObject.name} successfully!");
-
-        // เช็คว่า PlayMinigame.Instance มีค่าหรือไม่ก่อนเรียกใช้
-        if (PlayMinigame.Instance != null)
+        // Snap successful if scale is correct
+        if (IsScaleCorrect())
         {
-            PlayMinigame.Instance.CompletePart();
+            Debug.Log($"Snapped to target {targetObject.name} successfully!");
+            isSnapped = true; // Block further dragging after snapping
+            PlayMinigame.Instance.CompletePart(); // Notify the game that this part is complete
         }
         else
         {
-            Debug.LogWarning("PlayMinigame.Instance is null! Cannot complete part.");
+            // Optional: Change material or log feedback if scale is incorrect
+            ChangeMaterial(defaultMaterial); // Reset material if scale is incorrect
+            Debug.Log("Scale is incorrect, unable to snap.");
         }
     }
 }

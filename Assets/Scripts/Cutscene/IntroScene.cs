@@ -1,5 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // สำหรับโหลดฉากใหม่
 using System.Collections;
 
 public class IntroScene : MonoBehaviour
@@ -20,7 +21,6 @@ public class IntroScene : MonoBehaviour
         currentPanel = 0;
     }
 
-
     public void ShowingNextPanel()
     {
         if (currentPanel < cutscenePanel.Length)
@@ -36,6 +36,11 @@ public class IntroScene : MonoBehaviour
             StartCoroutine(CameraFollowing(() =>
             {
                 currentPanel++;
+                // หากถึง Panel สุดท้าย ให้แสดงปุ่มเพื่อไปยังซีน Dialogue
+                if (currentPanel >= cutscenePanel.Length)
+                {
+                    nextButton.onClick.AddListener(LoadDialogueScene); // เพิ่ม event listener สำหรับปุ่ม
+                }
             }));
         }
     }
@@ -63,7 +68,14 @@ public class IntroScene : MonoBehaviour
             mainCamera.transform.position = targetPosition;
             onComplete?.Invoke();
 
-            nextButton.gameObject.SetActive(true);
+            nextButton.gameObject.SetActive(true); // แสดงปุ่มเมื่อคัตซีนเสร็จ
         }
+    }
+
+    // ฟังก์ชันโหลดซีน Dialogue
+    public void LoadDialogueScene()
+    {
+        // กำหนดชื่อซีนที่คุณต้องการจะไปที่นี่
+        SceneManager.LoadScene("Dialogue"); // เปลี่ยนชื่อซีนตามที่คุณสร้าง
     }
 }

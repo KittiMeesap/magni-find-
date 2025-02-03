@@ -247,7 +247,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321424152}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20b9ee2b0b392b64aac23873b2059af7, type: 3}
   m_Name: 
@@ -255,6 +255,9 @@ MonoBehaviour:
   playMinigameObject: {fileID: 1032147843}
   playTransform: {fileID: 0}
   triggerObject: {fileID: 0}
+  gameTitleTransform: {fileID: 0}
+  targetPosition: {fileID: 0}
+  animationDuration: 1
 --- !u!4 &321424154
 Transform:
   m_ObjectHideFlags: 0
@@ -300,7 +303,7 @@ GameObject:
   - component: {fileID: 452356215}
   - component: {fileID: 452356214}
   - component: {fileID: 452356213}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Play
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: P
+  m_text: PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -741,7 +744,7 @@ GameObject:
   - component: {fileID: 927935966}
   - component: {fileID: 927935965}
   - component: {fileID: 927935964}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BlackL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -764,8 +767,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24, y: 48.761}
-  m_SizeDelta: {x: 590.0907, y: 147.5226}
+  m_AnchoredPosition: {x: -99.4, y: 48.761}
+  m_SizeDelta: {x: 80.7232, y: 60.239}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &927935964
 MonoBehaviour:
@@ -894,8 +897,9 @@ GameObject:
   - component: {fileID: 994415775}
   - component: {fileID: 994415777}
   - component: {fileID: 994415778}
+  - component: {fileID: 994415780}
   - component: {fileID: 994415779}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,8 +922,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800, y: 109}
-  m_SizeDelta: {x: 590.0907, y: 147.5226}
+  m_AnchoredPosition: {x: -559.74194, y: 83.22333}
+  m_SizeDelta: {x: 109.5746, y: 95.9693}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &994415775
 MonoBehaviour:
@@ -1110,6 +1114,18 @@ PolygonCollider2D:
       - {x: -2.311934, y: -6.011471}
       - {x: 8.370963, y: -5.490452}
   m_UseDelaunayMesh: 0
+--- !u!114 &994415780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994415773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d07b4f3ee53b4643ab2927e58114442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1032147843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,7 +1136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1032147844}
   - component: {fileID: 1032147845}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PlayMinigame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1134,7 +1150,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032147843}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1167,7 +1183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d9eae57f300fe44ae68133d4dd49f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerObject: {fileID: 0}
   playMinigameObject: {fileID: 1032147843}
   playTransform: {fileID: 452356212}
   animationDuration: 1
@@ -1191,7 +1206,7 @@ GameObject:
   - component: {fileID: 1209622889}
   - component: {fileID: 1209622888}
   - component: {fileID: 1209622887}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BlackA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1214,8 +1229,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27.4, y: 48.761}
-  m_SizeDelta: {x: 590.0907, y: 147.5226}
+  m_AnchoredPosition: {x: -48.4, y: 48.761}
+  m_SizeDelta: {x: 67.3141, y: 52.8712}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209622887
 MonoBehaviour:
@@ -1485,6 +1500,7 @@ MonoBehaviour:
   gameTitle: {fileID: 1454924557}
   targetYPosition: 250
   speed: 50
+  playMinigameObject: {fileID: 1032147843}
 --- !u!114 &1454924562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,8 +1570,9 @@ GameObject:
   - component: {fileID: 1619686606}
   - component: {fileID: 1619686608}
   - component: {fileID: 1619686609}
+  - component: {fileID: 1619686611}
   - component: {fileID: 1619686610}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1578,8 +1595,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -541, y: -257}
-  m_SizeDelta: {x: 590.0907, y: 147.5226}
+  m_AnchoredPosition: {x: -296.12, y: -287.09985}
+  m_SizeDelta: {x: 100.3307, y: 87.3229}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619686606
 MonoBehaviour:
@@ -1765,6 +1782,18 @@ PolygonCollider2D:
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
   m_UseDelaunayMesh: 0
+--- !u!114 &1619686611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619686604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d07b4f3ee53b4643ab2927e58114442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1688734881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,7 +1806,7 @@ GameObject:
   - component: {fileID: 1688734885}
   - component: {fileID: 1688734884}
   - component: {fileID: 1688734883}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BlackP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1800,8 +1829,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -75, y: 48.761}
-  m_SizeDelta: {x: 590.0907, y: 147.5226}
+  m_AnchoredPosition: {x: -151, y: 48.761}
+  m_SizeDelta: {x: 84.9651, y: 56.7664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1688734883
 MonoBehaviour:
@@ -1930,8 +1959,9 @@ GameObject:
   - component: {fileID: 1867125358}
   - component: {fileID: 1867125360}
   - component: {fileID: 1867125361}
+  - component: {fileID: 1867125363}
   - component: {fileID: 1867125362}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Y
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1954,8 +1984,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 758, y: 256.52}
-  m_SizeDelta: {x: 590.0907, y: 147.5226}
+  m_AnchoredPosition: {x: 766, y: 29.819}
+  m_SizeDelta: {x: 114.3071, y: 109.6381}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1867125358
 MonoBehaviour:
@@ -2141,6 +2171,18 @@ PolygonCollider2D:
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
   m_UseDelaunayMesh: 0
+--- !u!114 &1867125363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867125356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d07b4f3ee53b4643ab2927e58114442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1883249483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,7 +2195,7 @@ GameObject:
   - component: {fileID: 1883249487}
   - component: {fileID: 1883249486}
   - component: {fileID: 1883249485}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BlackY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2176,8 +2218,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 75, y: 48.761}
-  m_SizeDelta: {x: 590.0907, y: 147.5226}
+  m_AnchoredPosition: {x: 0.000030518, y: 48.761}
+  m_SizeDelta: {x: 80.284, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1883249485
 MonoBehaviour:
@@ -2306,8 +2348,9 @@ GameObject:
   - component: {fileID: 2075698886}
   - component: {fileID: 2075698888}
   - component: {fileID: 2075698889}
+  - component: {fileID: 2075698891}
   - component: {fileID: 2075698890}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2330,8 +2373,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 315, y: -222}
-  m_SizeDelta: {x: 590.0907, y: 147.5226}
+  m_AnchoredPosition: {x: 568.08276, y: -263.2469}
+  m_SizeDelta: {x: 83.9253, y: 65.0288}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2075698886
 MonoBehaviour:
@@ -2517,6 +2560,18 @@ PolygonCollider2D:
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
   m_UseDelaunayMesh: 0
+--- !u!114 &2075698891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075698884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d07b4f3ee53b4643ab2927e58114442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

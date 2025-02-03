@@ -64,11 +64,21 @@ public class InteractableObjectPlayMinigame : MonoBehaviour
     private bool IsWithinSnapDistance()
     {
         // ตรวจสอบว่าระยะห่างระหว่างตำแหน่งวัตถุและเป้าหมาย <= snapDistance
-        return Vector3.Distance(transform.position, targetObject.transform.position) <= snapDistance;
+        if (targetObject != null)
+        {
+            return Vector3.Distance(transform.position, targetObject.transform.position) <= snapDistance;
+        }
+        return false;
     }
 
     private void SnapToTarget()
     {
+        if (targetObject == null)
+        {
+            Debug.LogWarning("targetObject is not assigned!");
+            return;
+        }
+
         // คำนวณตำแหน่ง Snap ด้วย Offset แกน Y
         Vector3 snapPosition = targetObject.transform.position;
         snapPosition.y += snapYOffset;
@@ -80,6 +90,15 @@ public class InteractableObjectPlayMinigame : MonoBehaviour
         isSnapped = true;
 
         Debug.Log($"Snapped to target {targetObject.name} successfully!");
-        PlayMinigame.Instance.CompletePart(); // แจ้งว่าเกมทำสำเร็จแล้ว
+
+        // เช็คว่า PlayMinigame.Instance มีค่าหรือไม่ก่อนเรียกใช้
+        if (PlayMinigame.Instance != null)
+        {
+            PlayMinigame.Instance.CompletePart();
+        }
+        else
+        {
+            Debug.LogWarning("PlayMinigame.Instance is null! Cannot complete part.");
+        }
     }
 }

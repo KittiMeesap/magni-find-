@@ -438,7 +438,6 @@ GameObject:
   - component: {fileID: 55101547}
   - component: {fileID: 55101546}
   - component: {fileID: 55101545}
-  - component: {fileID: 55101548}
   m_Layer: 0
   m_Name: 4
   m_TagString: Untagged
@@ -610,24 +609,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &55101548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55101543}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &60279845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,7 +1667,6 @@ GameObject:
   - component: {fileID: 128024501}
   - component: {fileID: 128024500}
   - component: {fileID: 128024499}
-  - component: {fileID: 128024502}
   m_Layer: 0
   m_Name: 12
   m_TagString: Untagged
@@ -1870,24 +1850,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &128024502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128024497}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &133896429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,7 +2162,6 @@ GameObject:
   - component: {fileID: 171871042}
   - component: {fileID: 171871041}
   - component: {fileID: 171871040}
-  - component: {fileID: 171871043}
   m_Layer: 0
   m_Name: 6
   m_TagString: Untagged
@@ -2380,24 +2341,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &171871043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171871038}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &174872123
 GameObject:
   m_ObjectHideFlags: 0
@@ -3795,7 +3738,6 @@ GameObject:
   - component: {fileID: 268519677}
   - component: {fileID: 268519676}
   - component: {fileID: 268519675}
-  - component: {fileID: 268519678}
   m_Layer: 0
   m_Name: 7
   m_TagString: Untagged
@@ -3967,24 +3909,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &268519678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268519673}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &269407082
 GameObject:
   m_ObjectHideFlags: 0
@@ -4152,37 +4076,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282257316}
   m_CullTransparentMesh: 1
---- !u!1 &299116106
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 299116107}
-  m_Layer: 0
-  m_Name: Hidden Items
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &299116107
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299116106}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &329018029
 GameObject:
   m_ObjectHideFlags: 0
@@ -5022,7 +4915,6 @@ GameObject:
   - component: {fileID: 429137531}
   - component: {fileID: 429137530}
   - component: {fileID: 429137529}
-  - component: {fileID: 429137532}
   m_Layer: 0
   m_Name: 3
   m_TagString: Untagged
@@ -5207,24 +5099,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &429137532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 429137527}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &476194206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6493,7 +6367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &755485560
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7139,7 +7013,6 @@ GameObject:
   - component: {fileID: 820719248}
   - component: {fileID: 820719247}
   - component: {fileID: 820719246}
-  - component: {fileID: 820719249}
   m_Layer: 0
   m_Name: 11
   m_TagString: Untagged
@@ -7318,24 +7191,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &820719249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 820719244}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &829215127
 GameObject:
   m_ObjectHideFlags: 0
@@ -7902,7 +7757,6 @@ GameObject:
   - component: {fileID: 960785463}
   - component: {fileID: 960785462}
   - component: {fileID: 960785461}
-  - component: {fileID: 960785464}
   m_Layer: 0
   m_Name: 10
   m_TagString: Untagged
@@ -8110,24 +7964,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &960785464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960785459}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &962424659
 GameObject:
   m_ObjectHideFlags: 0
@@ -9006,7 +8842,6 @@ GameObject:
   - component: {fileID: 1179269513}
   - component: {fileID: 1179269512}
   - component: {fileID: 1179269511}
-  - component: {fileID: 1179269514}
   m_Layer: 0
   m_Name: 5
   m_TagString: Untagged
@@ -9185,24 +9020,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1179269514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179269509}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &1236248487
 GameObject:
   m_ObjectHideFlags: 0
@@ -11163,11 +10980,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1565297606}
+  - component: {fileID: 1565297609}
   - component: {fileID: 1565297605}
   - component: {fileID: 1565297604}
   - component: {fileID: 1565297607}
   - component: {fileID: 1565297608}
-  - component: {fileID: 1565297609}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11242,7 +11059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565297603}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11321,17 +11138,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb9c85d7aba5a14c93122084138b10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1565297605}
   moveSpeed: 5
   edgeThreshold: 50
   background: {fileID: 360230560}
+  defaultCameraSize: 5.35
+  enableZoom: 1
+  zoomPercentage: 1
+  duration: 1.5
   zoomSpeed: 1
   zoomPadding: 1.2
-  defaultCameraSize: 5.35
-  zoomPercentage: 1
-  enableZoom: 0
-  duration: 1.5
-  isMinigameActive: 0
-  isZooming: 0
 --- !u!1 &1617387559
 GameObject:
   m_ObjectHideFlags: 0
@@ -12151,7 +11967,6 @@ GameObject:
   - component: {fileID: 1737294084}
   - component: {fileID: 1737294083}
   - component: {fileID: 1737294082}
-  - component: {fileID: 1737294085}
   m_Layer: 0
   m_Name: 2
   m_TagString: Untagged
@@ -12319,24 +12134,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1737294085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737294080}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &1738522963
 GameObject:
   m_ObjectHideFlags: 0
@@ -13402,7 +13199,6 @@ GameObject:
   - component: {fileID: 1880922729}
   - component: {fileID: 1880922728}
   - component: {fileID: 1880922727}
-  - component: {fileID: 1880922730}
   m_Layer: 0
   m_Name: 1
   m_TagString: Untagged
@@ -13562,24 +13358,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1880922730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880922725}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &1891627889
 GameObject:
   m_ObjectHideFlags: 0
@@ -14429,7 +14207,6 @@ GameObject:
   - component: {fileID: 1973887979}
   - component: {fileID: 1973887978}
   - component: {fileID: 1973887977}
-  - component: {fileID: 1973887980}
   m_Layer: 0
   m_Name: 9
   m_TagString: Untagged
@@ -14617,24 +14394,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1973887980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973887975}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &1994941562
 GameObject:
   m_ObjectHideFlags: 0
@@ -14890,7 +14649,6 @@ GameObject:
   - component: {fileID: 2037880345}
   - component: {fileID: 2037880344}
   - component: {fileID: 2037880343}
-  - component: {fileID: 2037880346}
   m_Layer: 0
   m_Name: 8
   m_TagString: Untagged
@@ -15079,24 +14837,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2037880346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2037880341}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowColor: {r: 0.044874907, g: 1, b: 0, a: 1}
-  glowBrightness: 1
-  outlineWidth: 10
-  alphaThreshold: 0.01
-  drawOutside: 0
-  enableInstancing: 0
 --- !u!1 &2050599789
 GameObject:
   m_ObjectHideFlags: 0
@@ -16042,8 +15782,7 @@ SceneRoots:
   - {fileID: 1860011838}
   - {fileID: 1685710012}
   - {fileID: 962424660}
-  - {fileID: 1746846204}
-  - {fileID: 299116107}
   - {fileID: 1753817884}
   - {fileID: 329018030}
   - {fileID: 791850041}
+  - {fileID: 1746846204}

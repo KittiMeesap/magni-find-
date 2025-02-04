@@ -169,9 +169,19 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
     {
         if (MinigameManager.Instance.IsPlayingMinigame && ToolManager.Instance.CurrentMode == "Hand" || ToolManager.Instance.CurrentMode == "Magnifier")
         {
-            if (spriteRenderer != null && highlightedSprite != null)
+            if (!isSnapped)
             {
-                spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
+                if (spriteRenderer != null && highlightedSprite != null)
+                {
+                    spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
+                }
+            }
+            if (isSnapped)
+            {
+                if (spriteRenderer != null && highlightedSprite != null)
+                {
+                    spriteRenderer.sprite = defaultSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
+                }
             }
         }
     }

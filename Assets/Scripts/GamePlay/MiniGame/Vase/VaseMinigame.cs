@@ -104,7 +104,7 @@ public class VaseMinigame : MonoBehaviour
         Vector3 initialScale = vaseTransform.localScale;
         Vector3 targetScale = vaseTransform.localScale * 0.5f;
         Vector3 initialPosition = vaseTransform.localPosition;
-        Vector3 targetPosition = initialPosition + new Vector3(0, -2f, 0);
+        Vector3 targetPosition = initialPosition + new Vector3(0, -2.5f, 0);
 
         float elapsedTime = 0f;
         while (elapsedTime < animationDuration)

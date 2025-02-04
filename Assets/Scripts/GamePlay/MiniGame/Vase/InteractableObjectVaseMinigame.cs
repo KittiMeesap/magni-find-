@@ -14,10 +14,34 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
     private bool isDragging = false;
     private bool isSnapped = false; // เพิ่มตัวแปรสถานะเพื่อบล็อกการ drag เมื่อ snap แล้ว
 
-    [SerializeField] private Material defaultMaterial; // วัสดุเริ่มต้น
-    [SerializeField] private Material highlightMaterial; // วัสดุเมื่อ Drag หรือ Resize
+    private SpriteRenderer spriteRenderer;
+    private Sprite defaultSprite;       // ✅ Sprite ปกติ
+    [SerializeField] private Sprite highlightedSprite;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
+
+    private SpriteRenderer FrogTargetspriteRenderer;
+    [SerializeField] private GameObject FrogTarget;
+    private Sprite FrogTargetdefaultSprite;
+    [SerializeField] private Sprite FrogTargethighlightedSprite;
 
 
+    private void Awake()
+    {
+        if (FrogTarget != null)
+        {
+            FrogTargetspriteRenderer = FrogTarget.GetComponent<SpriteRenderer>();
+
+            if (FrogTargetspriteRenderer != null)
+            {
+                FrogTargetdefaultSprite = FrogTargetspriteRenderer.sprite;
+            }
+        }
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            defaultSprite = spriteRenderer.sprite; // ตั้งค่า Sprite เริ่มต้น
+        }
+    }
     void Update()
     {
         // Handle dragging in Hand mode
@@ -31,6 +55,19 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
             {
                 SnapToTarget(); // Snap เข้าหาเป้าหมาย
             }
+        }
+
+        if (IsScaleCorrect())
+        {
+            if (FrogTargetspriteRenderer != null)
+            {
+                 FrogTargetspriteRenderer.sprite = FrogTargethighlightedSprite; // ตั้งค่า Sprite เริ่มต้น
+            }
+        }
+
+        else if(!IsScaleCorrect())
+        {
+            FrogTargetspriteRenderer.sprite = FrogTargetdefaultSprite;
         }
 
         // Handle resizing in Magnify mode
@@ -48,17 +85,11 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
             {
                 // Start dragging only if clicked on this object
                 isDragging = true;
-
-                // เปลี่ยนวัสดุเป็น highlightMaterial เมื่อ Drag เริ่มต้น
-                ChangeMaterial(highlightMaterial);
             }
             else if (ToolManager.Instance.CurrentMode == "Magnifier")
             {
                 // Set this object as the target for magnifying
                 ToolManager.Instance.SetSelectedObject(gameObject);
-
-                // เปลี่ยนวัสดุเป็น highlightMaterial เมื่อเลือก Resize
-                ChangeMaterial(highlightMaterial);
             }
         }
     }
@@ -67,9 +98,6 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
     private void OnMouseUp()
     {
         isDragging = false;
-
-        // เปลี่ยนวัสดุกลับเป็น defaultMaterial เมื่อปล่อยวัตถุ
-        ChangeMaterial(defaultMaterial);
     }
 
 
@@ -86,6 +114,8 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
             {
                 ModifyScale(-scaleStep);
             }
+
+
         }
     }
 
@@ -100,19 +130,7 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
 
         transform.localScale = newScale;
 
-        // เปลี่ยนวัสดุเป็น highlightMaterial ระหว่างการ Resize
-        ChangeMaterial(highlightMaterial);
-
         Debug.Log($"Modified scale of {gameObject.name} to {newScale}");
-    }
-
-    private void ChangeMaterial(Material newMaterial)
-    {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null && newMaterial != null)
-        {
-            spriteRenderer.material = newMaterial;
-        }
     }
 
 
@@ -144,6 +162,25 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
             Debug.Log($"Snapped to target {targetObject.name} successfully!");
             isSnapped = true; // ตั้งค่า isSnapped เป็น true เพื่อบล็อกการ drag
             VaseMinigame.Instance.CompletePart(); // แจ้งว่าชิ้นนี้สำเร็จแล้ว
+        }
+    }
+
+    private void OnMouseOver()
+    {
+        if (MinigameManager.Instance.IsPlayingMinigame && ToolManager.Instance.CurrentMode == "Hand" || ToolManager.Instance.CurrentMode == "Magnifier")
+        {
+            if (spriteRenderer != null && highlightedSprite != null)
+            {
+                spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
+            }
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = defaultSprite; // ✅ กลับเป็น Sprite ปกติ
         }
     }
 

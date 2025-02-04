@@ -72,7 +72,7 @@ public class ClockMinigame : MonoBehaviour
             availableIndexes.Add(i);
         }
 
-        float[] fixedScales = { 0.3f, 0.4f, 0.5f, 0.6f }; // ✅ กำหนดขนาดตายตัว
+        float[] fixedScales = { 0.4f, 0.5f, 0.6f }; // ✅ กำหนดขนาดตายตัว
 
         for (int i = 0; i < clockNumbers.Length; i++)
         {

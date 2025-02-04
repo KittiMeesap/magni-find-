@@ -1,5 +1,6 @@
 ﻿using SpriteGlow;
 using UnityEngine;
+using System.Collections;
 
 public class InteractableClockHand : MonoBehaviour
 {
@@ -16,19 +17,22 @@ public class InteractableClockHand : MonoBehaviour
 
     private int currentPositionIndex; // ตำแหน่งปัจจุบัน
     public bool isSnapped = false;
+    private bool isMoving = false; // ✅ ป้องกันการกดซ้ำตอนกำลังเคลื่อนที่
 
     private SpriteRenderer spriteRenderer;
-    private Sprite defaultSprite;       // ✅ Sprite ปกติ
-    [SerializeField] private Sprite highlightedSprite;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
+    private Sprite defaultSprite;
+    [SerializeField] private Sprite highlightedSprite;
+
+    [SerializeField] private float moveSpeed = 5f; // ✅ ความเร็วของการเลื่อนเข็ม
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
-            defaultSprite = spriteRenderer.sprite; // ตั้งค่า Sprite เริ่มต้น
+            defaultSprite = spriteRenderer.sprite;
         }
-        if (spriteRenderer == null)
+        else
         {
             Debug.LogError($"{gameObject.name} is missing a SpriteRenderer!");
         }
@@ -46,23 +50,26 @@ public class InteractableClockHand : MonoBehaviour
     {
         if (ClockMinigame.Instance != null && ClockMinigame.Instance.CompletedParts >= ClockMinigame.Instance.TotalParts)
         {
-            return; //  ถ้ามินิเกมจบแล้ว ให้ return ออกทันที
+            return;
         }
+
         if (MinigameManager.Instance.IsPlayingMinigame && ToolManager.Instance.CurrentMode == "Hand")
         {
             if (spriteRenderer != null && highlightedSprite != null)
             {
-                spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
+                spriteRenderer.sprite = highlightedSprite;
             }
 
-            // ตรวจจับการกดเมาส์เมื่ออยู่บนเข็มนาฬิกา
-            if (Input.GetMouseButtonDown(0)) // คลิกซ้ายเพื่อหมุนไปข้างหน้า
+            if (!isMoving) // ✅ ป้องกันการกดซ้ำ
             {
-                HandleLeftClick();
-            }
-            else if (Input.GetMouseButtonDown(1)) // คลิกขวาเพื่อหมุนย้อนกลับ
-            {
-                HandleRightClick();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    HandleLeftClick();
+                }
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    HandleRightClick();
+                }
             }
         }
     }
@@ -71,7 +78,7 @@ public class InteractableClockHand : MonoBehaviour
     {
         if (spriteRenderer != null)
         {
-            spriteRenderer.sprite = defaultSprite; // ✅ กลับเป็น Sprite ปกติ
+            spriteRenderer.sprite = defaultSprite;
         }
     }
 
@@ -80,15 +87,10 @@ public class InteractableClockHand : MonoBehaviour
         if (isSnapped)
         {
             isSnapped = false;
-            ClockMinigame.Instance.DecreaseCompletedParts(); // ลดจำนวนชิ้นสำเร็จ
+            ClockMinigame.Instance.DecreaseCompletedParts();
         }
 
         AdvancePosition();
-
-        if (currentPositionIndex == correctPositionIndex)
-        {
-            SnapToTarget();
-        }
     }
 
     private void HandleRightClick()
@@ -96,39 +98,60 @@ public class InteractableClockHand : MonoBehaviour
         if (isSnapped)
         {
             isSnapped = false;
-            ClockMinigame.Instance.DecreaseCompletedParts(); // ลดจำนวนชิ้นสำเร็จ
+            ClockMinigame.Instance.DecreaseCompletedParts();
         }
 
         ReversePosition();
+    }
+
+    private void AdvancePosition()
+    {
+        if (isMoving) return;
+        isMoving = true;
+
+        int newIndex = (currentPositionIndex + 1) % positions.Length;
+        StartCoroutine(MoveClockHandCoroutine(newIndex));
+    }
+
+    private void ReversePosition()
+    {
+        if (isMoving) return;
+        isMoving = true;
+
+        int newIndex = (currentPositionIndex - 1 + positions.Length) % positions.Length;
+        StartCoroutine(MoveClockHandCoroutine(newIndex));
+    }
+
+    private IEnumerator MoveClockHandCoroutine(int newIndex)
+    {
+        Vector3 startPos = transform.localPosition;
+        Quaternion startRot = transform.localRotation;
+        Vector3 targetPos = positions[newIndex].position;
+        Quaternion targetRot = Quaternion.Euler(positions[newIndex].rotation);
+
+        float elapsedTime = 0f;
+        float duration = 1f / moveSpeed; // ✅ คำนวณเวลาตาม `moveSpeed`
+
+        while (elapsedTime < duration)
+        {
+            transform.localPosition = Vector3.Lerp(startPos, targetPos, elapsedTime / duration);
+            transform.localRotation = Quaternion.Lerp(startRot, targetRot, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localPosition = targetPos;
+        transform.localRotation = targetRot;
+        currentPositionIndex = newIndex;
+
+        isMoving = false; // ✅ ปลดล็อกให้กดใหม่ได้
+
+        Debug.Log($"{gameObject.name} moved to position {currentPositionIndex + 1}");
 
         if (currentPositionIndex == correctPositionIndex)
         {
             SnapToTarget();
         }
-    }
-
-    private void AdvancePosition()
-    {
-        // เลื่อนไปตำแหน่งถัดไป (วนลูป 0-11)
-        currentPositionIndex = (currentPositionIndex + 1) % positions.Length;
-
-        // ตั้งค่าตำแหน่งและการหมุนตามตำแหน่งปัจจุบัน
-        transform.localPosition = positions[currentPositionIndex].position;
-        transform.localRotation = Quaternion.Euler(positions[currentPositionIndex].rotation);
-
-        Debug.Log($"{gameObject.name} moved to position {currentPositionIndex + 1}");
-    }
-
-    private void ReversePosition()
-    {
-        // เลื่อนไปตำแหน่งก่อนหน้า (วนลูป 11-0)
-        currentPositionIndex = (currentPositionIndex - 1 + positions.Length) % positions.Length;
-
-        // ตั้งค่าตำแหน่งและการหมุนตามตำแหน่งปัจจุบัน
-        transform.localPosition = positions[currentPositionIndex].position;
-        transform.localRotation = Quaternion.Euler(positions[currentPositionIndex].rotation);
-
-        Debug.Log($"{gameObject.name} moved to position {currentPositionIndex + 1}");
     }
 
     private void SnapToTarget()

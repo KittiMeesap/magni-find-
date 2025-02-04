@@ -12,15 +12,18 @@ public class CameraController : MonoBehaviour
     public float zoomPadding = 1.2f;
     public float defaultCameraSize = 5f;
 
+    [Range(0f, 1f)] public float zoomPercentage = 1.0f; // ✅ 0 = ไม่ซูม, 1 = ซูมสุด, 0.5 = ซูมครึ่งทาง
+    public bool enableZoom = true; // ✅ เปิด/ปิดระบบซูม
+    [SerializeField] private float duration = 1f; // ✅ ระยะเวลาการซูม (ใช้เมื่อ enableZoom = true)
+
     private float minX, maxX;
     private float halfScreenWidth;
-    private Vector3 lastCameraPosition;   // ✅ ตำแหน่งก่อนซูม
-    private float lastCameraSize;         // ✅ ขนาดก่อนซูม
-    private Vector3 zoomedCameraPosition; // ✅ ตำแหน่งที่ซูมเข้าไป
-    private float zoomedCameraSize;       // ✅ ขนาดที่ซูมเข้าไป
+    private Vector3 lastCameraPosition;
+    private float lastCameraSize;
+    private Vector3 zoomedCameraPosition;
+    private float zoomedCameraSize;
     public bool isMinigameActive = false;
     public bool isZooming = false;
-    [SerializeField] private float duration = 1f;
 
     private Camera mainCamera;
 
@@ -85,27 +88,38 @@ public class CameraController : MonoBehaviour
         transform.position = new Vector3(newX, transform.position.y, transform.position.z);
     }
 
-    // ✅ **ซูมเข้าไปที่ Object และบันทึกค่าก่อนเข้า Minigame**
+    // ✅ **ซูมเข้าไปที่ Object ตามเปอร์เซ็นต์ที่ตั้ง**
     public void ZoomToObject(Transform target, System.Action onComplete)
     {
         if (isZooming) return;
 
-        lastCameraPosition = transform.position;   // ✅ บันทึกค่าก่อนซูม
+        lastCameraPosition = transform.position;
         lastCameraSize = mainCamera.orthographicSize;
+
+        if (!enableZoom)
+        {
+            // ✅ ถ้า enableZoom = false → ตัดไปตำแหน่งใหม่ทันที (ไม่ใช้ duration)
+            zoomedCameraPosition = lastCameraPosition;
+            zoomedCameraSize = defaultCameraSize;
+            transform.position = zoomedCameraPosition;
+            mainCamera.orthographicSize = zoomedCameraSize;
+            onComplete?.Invoke();
+            return;
+        }
 
         // ✅ **ดึงค่ากลางของ Object**
         SpriteRenderer targetRenderer = target.GetComponent<SpriteRenderer>();
         Vector3 targetCenter = targetRenderer != null ? targetRenderer.bounds.center : target.position;
 
-        // ✅ **คำนวณขนาดที่ต้องซูม**
-        float zoomSize = CalculateZoomSize(targetRenderer);
+        // ✅ **คำนวณขนาดที่ต้องซูมโดยใช้เปอร์เซ็นต์**
+        float maxZoomSize = CalculateZoomSize(targetRenderer);
+        zoomedCameraSize = Mathf.Lerp(defaultCameraSize, maxZoomSize, zoomPercentage);
 
         // ✅ **กำหนดค่าตำแหน่งที่ซูมเข้าไป**
         zoomedCameraPosition = new Vector3(targetCenter.x, targetCenter.y, transform.position.z);
-        zoomedCameraSize = zoomSize;
 
         isZooming = true;
-        StartCoroutine(MoveAndZoomCoroutine(zoomedCameraPosition, zoomSize, () =>
+        StartCoroutine(MoveAndZoomCoroutine(zoomedCameraPosition, zoomedCameraSize, () =>
         {
             isZooming = false;
             onComplete?.Invoke();
@@ -118,7 +132,6 @@ public class CameraController : MonoBehaviour
         if (isMinigameActive) return;
         isMinigameActive = true;
 
-        // ✅ **ตัดไปที่ `(0,0)` ทันที**
         transform.position = new Vector3(0, 0, transform.position.z);
         mainCamera.orthographicSize = defaultCameraSize;
     }
@@ -132,14 +145,22 @@ public class CameraController : MonoBehaviour
         transform.position = zoomedCameraPosition;
         mainCamera.orthographicSize = zoomedCameraSize;
 
+        if (!enableZoom)
+        {
+            // ✅ ถ้า enableZoom = false → ตัดไปตำแหน่งเดิมทันที
+            transform.position = lastCameraPosition;
+            mainCamera.orthographicSize = lastCameraSize;
+            ToolManager.Instance.SetToolMode("Eye");
+            return;
+        }
+
         isZooming = true;
         StartCoroutine(MoveAndZoomCoroutine(lastCameraPosition, lastCameraSize, () =>
         {
             isZooming = false;
-            ToolManager.Instance.SetToolMode("Eye"); // ✅ เรียกใช้หลังจากซูมออกเสร็จ
+            ToolManager.Instance.SetToolMode("Eye");
         }));
     }
-
 
     // ✅ **ฟังก์ชันคำนวณระยะซูมให้เห็น Object พอดี**
     private float CalculateZoomSize(SpriteRenderer targetRenderer)
@@ -158,7 +179,14 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator MoveAndZoomCoroutine(Vector3 targetPosition, float zoomSize, System.Action onComplete)
     {
-        
+        if (!enableZoom)
+        {
+            transform.position = targetPosition;
+            mainCamera.orthographicSize = zoomSize;
+            onComplete?.Invoke();
+            yield break;
+        }
+
         float elapsedTime = 0f;
         Vector3 startPos = transform.position;
         float startSize = mainCamera.orthographicSize;

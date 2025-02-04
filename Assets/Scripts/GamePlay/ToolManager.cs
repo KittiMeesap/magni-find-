@@ -1,6 +1,5 @@
-﻿using Unity.Burst.CompilerServices;
-using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ToolManager : MonoBehaviour
 {
@@ -203,7 +202,28 @@ public class ToolManager : MonoBehaviour
 
         else
         {
-            if (CurrentMode != "Eye")
+            if (SceneManager.GetActiveScene().name == "Gameplay")
+            {
+                if (CurrentMode != "Eye")
+                {
+                    SetToolMode("Eye");
+                }
+            }
+
+            else if (SceneManager.GetActiveScene().name == "MainMenu")
+            {
+                if (CurrentMode == "Hand")
+                {
+                    SetToolMode("Magnifier");
+                }
+                else
+                {
+                    SetToolMode("Hand");
+                }
+                return;
+            }
+
+            else if (CurrentMode != "Eye")
             {
                 SetToolMode("Eye");
             }

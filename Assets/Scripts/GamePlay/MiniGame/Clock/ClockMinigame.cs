@@ -72,6 +72,8 @@ public class ClockMinigame : MonoBehaviour
             availableIndexes.Add(i);
         }
 
+        float[] fixedScales = { 0.3f, 0.4f, 0.5f, 0.6f }; // ✅ กำหนดขนาดตายตัว
+
         for (int i = 0; i < clockNumbers.Length; i++)
         {
             int randomIndex = Random.Range(0, availableIndexes.Count);
@@ -79,7 +81,7 @@ public class ClockMinigame : MonoBehaviour
 
             clockNumbers[i].transform.localPosition = numberPositions[positionIndex];
 
-            float randomScale = Random.Range(0.4f, 0.6f);
+            float randomScale = fixedScales[Random.Range(0, fixedScales.Length)]; // ✅ สุ่มขนาด ค่า
             clockNumbers[i].transform.localScale = new Vector3(randomScale, randomScale, randomScale);
 
             availableIndexes.RemoveAt(randomIndex);
@@ -88,6 +90,7 @@ public class ClockMinigame : MonoBehaviour
         Debug.Log("Clock numbers shuffled successfully!");
         isFirstTime = false;
     }
+
 
     public void StartMinigame()
     {

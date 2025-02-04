@@ -17,11 +17,21 @@ public class InteractableClockHand : MonoBehaviour
     private int currentPositionIndex; // ตำแหน่งปัจจุบัน
     public bool isSnapped = false;
 
-    private SpriteGlowEffect glowEffect;
+    private SpriteRenderer spriteRenderer;
+    private Sprite defaultSprite;       // ✅ Sprite ปกติ
+    [SerializeField] private Sprite highlightedSprite;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
 
     private void Awake()
     {
-        glowEffect = GetComponent<SpriteGlowEffect>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            defaultSprite = spriteRenderer.sprite; // ตั้งค่า Sprite เริ่มต้น
+        }
+        if (spriteRenderer == null)
+        {
+            Debug.LogError($"{gameObject.name} is missing a SpriteRenderer!");
+        }
     }
 
     private void Start()
@@ -40,9 +50,9 @@ public class InteractableClockHand : MonoBehaviour
         }
         if (MinigameManager.Instance.IsPlayingMinigame && ToolManager.Instance.CurrentMode == "Hand")
         {
-            if (glowEffect != null)
+            if (spriteRenderer != null && highlightedSprite != null)
             {
-                glowEffect.enabled = true; // เปิดเอฟเฟกต์ Glow
+                spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
             }
 
             // ตรวจจับการกดเมาส์เมื่ออยู่บนเข็มนาฬิกา
@@ -55,20 +65,13 @@ public class InteractableClockHand : MonoBehaviour
                 HandleRightClick();
             }
         }
-        else
-        {
-            if (glowEffect != null)
-            {
-                glowEffect.enabled = false; // ปิดเอฟเฟกต์ Glow
-            }
-        }
     }
 
     private void OnMouseExit()
     {
-        if (glowEffect != null)
+        if (spriteRenderer != null)
         {
-            glowEffect.enabled = false; // ปิดเอฟเฟกต์ Glow
+            spriteRenderer.sprite = defaultSprite; // ✅ กลับเป็น Sprite ปกติ
         }
     }
 

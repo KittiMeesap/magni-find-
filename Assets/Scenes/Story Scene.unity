@@ -777,7 +777,6 @@ GameObject:
   m_Component:
   - component: {fileID: 723526811}
   - component: {fileID: 723526812}
-  - component: {fileID: 723526813}
   m_Layer: 0
   m_Name: Cutscene
   m_TagString: Untagged
@@ -831,19 +830,6 @@ MonoBehaviour:
   - {fileID: 980717206}
   - {fileID: 981551678}
   - {fileID: 863179071}
---- !u!114 &723526813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723526810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20b9ee2b0b392b64aac23873b2059af7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playMinigameObject: {fileID: 0}
 --- !u!1 &833643366
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +913,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 723526813}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: LoadNextLevel
         m_Mode: 1

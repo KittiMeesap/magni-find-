@@ -35,6 +35,7 @@ public class ClockMinigame : MonoBehaviour
 
     public int CompletedParts => completedParts; // ✅ Getter สำหรับ CompletedParts
     public int TotalParts => totalParts; // ✅ Getter สำหรับ TotalParts
+    [SerializeField] private InteractObject interactObject;
 
     private void Awake()
     {
@@ -247,6 +248,7 @@ public class ClockMinigame : MonoBehaviour
         }
 
         Debug.Log("Clock Minigame completion animation finished. Waiting for reward collection.");
+        interactObject.CheckMinigameDone();
     }
 
 

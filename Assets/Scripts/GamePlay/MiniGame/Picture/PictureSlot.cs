@@ -28,6 +28,7 @@ public class PictureSlot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (PictureMinigame.Instance.PictureMinigameDone) return;
         if (isSliding) return;
         isDragging = true;
         dragStartY = Input.mousePosition.y;

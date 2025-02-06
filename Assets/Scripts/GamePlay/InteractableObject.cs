@@ -4,6 +4,7 @@ using System.Collections;
 public class InteractObject : MonoBehaviour
 {
     [SerializeField] private MinigameType minigameType;
+    
     public enum MinigameType
     {
         Null,
@@ -17,8 +18,11 @@ public class InteractObject : MonoBehaviour
     }
 
     private SpriteRenderer spriteRenderer;
-    private Sprite defaultSprite;       // ✅ Sprite ปกติ
+    [SerializeField] private Sprite defaultSprite;       // ✅ Sprite ปกติ
     [SerializeField] private Sprite highlightedSprite;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
+    [SerializeField] private Sprite defaultSpriteDone;       // ✅ Sprite ปกติ
+    [SerializeField] private Sprite highlightedSpriteDone;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
+    public bool minigameDone = false;
 
     private bool isHovering = false;
     private float oscillationSpeed = 3f;
@@ -28,23 +32,44 @@ public class InteractObject : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
         if (spriteRenderer != null)
         {
-            defaultSprite = spriteRenderer.sprite; // ตั้งค่า Sprite เริ่มต้น
+            defaultSprite = spriteRenderer.sprite;
         }
-
         initialPosition = transform.position;
     }
 
+    public void CheckMinigameDone()
+    {
+        minigameDone = true;
+        if (minigameDone)
+        {
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = defaultSpriteDone; // ตั้งค่า Sprite เริ่มต้น
+            }
+        }
+    }
     private void OnMouseOver()
     {
         if (MinigameManager.Instance.IsPlayingMinigame == false && ToolManager.Instance.CurrentMode == "Eye")
         {
-            if (spriteRenderer != null && highlightedSprite != null)
+            if (!minigameDone) 
             {
-                spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
+                if (spriteRenderer != null && highlightedSprite != null)
+                {
+                    spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
+                }
             }
+
+            else if (minigameDone)
+            {
+                if (spriteRenderer != null && highlightedSpriteDone != null)
+                {
+                    spriteRenderer.sprite = highlightedSpriteDone;
+                }
+            }
+            
 
             if (!isHovering)
             {
@@ -65,9 +90,20 @@ public class InteractObject : MonoBehaviour
 
     private void ResetObject()
     {
-        if (spriteRenderer != null)
+        if (!minigameDone)
         {
-            spriteRenderer.sprite = defaultSprite; // ✅ กลับเป็น Sprite ปกติ
+            if (spriteRenderer != null && defaultSprite != null)
+            {
+                spriteRenderer.sprite = defaultSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
+            }
+        }
+
+        else if (minigameDone)
+        {
+            if (spriteRenderer != null && defaultSpriteDone != null)
+            {
+                spriteRenderer.sprite = defaultSpriteDone;
+            }
         }
 
         isHovering = false;

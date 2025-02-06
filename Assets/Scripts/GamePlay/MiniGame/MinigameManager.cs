@@ -19,6 +19,10 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] private Vector3 minigameTargetScale = new Vector3(0.8f, 0.8f, 0.8f);
     [SerializeField] private Vector3 minigameTargetPositionOffset = new Vector3(0, 2.0f, 0);
 
+    private SpriteRenderer spriteRenderer;
+    private Sprite defaultSprite;
+    private Sprite highlightedSprite;
+
     private void Awake()
     {
         if (Instance != null)

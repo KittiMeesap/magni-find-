@@ -262,10 +262,10 @@ public class CameraMinigame : MonoBehaviour
 
         float elapsedTime = 0f;
 
-        while (elapsedTime < fadeDuration * 0.3f)
+        while (elapsedTime < fadeDuration * 0.5f)
         {
             elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / (fadeDuration * 0.3f));
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / (fadeDuration * 0.5f));
             cameraScreen.color = new Color(1f, 1f, 1f, alpha);
             yield return null;
         }
@@ -274,10 +274,10 @@ public class CameraMinigame : MonoBehaviour
         cameraScreen.sprite = photos[currentPhotoIndex];
 
         elapsedTime = 0f;
-        while (elapsedTime < fadeDuration * 1f)
+        while (elapsedTime < fadeDuration * 0.5f)
         {
             elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / (fadeDuration * 0.3f));
+            float alpha = Mathf.Lerp(0f, 1f, elapsedTime / (fadeDuration * 0.5f));
             cameraScreen.color = new Color(1f, 1f, 1f, alpha);
             yield return null;
         }

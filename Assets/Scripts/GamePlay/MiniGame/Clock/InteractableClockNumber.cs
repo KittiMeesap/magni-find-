@@ -1,45 +1,46 @@
 ﻿using SpriteGlow;
 using UnityEngine;
+using System.Collections;
 
 public class InteractableClockNumber : MonoBehaviour
 {
-    public GameObject targetPosition; // ตำแหน่งเป้าหมาย
-    public GameObject dragBoundsObject; // ✅ Object ที่ใช้เป็นขอบเขตของการลาก
+    public GameObject targetPosition;
+    public GameObject dragBoundsObject;
     public Vector3 correctScale;
     public float scaleTolerance = 0.05f;
     public float snapDistance = 0.5f;
+    public float scaleDuration = 0.15f; // ✅ เวลาที่ใช้ในการย่อขยาย (เพิ่มความสมูท)
 
     public bool isSnapped = false;
     private bool isDragging = false;
+    private bool isScaling = false; // ✅ ป้องกันการกดซ้ำขณะกำลังปรับขนาด
     private static InteractableClockNumber selectedNumber;
     private SpriteRenderer spriteRenderer;
-    private Sprite defaultSprite;       // ✅ Sprite ปกติ
-    [SerializeField] private Sprite highlightedSprite;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
+    private Sprite defaultSprite;
+    [SerializeField] private Sprite highlightedSprite;
 
-    private int originalSortingOrder; // ✅ เก็บค่า Sorting Order เดิม
-    private Bounds dragBounds; // ✅ ขอบเขตของการลาก
-    private Vector3 dragCenter; // ✅ ศูนย์กลางของขอบลาก
-    private float dragRadius; // ✅ รัศมีของขอบลาก (ถ้าเป็นวงกลม)
+    private int originalSortingOrder;
+    private Bounds dragBounds;
+    private Vector3 dragCenter;
+    private float dragRadius;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
-            defaultSprite = spriteRenderer.sprite; // ตั้งค่า Sprite เริ่มต้น
-        }
-        if (spriteRenderer == null)
-        {
-            Debug.LogError($"{gameObject.name} is missing a SpriteRenderer!");
+            defaultSprite = spriteRenderer.sprite;
         }
         else
         {
-            originalSortingOrder = spriteRenderer.sortingOrder; // ✅ เก็บค่า Sorting Order เดิม
+            Debug.LogError($"{gameObject.name} is missing a SpriteRenderer!");
         }
+
+        originalSortingOrder = spriteRenderer.sortingOrder;
 
         if (dragBoundsObject != null)
         {
-            GetObjectBounds(dragBoundsObject); // ✅ ดึงขอบเขตจาก Object ที่กำหนด
+            GetObjectBounds(dragBoundsObject);
         }
     }
 
@@ -63,15 +64,10 @@ public class InteractableClockNumber : MonoBehaviour
             isDragging = true;
             selectedNumber = this;
 
-            // ✅ ทำให้ Object ที่ถูกเลือกไปอยู่หน้าสุด
             if (spriteRenderer != null)
             {
                 spriteRenderer.sortingOrder = 999;
             }
-        }
-        else if (ToolManager.Instance.CurrentMode == "Magnifier" && !isSnapped)
-        {
-            selectedNumber = this;
         }
     }
 
@@ -79,7 +75,6 @@ public class InteractableClockNumber : MonoBehaviour
     {
         isDragging = false;
 
-        // ✅ คืนค่า Sorting Order กลับเป็นปกติ
         if (spriteRenderer != null)
         {
             spriteRenderer.sortingOrder = originalSortingOrder;
@@ -94,7 +89,6 @@ public class InteractableClockNumber : MonoBehaviour
         {
             if (dragRadius > 0)
             {
-                // ✅ ถ้าเป็นวงกลม → จำกัดการลากในรัศมี
                 Vector2 direction = (mousePosition - (Vector2)dragCenter).normalized;
                 float distance = Vector2.Distance(mousePosition, dragCenter);
                 float clampedDistance = Mathf.Min(distance, dragRadius);
@@ -102,7 +96,6 @@ public class InteractableClockNumber : MonoBehaviour
             }
             else
             {
-                // ✅ ถ้าเป็น BoxCollider → จำกัดการลากเป็นสี่เหลี่ยม
                 float clampedX = Mathf.Clamp(mousePosition.x, dragBounds.min.x, dragBounds.max.x);
                 float clampedY = Mathf.Clamp(mousePosition.y, dragBounds.min.y, dragBounds.max.y);
                 transform.position = new Vector2(clampedX, clampedY);
@@ -110,22 +103,54 @@ public class InteractableClockNumber : MonoBehaviour
         }
         else
         {
-            transform.position = mousePosition; // ถ้าไม่มีขอบเขต ให้ลากได้อิสระ
+            transform.position = mousePosition;
         }
     }
 
-    private void ModifyScale(float scaleStep)
+    private void OnMouseOver()
     {
-        float stepSize = 0.1f;
-        float newX = Mathf.Round((transform.localScale.x + scaleStep) / stepSize) * stepSize;
-        float newY = Mathf.Round((transform.localScale.y + scaleStep) / stepSize) * stepSize;
-        float newZ = Mathf.Round((transform.localScale.z + scaleStep) / stepSize) * stepSize;
+        if (ToolManager.Instance.CurrentMode == "Magnifier" && !isSnapped && !isScaling)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(ModifyScaleSmoothly(0.1f)); // ✅ ทำให้สมูท
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                StartCoroutine(ModifyScaleSmoothly(-0.1f)); // ✅ ทำให้สมูท
+            }
+        }
 
-        newX = Mathf.Clamp(newX, 0.5f, 0.9f);
-        newY = Mathf.Clamp(newY, 0.5f, 0.9f);
-        newZ = Mathf.Clamp(newZ, 0.5f, 0.9f);
+        if (MinigameManager.Instance.IsPlayingMinigame && (ToolManager.Instance.CurrentMode == "Hand" || ToolManager.Instance.CurrentMode == "Magnifier"))
+        {
+            if (!isSnapped && spriteRenderer != null && highlightedSprite != null)
+            {
+                spriteRenderer.sprite = highlightedSprite;
+            }
+        }
+    }
 
-        transform.localScale = new Vector3(newX, newY, newZ);
+    private IEnumerator ModifyScaleSmoothly(float scaleStep)
+    {
+        isScaling = true;
+
+        Vector3 startScale = transform.localScale;
+        Vector3 targetScale = startScale + Vector3.one * scaleStep;
+
+        targetScale.x = Mathf.Clamp(targetScale.x, 0.5f, 0.9f);
+        targetScale.y = Mathf.Clamp(targetScale.y, 0.5f, 0.9f);
+        targetScale.z = Mathf.Clamp(targetScale.z, 0.5f, 0.9f);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < scaleDuration)
+        {
+            transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / scaleDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale;
+        isScaling = false;
     }
 
     private bool IsCloseToTarget()
@@ -167,12 +192,10 @@ public class InteractableClockNumber : MonoBehaviour
         ClockMinigame.Instance.CompletePart();
     }
 
-    // ✅ **ฟังก์ชันดึงขอบเขตของ Object ที่ใช้เป็นขอบลาก**
     private void GetObjectBounds(GameObject obj)
     {
         if (obj == null) return;
 
-        // ✅ ถ้ามี CircleCollider2D → กำหนดเป็นวงกลม
         CircleCollider2D circleCollider = obj.GetComponent<CircleCollider2D>();
         if (circleCollider != null)
         {
@@ -181,48 +204,23 @@ public class InteractableClockNumber : MonoBehaviour
             return;
         }
 
-        // ✅ ถ้าเป็น BoxCollider2D → ใช้ขอบสี่เหลี่ยมปกติ
         BoxCollider2D boxCollider = obj.GetComponent<BoxCollider2D>();
         if (boxCollider != null)
         {
             dragBounds = boxCollider.bounds;
-            dragRadius = 0; // ตั้งค่าเป็น 0 เพราะใช้แบบสี่เหลี่ยม
+            dragRadius = 0;
             return;
         }
 
-        // ✅ ถ้าไม่มี Collider → ใช้ SpriteRenderer
         SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
             dragBounds = spriteRenderer.bounds;
-            dragRadius = 0; // ใช้แบบสี่เหลี่ยม
+            dragRadius = 0;
             return;
         }
 
         Debug.LogWarning($"{obj.name} has no valid Collider or SpriteRenderer! Using default bounds.");
-    }
-
-    private void OnMouseOver()
-    {
-        if (ToolManager.Instance.CurrentMode == "Magnifier" && !isSnapped)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                ModifyScale(0.1f); // ขยาย
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                ModifyScale(-0.1f); // ย่อ
-            }
-        }
-
-        if (MinigameManager.Instance.IsPlayingMinigame && ToolManager.Instance.CurrentMode == "Hand" || ToolManager.Instance.CurrentMode == "Magnifier")
-        {
-            if (spriteRenderer != null && highlightedSprite != null)
-            {
-                spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
-            }
-        }
     }
 
     private void OnMouseExit()
@@ -234,7 +232,7 @@ public class InteractableClockNumber : MonoBehaviour
 
         if (spriteRenderer != null)
         {
-            spriteRenderer.sprite = defaultSprite; // ✅ กลับเป็น Sprite ปกติ
+            spriteRenderer.sprite = defaultSprite;
         }
     }
 }

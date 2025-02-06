@@ -475,10 +475,10 @@ TextureImporter:
       name: clockPuzzle_13
       rect:
         serializedVersion: 2
-        x: 104
-        y: 1917
-        width: 62
-        height: 83
+        x: 93
+        y: 1906
+        width: 84
+        height: 105
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -497,10 +497,10 @@ TextureImporter:
       name: clockPuzzle_14
       rect:
         serializedVersion: 2
-        x: 275
-        y: 1910
-        width: 86
-        height: 92
+        x: 263
+        y: 1898
+        width: 107
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -519,10 +519,10 @@ TextureImporter:
       name: clockPuzzle_15
       rect:
         serializedVersion: 2
-        x: 468
-        y: 1902
-        width: 92
-        height: 103
+        x: 457
+        y: 1893
+        width: 114
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -541,10 +541,10 @@ TextureImporter:
       name: clockPuzzle_16
       rect:
         serializedVersion: 2
-        x: 667
-        y: 1913
-        width: 90
-        height: 96
+        x: 655
+        y: 1902
+        width: 113
+        height: 117
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -563,10 +563,10 @@ TextureImporter:
       name: clockPuzzle_17
       rect:
         serializedVersion: 2
-        x: 865
-        y: 1906
-        width: 81
-        height: 103
+        x: 854
+        y: 1895
+        width: 101
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -585,10 +585,10 @@ TextureImporter:
       name: clockPuzzle_18
       rect:
         serializedVersion: 2
-        x: 1055
-        y: 1913
-        width: 82
-        height: 98
+        x: 1043
+        y: 1904
+        width: 104
+        height: 118
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -607,10 +607,10 @@ TextureImporter:
       name: clockPuzzle_19
       rect:
         serializedVersion: 2
-        x: 1244
-        y: 1913
-        width: 83
-        height: 102
+        x: 1235
+        y: 1902
+        width: 103
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -629,10 +629,10 @@ TextureImporter:
       name: clockPuzzle_20
       rect:
         serializedVersion: 2
-        x: 1433
-        y: 1910
-        width: 87
-        height: 105
+        x: 1422
+        y: 1900
+        width: 107
+        height: 126
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -651,10 +651,10 @@ TextureImporter:
       name: clockPuzzle_21
       rect:
         serializedVersion: 2
-        x: 1626
-        y: 1913
-        width: 81
-        height: 102
+        x: 1615
+        y: 1903
+        width: 103
+        height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -673,10 +673,10 @@ TextureImporter:
       name: clockPuzzle_22
       rect:
         serializedVersion: 2
-        x: 1823
-        y: 1915
-        width: 152
-        height: 90
+        x: 1812
+        y: 1905
+        width: 175
+        height: 112
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -695,10 +695,10 @@ TextureImporter:
       name: clockPuzzle_23
       rect:
         serializedVersion: 2
-        x: 2063
-        y: 1919
-        width: 124
-        height: 83
+        x: 2052
+        y: 1908
+        width: 147
+        height: 105
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -717,10 +717,10 @@ TextureImporter:
       name: clockPuzzle_24
       rect:
         serializedVersion: 2
-        x: 2257
-        y: 1911
-        width: 148
-        height: 93
+        x: 2245
+        y: 1900
+        width: 171
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -894,9 +894,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 181
-        y: 20
-        width: 1659
-        height: 1230
+        y: 155
+        width: 1541
+        height: 1095
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

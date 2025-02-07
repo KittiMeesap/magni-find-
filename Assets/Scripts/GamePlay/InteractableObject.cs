@@ -13,7 +13,7 @@ public class InteractObject : MonoBehaviour
         Camera,
         Cat,
         Picture,
-        Instrument,
+        Turntable,
         Bird
     }
 
@@ -171,8 +171,8 @@ public class InteractObject : MonoBehaviour
             case MinigameType.Picture:
                 PictureMinigame.Instance.StartMinigame();
                 break;
-            case MinigameType.Instrument:
-                // InstrumentMinigame.Instance.StartMinigame();
+            case MinigameType.Turntable:
+                TurntableMinigame.Instance.StartMinigame();
                 break;
             case MinigameType.Bird:
                 BirdMinigame.Instance.StartMinigame();

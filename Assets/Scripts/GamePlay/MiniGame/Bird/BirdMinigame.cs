@@ -21,9 +21,11 @@ public class BirdMinigame : MonoBehaviour
     [SerializeField] private float fallDuration = 0.8f; // ✅ ระยะเวลาที่แอปเปิ้ลร่วง
     [SerializeField] private float moveDuration = 1f; // ✅ ระยะเวลาที่นกเดินไปกิน
     [SerializeField] private float rewardMoveDuration = 1f; // ✅ ระยะเวลาที่แหวนขยับไปตำแหน่งที่ตั้งไว้
+    [SerializeField] private float appleFadeDuration = 1f; // ✅ ระยะเวลาเฟดหายของแอปเปิ้ล
     [SerializeField] private float rotationSpeed = 720f; // ✅ ความเร็วในการหมุนแหวนระหว่างขยับไปตำแหน่ง
     private SpriteRenderer birdRenderer;
     private Collider2D birdCollider;
+    private SpriteRenderer appleRenderer;
     private bool isMinigameComplete = false;
     public bool IsAppleCorrectSize { get; private set; } = false;
     public bool CanPickUpApple { get; private set; } = false; // ✅ เช็คว่าแอปเปิ้ลร่วงแล้วหรือยัง
@@ -41,6 +43,7 @@ public class BirdMinigame : MonoBehaviour
 
         birdRenderer = bird.GetComponent<SpriteRenderer>();
         birdCollider = bird.GetComponent<Collider2D>();
+        appleRenderer = apple.GetComponent<SpriteRenderer>();
 
         // ✅ ซ่อนรางวัลตอนเริ่มเกม
         rewardItem.SetActive(false);
@@ -72,13 +75,22 @@ public class BirdMinigame : MonoBehaviour
     private IEnumerator DropApple()
     {
         yield return new WaitForSeconds(1f); // ✅ รอ 1 วินาที
+
         float elapsedTime = 0f;
         Vector3 startPos = apple.transform.position;
+        Vector3 endPos = appleFallPosition.position;
+
+        // ✅ คำนวณจุดโค้งกลาง ให้ตกลงแบบสมจริง
+        Vector3 controlPoint = new Vector3((startPos.x + endPos.x) / 2, startPos.y + 1.5f, startPos.z);
 
         while (elapsedTime < fallDuration)
         {
             elapsedTime += Time.deltaTime;
-            apple.transform.position = Vector3.Lerp(startPos, appleFallPosition.position, elapsedTime / fallDuration);
+            float t = elapsedTime / fallDuration;
+
+            // ✅ ใช้ Bezier Curve สำหรับการเคลื่อนที่แบบพาราโบลา
+            apple.transform.position = BezierCurve(startPos, controlPoint, endPos, t);
+
             yield return null;
         }
 
@@ -86,11 +98,19 @@ public class BirdMinigame : MonoBehaviour
         CanPickUpApple = true; // ✅ ตอนนี้สามารถลากแอปเปิ้ลไปวางที่ถาดได้
     }
 
+    // ✅ ฟังก์ชัน Bezier Curve สำหรับการทำให้แอปเปิ้ลตกโค้ง
+    private Vector3 BezierCurve(Vector3 p0, Vector3 p1, Vector3 p2, float t)
+    {
+        float u = 1 - t;
+        return (u * u * p0) + (2 * u * t * p1) + (t * t * p2);
+    }
+
+
     public void PlaceAppleInTray()
     {
         if (!CanPickUpApple) return;
 
-        apple.transform.position = appleTrayPosition.position;
+        apple.transform.position = appleTrayPosition.position; // ✅ แค่ย้ายตำแหน่ง ไม่ปิด Object
         CanPickUpApple = false; // ✅ ป้องกันการลากอีก
         StartCoroutine(BirdEatApple());
     }
@@ -102,20 +122,46 @@ public class BirdMinigame : MonoBehaviour
         bird.GetComponent<InteractableBird>().SetBirdState("walking");
         float elapsedTime = 0f;
         Vector3 startPos = bird.transform.position;
+        Vector3 endPos = birdEatPosition.position;
+
+        // ✅ ขยับไปทางขวาเล็กน้อย (เพิ่มค่า X)
+        Vector3 controlPoint = new Vector3((startPos.x + endPos.x) / 2 + 1.0f, startPos.y, startPos.z);
 
         while (elapsedTime < moveDuration)
         {
             elapsedTime += Time.deltaTime;
-            bird.transform.position = Vector3.Lerp(startPos, birdEatPosition.position, elapsedTime / moveDuration);
+            float t = elapsedTime / moveDuration;
+
+            // ✅ ใช้ Bezier Curve เพื่อให้ขยับแบบมีโค้งไปทางขวา
+            bird.transform.position = BezierCurve(startPos, controlPoint, endPos, t);
+
             yield return null;
         }
 
         bird.transform.position = birdEatPosition.position;
         bird.GetComponent<InteractableBird>().SetBirdState("eating");
 
-        yield return new WaitForSeconds(1f); // ✅ รออีก 1 วิ ก่อนแหวนร่วงลงมา
+        yield return new WaitForSeconds(1f); // ✅ รออีก 1 วิ ก่อนแอปเปิ้ลค่อยๆ หายไป
+        StartCoroutine(FadeOutApple());
 
+        yield return new WaitForSeconds(1f); // ✅ รออีก 1 วิ ก่อนแหวนร่วงลงมา
         StartCoroutine(DropReward());
+    }
+
+    private IEnumerator FadeOutApple()
+    {
+        float elapsedTime = 0f;
+        Color startColor = appleRenderer.color;
+        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f); // ✅ ค่อยๆ ทำให้โปร่งใส
+
+        while (elapsedTime < appleFadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            appleRenderer.color = Color.Lerp(startColor, endColor, elapsedTime / appleFadeDuration);
+            yield return null;
+        }
+
+        apple.SetActive(false); // ✅ ซ่อนแอปเปิ้ลเมื่อ Fade เสร็จ
     }
 
     private IEnumerator DropReward()
@@ -123,18 +169,23 @@ public class BirdMinigame : MonoBehaviour
         rewardItem.SetActive(true);
         float elapsedTime = 0f;
         Vector3 startPos = rewardItem.transform.position;
-        float currentRotation = 0f; // ✅ ใช้คุมการหมุนของแหวน
+        Vector3 endPos = rewardFallPosition.position;
+        float currentRotation = 0f;
+
+        // ✅ คำนวณจุดกึ่งกลางให้แหวนตกเป็นโค้ง
+        Vector3 controlPoint = new Vector3((startPos.x + endPos.x) / 2, startPos.y + 1.5f, startPos.z);
 
         while (elapsedTime < rewardMoveDuration)
         {
             elapsedTime += Time.deltaTime;
-            float progress = elapsedTime / rewardMoveDuration;
+            float t = elapsedTime / rewardMoveDuration;
 
-            // ✅ ขยับแหวนไปตำแหน่งที่ตั้งไว้
-            rewardItem.transform.position = Vector3.Lerp(startPos, rewardFallPosition.position, progress);
+            // ✅ ใช้ Bezier Curve เพื่อให้แหวนตกแบบโค้ง
+            rewardItem.transform.position = BezierCurve(startPos, controlPoint, endPos, t);
 
-            // ✅ หมุนแหวนระหว่างขยับ
-            currentRotation += rotationSpeed * Time.deltaTime;
+            // ✅ หมุนแหวน เร่งความเร็วตอนต้น และช้าลงตอนท้าย
+            float rotationSpeedAdjusted = Mathf.Lerp(rotationSpeed, 0f, t);
+            currentRotation += rotationSpeedAdjusted * Time.deltaTime;
             rewardItem.transform.rotation = Quaternion.Euler(0f, 0f, currentRotation);
 
             yield return null;

@@ -26,7 +26,7 @@ public class InteractableApple : MonoBehaviour
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mousePos;
         }
-        else if (ToolManager.Instance.CurrentMode == "Magnifier")
+        else if (ToolManager.Instance.CurrentMode == "Magnifier" && !BirdMinigame.Instance.IsAppleCorrectSize)
         {
             HandleScaling();
         }
@@ -48,7 +48,6 @@ public class InteractableApple : MonoBehaviour
         {
             BirdMinigame.Instance.PlaceAppleInTray();
             isPlacedInTray = true;
-            gameObject.SetActive(false); // ✅ ปิดแอปเปิ้ลหลังจากวางสำเร็จ
         }
     }
 

@@ -175,7 +175,7 @@ public class InteractObject : MonoBehaviour
                 // InstrumentMinigame.Instance.StartMinigame();
                 break;
             case MinigameType.Bird:
-                // BirdMinigame.Instance.StartMinigame();
+                BirdMinigame.Instance.StartMinigame();
                 break;
             default:
                 Debug.LogWarning("Not Minigame Object");

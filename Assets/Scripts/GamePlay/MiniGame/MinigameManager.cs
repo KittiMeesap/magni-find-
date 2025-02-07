@@ -245,7 +245,7 @@ public class MinigameManager : MonoBehaviour
             currentMinigame.SetActive(false);
         }
 
-        ToolManager.Instance.SetToolMode("Eye");
+        //ToolManager.Instance.SetToolMode("Eye");
 
         DisableMinigameTrigger();
         DialogueUI.Instance.HideDialogue();

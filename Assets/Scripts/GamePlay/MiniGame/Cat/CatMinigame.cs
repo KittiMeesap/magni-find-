@@ -65,13 +65,11 @@ public class CatMinigame : MonoBehaviour
             slimCatEyes.SetActive(true);
             fatCatEyes.SetActive(false);
         }
-
-        mouse.SetActive(true);
-        StartCoroutine(FadeInMouse());
     }
 
-    private IEnumerator FadeInMouse()
+    public IEnumerator FadeInMouse()
     {
+        mouse.SetActive(true);
         SpriteRenderer mouseSR = mouse.GetComponent<SpriteRenderer>();
         float elapsedTime = 0f;
         float fadeDuration = 1f;

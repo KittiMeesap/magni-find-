@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class InteractableCat : MonoBehaviour
 {
@@ -38,14 +39,22 @@ public class InteractableCat : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) // ✅ คลิกซ้าย -> แมวอ้วน
             {
                 Debug.Log("คลิกซ้าย -> เปลี่ยนเป็นแมวอ้วน");
-                StartCoroutine(FadeChangeSprite(fatCatSprite));
+
+                StartCoroutine(FadeChangeSprite(fatCatSprite, () =>
+                {
+                    StartCoroutine(CatMinigame.Instance.FadeInMouse());
+                }));
+
                 CatMinigame.Instance.SetCatState("fat");
                 DisableColliderAfterClick();
             }
             else if (Input.GetMouseButtonDown(1)) // ✅ คลิกขวา -> แมวผอม
             {
                 Debug.Log("คลิกขวา -> เปลี่ยนเป็นแมวผอม");
-                StartCoroutine(FadeChangeSprite(thinCatSprite));
+                StartCoroutine(FadeChangeSprite(thinCatSprite, () =>
+                {
+                    StartCoroutine(CatMinigame.Instance.FadeInMouse());
+                }));
                 CatMinigame.Instance.SetCatState("thin");
                 DisableColliderAfterClick();
             }
@@ -99,35 +108,32 @@ public class InteractableCat : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeChangeSprite(Sprite newSprite)
+    private IEnumerator FadeChangeSprite(Sprite newSprite, Action onComplete)
     {
         if (spriteRenderer == null) yield break;
 
         float elapsedTime = 0f;
-        Color originalColor = spriteRenderer.color;
+        Color startColor = spriteRenderer.color;
 
-        // ✅ เฟดออก แต่เหลือ Alpha อย่างน้อย 50% (minAlpha)
-        while (elapsedTime < fadeDuration / 2)
+        while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, minAlpha, elapsedTime / (fadeDuration / 2));
-            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            float alpha = Mathf.Lerp(1f, minAlpha, elapsedTime / fadeDuration);
+            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
             yield return null;
         }
 
-        // ✅ เปลี่ยน sprite
-        spriteRenderer.sprite = newSprite;
+        spriteRenderer.sprite = newSprite; // ✅ เปลี่ยน Sprite ใหม่
 
-        // ✅ เฟดเข้า
         elapsedTime = 0f;
-        while (elapsedTime < fadeDuration / 2)
+        while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(minAlpha, 1f, elapsedTime / (fadeDuration / 2));
-            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            float alpha = Mathf.Lerp(minAlpha, 1f, elapsedTime / fadeDuration);
+            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
             yield return null;
         }
 
-        spriteRenderer.color = originalColor; // ✅ คืนค่าเดิม
+        onComplete?.Invoke(); // ✅ เรียก Callback เมื่อทำงานเสร็จ
     }
 }

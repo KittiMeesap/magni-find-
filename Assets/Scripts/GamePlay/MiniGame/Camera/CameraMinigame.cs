@@ -73,6 +73,7 @@ public class CameraMinigame : MonoBehaviour
 
     private IEnumerator FadeOutOldBattery()
     {
+        
         SpriteRenderer oldBatteryRenderer = oldBattery.GetComponent<SpriteRenderer>();
         if (oldBatteryRenderer == null)
         {
@@ -80,6 +81,7 @@ public class CameraMinigame : MonoBehaviour
             oldBattery = null;
             yield break;
         }
+        DialogueUI.Instance.DialogueButton(false);
 
         float duration = 0.8f; // ✅ กำหนดระยะเวลาในการเฟด
         float elapsedTime = 0f;
@@ -116,6 +118,7 @@ public class CameraMinigame : MonoBehaviour
             newBatteryRenderer.color = new Color(1f, 1f, 1f, alpha);
             yield return null;
         }
+        DialogueUI.Instance.DialogueButton(true);
     }
 
 
@@ -150,7 +153,9 @@ public class CameraMinigame : MonoBehaviour
 
     private IEnumerator FadeToNewCamera()
     {
+        
         if (isCameraTransitioning) yield break;
+        DialogueUI.Instance.DialogueButton(false);
         isCameraTransitioning = true;
 
         // ✅ เฟดกล้องเก่า (รวมลูกๆ)
@@ -212,6 +217,7 @@ public class CameraMinigame : MonoBehaviour
         {
             renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 1f);
         }
+        DialogueUI.Instance.DialogueButton(true);
     }
 
 
@@ -257,7 +263,9 @@ public class CameraMinigame : MonoBehaviour
 
     private IEnumerator FadeToNextPhoto(int direction)
     {
+        
         if (isSliding) yield break;
+        DialogueUI.Instance.DialogueButton(false);
         isSliding = true;
 
         float elapsedTime = 0f;
@@ -283,6 +291,7 @@ public class CameraMinigame : MonoBehaviour
         }
 
         isSliding = false;
+        DialogueUI.Instance.DialogueButton(true);
     }
 
 }

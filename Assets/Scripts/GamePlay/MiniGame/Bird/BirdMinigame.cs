@@ -12,9 +12,12 @@ public class BirdMinigame : MonoBehaviour
     [SerializeField] private GameObject apple;
     public GameObject Apple => apple;
 
-    [SerializeField] private Transform appleFallPosition; // ✅ ตำแหน่งที่แอปเปิ้ลร่วง
-    [SerializeField] private Transform appleTrayPosition; // ✅ ตำแหน่งถาดใส่อาหารนก
-    [SerializeField] private Transform birdEatPosition; // ✅ ตำแหน่งที่นกจะเดินไปกิน
+    [SerializeField] private Transform appleFallPosition;
+    public Transform AppleFallPosition => appleFallPosition;// ✅ ตำแหน่งที่แอปเปิ้ลร่วง
+    [SerializeField] private Transform appleTrayPosition;
+    public Transform AppleTrayPosition => appleTrayPosition;// ✅ ตำแหน่งถาดใส่อาหารนก
+    [SerializeField] private Transform birdEatPosition;
+    public Transform BirdEatPosition => birdEatPosition;// ✅ ตำแหน่งที่นกจะเดินไปกิน
     [SerializeField] private Transform rewardFallPosition; // ✅ ตำแหน่งที่แหวนจะตก
 
     [SerializeField] private Vector3 correctAppleScale;
@@ -30,6 +33,11 @@ public class BirdMinigame : MonoBehaviour
     public bool IsAppleCorrectSize { get; private set; } = false;
     public bool CanPickUpApple { get; private set; } = false; // ✅ เช็คว่าแอปเปิ้ลร่วงแล้วหรือยัง
 
+    private bool isShakingTray = false;
+
+    private Vector3 initialTrayPosition;
+    private Quaternion initialTrayRotation;
+
     private void Awake()
     {
         if (Instance != null)
@@ -44,6 +52,9 @@ public class BirdMinigame : MonoBehaviour
         birdRenderer = bird.GetComponent<SpriteRenderer>();
         birdCollider = bird.GetComponent<Collider2D>();
         appleRenderer = apple.GetComponent<SpriteRenderer>();
+
+        initialTrayPosition = appleTrayPosition.position;
+        initialTrayRotation = appleTrayPosition.rotation;
 
         // ✅ ซ่อนรางวัลตอนเริ่มเกม
         rewardItem.SetActive(false);
@@ -74,29 +85,28 @@ public class BirdMinigame : MonoBehaviour
 
     private IEnumerator DropApple()
     {
-        yield return new WaitForSeconds(1f); // ✅ รอ 1 วินาที
+        DialogueUI.Instance.DialogueButton(false);
 
+        yield return new WaitForSeconds(1f);
         float elapsedTime = 0f;
         Vector3 startPos = apple.transform.position;
         Vector3 endPos = appleFallPosition.position;
-
-        // ✅ คำนวณจุดโค้งกลาง ให้ตกลงแบบสมจริง
         Vector3 controlPoint = new Vector3((startPos.x + endPos.x) / 2, startPos.y + 1.5f, startPos.z);
 
         while (elapsedTime < fallDuration)
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / fallDuration;
-
-            // ✅ ใช้ Bezier Curve สำหรับการเคลื่อนที่แบบพาราโบลา
             apple.transform.position = BezierCurve(startPos, controlPoint, endPos, t);
-
             yield return null;
         }
 
         apple.transform.position = appleFallPosition.position;
-        CanPickUpApple = true; // ✅ ตอนนี้สามารถลากแอปเปิ้ลไปวางที่ถาดได้
+        CanPickUpApple = true;
+        apple.GetComponent<InteractableApple>().MarkAsFallen();
+        DialogueUI.Instance.DialogueButton(true);
     }
+
 
     // ✅ ฟังก์ชัน Bezier Curve สำหรับการทำให้แอปเปิ้ลตกโค้ง
     private Vector3 BezierCurve(Vector3 p0, Vector3 p1, Vector3 p2, float t)
@@ -117,6 +127,7 @@ public class BirdMinigame : MonoBehaviour
 
     private IEnumerator BirdEatApple()
     {
+        DialogueUI.Instance.DialogueButton(false);
         yield return new WaitForSeconds(1f); // ✅ รอ 1 วินาทีก่อนที่นกจะเดินมากิน
 
         bird.GetComponent<InteractableBird>().SetBirdState("walking");
@@ -150,19 +161,23 @@ public class BirdMinigame : MonoBehaviour
 
     private IEnumerator FadeOutApple()
     {
-        float elapsedTime = 0f;
-        Color startColor = appleRenderer.color;
-        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f); // ✅ ค่อยๆ ทำให้โปร่งใส
+        SpriteRenderer appleSR = apple.GetComponent<SpriteRenderer>();
+        if (appleSR == null) yield break;
 
-        while (elapsedTime < appleFadeDuration)
+        float elapsedTime = 0f;
+        float fadeDuration = 1f;
+        while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
-            appleRenderer.color = Color.Lerp(startColor, endColor, elapsedTime / appleFadeDuration);
+            float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            appleSR.color = new Color(1f, 1f, 1f, alpha);
             yield return null;
         }
 
-        apple.SetActive(false); // ✅ ซ่อนแอปเปิ้ลเมื่อ Fade เสร็จ
+        apple.SetActive(false);
+        DialogueUI.Instance.DialogueButton(true);
     }
+
 
     private IEnumerator DropReward()
     {
@@ -197,5 +212,40 @@ public class BirdMinigame : MonoBehaviour
 
         // ✅ แจ้งว่า Minigame เสร็จแล้ว
         MinigameManager.Instance.CompleteMinigame();
+        DialogueUI.Instance.DialogueButton(true);
+    }
+
+    public IEnumerator ShakeTray()
+    {
+        if (isShakingTray) yield break;
+        isShakingTray = true;
+
+        float shakeAngle = 1f; // ✅ กำหนดองศาที่จะโยก
+        float shakeDuration = 0.5f; // ✅ ระยะเวลาโยก
+        float elapsedTime = 0f;
+        float direction = 1f; // ✅ ใช้กำหนดทิศทางการโยกซ้าย-ขวา
+
+        Quaternion originalRotation = appleTrayPosition.rotation;
+
+        while (elapsedTime < shakeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float t = Mathf.Sin(elapsedTime / shakeDuration * Mathf.PI); // ✅ ทำให้โยกไปกลับแบบ smooth
+            float angle = shakeAngle * t * direction;
+
+            appleTrayPosition.rotation = originalRotation * Quaternion.Euler(0, 0, angle);
+            yield return null;
+        }
+
+        appleTrayPosition.rotation = originalRotation;
+        isShakingTray = false;
+    }
+
+
+    public void ResetTray()
+    {
+        appleTrayPosition.position = initialTrayPosition; // ✅ รีเซ็ต Tray ไปที่ตำแหน่งเริ่มต้น
+        appleTrayPosition.rotation = initialTrayRotation; // ✅ รีเซ็ตการหมุนของ Tray
     }
 }

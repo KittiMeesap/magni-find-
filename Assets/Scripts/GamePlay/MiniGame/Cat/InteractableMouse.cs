@@ -42,6 +42,7 @@ public class InteractableMouse : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
         if (CatMinigame.Instance.IsMouseRunning) return; // ✅ ถ้าหนูกำลังวิ่ง ห้ามทำอะไร
         Collider2D col = GetComponent<Collider2D>();
         if (col != null && !col.enabled) return;

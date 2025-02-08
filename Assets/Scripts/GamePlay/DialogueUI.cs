@@ -9,6 +9,7 @@ public class DialogueUI : MonoBehaviour
     public GameObject dialoguePanel;
     public TMP_Text dialogueText;
     public Button closeButton;
+    public Button qButton;
     public Image CharImage;
     private GameObject currentItemObject;
     public bool IsOpenDialog = false;
@@ -55,6 +56,7 @@ public class DialogueUI : MonoBehaviour
 
     public void ShowDialogue(string message, GameObject itemObject = null)
     {
+        qButton.gameObject.SetActive(false);
         IsOpenDialog = true;
         dialogueText.text = message;
         dialoguePanel.SetActive(true);
@@ -103,6 +105,7 @@ public class DialogueUI : MonoBehaviour
 
     public void HideDialogue()
     {
+        qButton.gameObject.SetActive(true);
         IsOpenDialog = false;
         dialoguePanel.SetActive(false);
 
@@ -120,6 +123,12 @@ public class DialogueUI : MonoBehaviour
 
         itemImage.gameObject.SetActive(false);
         Camera.main.GetComponent<CameraController>().ExitMinigame();
+    }
+
+    public void DialogueButton(bool status)
+    {
+        closeButton.gameObject.SetActive(status);
+        //closeButton.interactable = status;
     }
 
 }

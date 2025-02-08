@@ -29,6 +29,9 @@ public class InteractObject : MonoBehaviour
     private float oscillationAmount = 0.05f;
     private Vector3 initialPosition;
 
+    [SerializeField] private AudioClip onMouseDown;
+    [SerializeField] private AudioClip onMouseOver;
+    private bool onMouseOverSoundPlay = false;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -50,18 +53,26 @@ public class InteractObject : MonoBehaviour
             }
         }
     }
+    
+
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
         if (MinigameManager.Instance.IsPlayingMinigame == false && ToolManager.Instance.CurrentMode == "Eye")
         {
-            if (!minigameDone) 
+            if (!onMouseOverSoundPlay)
+            {
+                SoundManager.Instance.PlaySFX(onMouseOver);
+                onMouseOverSoundPlay = true;
+            }
+
+            if (!minigameDone)
             {
                 if (spriteRenderer != null && highlightedSprite != null)
                 {
                     spriteRenderer.sprite = highlightedSprite; // ✅ เปลี่ยนเป็น Sprite ไฮไลท์
                 }
             }
-
             else if (minigameDone)
             {
                 if (spriteRenderer != null && highlightedSpriteDone != null)
@@ -69,7 +80,6 @@ public class InteractObject : MonoBehaviour
                     spriteRenderer.sprite = highlightedSpriteDone;
                 }
             }
-            
 
             if (!isHovering)
             {
@@ -83,9 +93,12 @@ public class InteractObject : MonoBehaviour
         }
     }
 
+
     private void OnMouseExit()
     {
+
         ResetObject();
+        onMouseOverSoundPlay = false;
     }
 
     private void ResetObject()
@@ -127,8 +140,11 @@ public class InteractObject : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Time.timeScale == 0f) return;
+
         if (MinigameManager.Instance.IsPlayingMinigame == false && ToolManager.Instance.CurrentMode == "Eye")
         {
+            SoundManager.Instance.PlaySFX(onMouseDown);
             ToolManager.Instance.SetToolMode("Hand");
 
             bool isMinigame = minigameType != MinigameType.Null;
@@ -182,6 +198,4 @@ public class InteractObject : MonoBehaviour
                 break;
         }
     }
-
-    public Transform centerPoint; // ✅ จุดศูนย์กลางที่ให้กล้องโฟกัส
 }

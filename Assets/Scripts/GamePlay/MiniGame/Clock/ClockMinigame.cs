@@ -171,6 +171,7 @@ public class ClockMinigame : MonoBehaviour
 
     private IEnumerator HandleMinigameCompletion()
     {
+        DialogueUI.Instance.DialogueButton(false);
         Debug.Log("Clock Minigame completed successfully! Starting animation...");
 
         Vector3 initialScale = clockTransform.localScale;
@@ -249,6 +250,8 @@ public class ClockMinigame : MonoBehaviour
 
         Debug.Log("Clock Minigame completion animation finished. Waiting for reward collection.");
         interactObject.CheckMinigameDone();
+        DialogueUI.Instance.DialogueButton(true);
+
     }
 
 

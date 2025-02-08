@@ -20,6 +20,8 @@ public class PhotoButton : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Time.timeScale == 0f) return;
+
         if (ToolManager.Instance.CurrentMode == "Hand")
         {
             bool canGoLeft = buttonType == ButtonType.Left && CameraMinigame.Instance.CurrentPhotoIndex > 0;
@@ -39,6 +41,7 @@ public class PhotoButton : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
         if (MinigameManager.Instance.IsPlayingMinigame && (ToolManager.Instance.CurrentMode == "Hand"))
         {
             bool isLeftActive = buttonType == ButtonType.Left && CameraMinigame.Instance.Photos.Count > 0 && CameraMinigame.Instance.CurrentPhotoIndex > 0;

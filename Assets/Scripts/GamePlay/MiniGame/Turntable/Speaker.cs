@@ -66,11 +66,14 @@ public class Speaker : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
         isMouseOver = true;
     }
 
     private void OnMouseExit()
     {
+        if (Time.timeScale == 0f) return;
+
         isMouseOver = false;
     }
 }

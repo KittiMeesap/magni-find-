@@ -167,20 +167,6 @@ public class MinigameManager : MonoBehaviour
         minigameObject.SetActive(true);
         pausedMinigames[minigameObject] = false; // ล้างสถานะพัก
         Debug.Log($"Minigame resumed: {minigameObject.name}");
-        
-        /*
-        if (minigameTransform != null)
-        {
-            if (useFadeIn)
-            {
-                StartCoroutine(FadeIn(minigameTransform));
-            }
-            else
-            {
-                StartCoroutine(ZoomIn(minigameTransform));
-            }
-        }
-        */
     }
 
     public void CompleteMinigame()

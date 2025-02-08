@@ -25,6 +25,8 @@ public class CollectibleItem : MonoBehaviour
 
     void OnMouseDown()
     {
+        if (Time.timeScale == 0f) return;
+
         if (ToolManager.Instance.CurrentMode == "Hand")
         {
             // ✅ **เช็คว่า sprite มี alpha เป็น 255 (1f) หรือไม่**
@@ -46,6 +48,7 @@ public class CollectibleItem : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
 
         if (MinigameManager.Instance.IsPlayingMinigame && (ToolManager.Instance.CurrentMode == "Hand"))
         {
@@ -65,6 +68,7 @@ public class CollectibleItem : MonoBehaviour
 
     private void OnMouseExit()
     {
+
         if (spriteRenderer != null)
         {
             spriteRenderer.sprite = defaultSprite;

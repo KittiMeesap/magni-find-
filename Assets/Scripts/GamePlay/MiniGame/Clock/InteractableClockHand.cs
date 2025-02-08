@@ -48,6 +48,8 @@ public class InteractableClockHand : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
+
         if (ClockMinigame.Instance != null && ClockMinigame.Instance.CompletedParts >= ClockMinigame.Instance.TotalParts)
         {
             return;
@@ -71,6 +73,10 @@ public class InteractableClockHand : MonoBehaviour
                     HandleRightClick();
                 }
             }
+        }
+        else
+        {
+                spriteRenderer.sprite = defaultSprite;
         }
     }
 

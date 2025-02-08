@@ -73,6 +73,7 @@ public class InteractableCat : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
         if (col == null || !col.enabled) return;
 
         isMouseOver = true; // ✅ เมาส์อยู่บนตัวแมวแล้ว
@@ -98,6 +99,7 @@ public class InteractableCat : MonoBehaviour
 
     private void OnMouseExit()
     {
+
         if (col == null || !col.enabled) return;
 
         isMouseOver = false; // ✅ เมาส์ออกจากตัวแมวแล้ว หยุดให้กดเปลี่ยนได้
@@ -110,7 +112,9 @@ public class InteractableCat : MonoBehaviour
 
     private IEnumerator FadeChangeSprite(Sprite newSprite, Action onComplete)
     {
+        
         if (spriteRenderer == null) yield break;
+        DialogueUI.Instance.DialogueButton(false);
 
         float elapsedTime = 0f;
         Color startColor = spriteRenderer.color;

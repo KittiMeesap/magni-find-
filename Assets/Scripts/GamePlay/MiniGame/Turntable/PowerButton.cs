@@ -14,6 +14,8 @@ public class PowerButton : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Time.timeScale == 0f) return;
+
         if (ToolManager.Instance.CurrentMode != "Hand") return; // ✅ ต้องอยู่ในโหมด Hand เท่านั้น
         if (!TurntableMinigame.Instance.CanPressPower) return; // ✅ ถ้าไม่มีแผ่นเสียงห้ามเปิด
 

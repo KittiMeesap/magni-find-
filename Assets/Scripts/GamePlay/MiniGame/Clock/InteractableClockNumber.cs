@@ -59,6 +59,8 @@ public class InteractableClockNumber : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Time.timeScale == 0f) return;
+
         if (ToolManager.Instance.CurrentMode == "Hand" && !isSnapped)
         {
             isDragging = true;
@@ -109,6 +111,8 @@ public class InteractableClockNumber : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
+
         if (ToolManager.Instance.CurrentMode == "Magnifier" && !isSnapped && !isScaling)
         {
             if (Input.GetMouseButtonDown(0))
@@ -225,6 +229,7 @@ public class InteractableClockNumber : MonoBehaviour
 
     private void OnMouseExit()
     {
+
         if (selectedNumber == this)
         {
             selectedNumber = null;

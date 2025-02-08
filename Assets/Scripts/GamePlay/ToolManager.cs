@@ -13,9 +13,6 @@ public class ToolManager : MonoBehaviour
     private GameObject selectedObject;
     private CollectibleItem[] collectibleItems;
 
-    public Material defaultMaterial;
-    public Material outlineMaterial;
-
     public float zoomAmount = 0.1f;
 
     private void Awake()
@@ -39,113 +36,7 @@ public class ToolManager : MonoBehaviour
         {
                 ToggleToolMode();
         }
-
-        /*if (CurrentMode == "Hand" && Input.GetMouseButtonDown(0))
-        {
-            if (!MinigameManager.Instance.IsPlayingMinigame)
-            {
-                SelectObject();
-            }
-        }
-
-        if (CurrentMode == "Eye")
-        {
-            DialogueSystem dialogueSystem = GetComponent<DialogueSystem>();
-            if (dialogueSystem != null)
-            {
-                dialogueSystem.ShowDialogue();
-            }
-            /*GameObject targetObject = Instance.GetSelectedObject();
-
-            if (targetObject != null)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    DialogueSystem dialogueSystem = targetObject.GetComponent<DialogueSystem>();
-                    if (dialogueSystem != null)
-                    {
-                        dialogueSystem.ShowDialogue();
-                    }
-                    else
-                    {
-                        Debug.LogWarning("No DialogueSystem attached to the selected object.");
-                    }
-
-
-                    //MiniGame Start
-                    InteractableObject interactableObject = targetObject.GetComponent<InteractableObject>();
-
-                    if (interactableObject.IsMiniGameObject == true)
-                    {
-                        SetToolMode("Hand");
-
-                        if (selectedObject)
-                        {
-                            ApplyMaterial(selectedObject, defaultMaterial); // ÃÕà«çµ Material à»ç¹¤èÒàÃÔèÁµé¹
-                            selectedObject = null; // Â¡àÅÔ¡¡ÒÃàÅ×Í¡
-                            Debug.Log("Deselected the object.");
-                        }
-
-                        if (interactableObject.minigameNumber == 1)
-                        {
-                            VaseMinigame.Instance.StartMinigame(3);
-                        }
-                        else if (interactableObject.minigameNumber == 2)
-                        {
-                            ClockMinigame.Instance.StartMinigame();
-                        }
-                    }
-                }
-            }
-        }
-
-        if (CurrentMode == "Magnifier")
-        {
-            
-            GameObject targetObject = Instance.GetSelectedObject();
-
-            if (targetObject != null)
-            {
-                DialogueSystem dialogueSystem = targetObject.GetComponent<DialogueSystem>();
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (dialogueSystem != null && dialogueSystem.hasMagnifierMessage)
-                    {
-                        dialogueSystem.ShowDialogue();
-                    }
-                    else
-                    {
-                        ModifyObjectScale(targetObject, zoomAmount);
-                    }
-                }
-                else if (Input.GetMouseButtonDown(1))
-                {
-                    if (dialogueSystem != null && dialogueSystem.hasMagnifierMessage)
-                    {
-                        dialogueSystem.ShowDialogue();
-                    }
-                    else
-                    {
-                        ModifyObjectScale(targetObject, -zoomAmount);
-                    }
-                }
-            }
-        }*/
     }
-
-    /*void ModifyObjectScale(GameObject target, float scaleChange)
-    {
-        InteractableObject breakable = target.GetComponent<InteractableObject>();
-        if (breakable != null)
-        {
-            breakable.ModifyScale(scaleChange);
-        }
-        else
-        {
-            Debug.LogWarning("Selected object is not breakable.");
-        }
-    }*/
 
     public void Initialize(CollectibleItem[] items)
     {
@@ -244,24 +135,14 @@ public class ToolManager : MonoBehaviour
 
             if (clickedObject.CompareTag("Object"))
             {
-                // ¶éÒ¤ÅÔ¡ÇÑµ¶Ø·ÕèàÅ×Í¡ÍÂÙè ãËéÂ¡àÅÔ¡¡ÒÃàÅ×Í¡
                 if (selectedObject == clickedObject)
                 {
-                    ApplyMaterial(selectedObject, defaultMaterial); // ÃÕà«çµ Material à»ç¹¤èÒàÃÔèÁµé¹
-                    selectedObject = null; // Â¡àÅÔ¡¡ÒÃàÅ×Í¡
+                    selectedObject = null;
                     Debug.Log("Deselected the object.");
                 }
                 else
                 {
-                    // ¶éÒÁÕÇÑµ¶ØÍ×è¹¶Ù¡àÅ×Í¡ÍÂÙè ãËéÃÕà«çµ¡èÍ¹
-                    if (selectedObject != null)
-                    {
-                        ApplyMaterial(selectedObject, defaultMaterial); // ÃÕà«çµ Material à»ç¹¤èÒàÃÔèÁµé¹
-                    }
-
-                    // àÅ×Í¡ÇÑµ¶ØãËÁè
                     selectedObject = clickedObject;
-                    ApplyMaterial(selectedObject, outlineMaterial); // ãÊè Material áºº Outline
                     Debug.Log($"Selected: {selectedObject.name}");
                 }
             }
@@ -269,15 +150,6 @@ public class ToolManager : MonoBehaviour
         else
         {
             Debug.LogWarning("No object selected!");
-        }
-    }
-
-    private void ApplyMaterial(GameObject obj, Material material)
-    {
-        SpriteRenderer sr = obj.GetComponent<SpriteRenderer>();
-        if (sr != null)
-        {
-            sr.material = material; // à»ÅÕèÂ¹ Material ¢Í§ SpriteRenderer
         }
     }
 

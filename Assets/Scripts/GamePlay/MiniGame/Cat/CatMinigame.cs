@@ -69,6 +69,7 @@ public class CatMinigame : MonoBehaviour
 
     public IEnumerator FadeInMouse()
     {
+        DialogueUI.Instance.DialogueButton(false);
         mouse.SetActive(true);
         SpriteRenderer mouseSR = mouse.GetComponent<SpriteRenderer>();
         float elapsedTime = 0f;
@@ -81,6 +82,7 @@ public class CatMinigame : MonoBehaviour
             mouseSR.color = new Color(1f, 1f, 1f, alpha);
             yield return null;
         }
+        DialogueUI.Instance.DialogueButton(true);
     }
 
     public void CheckMouseSize()
@@ -98,6 +100,7 @@ public class CatMinigame : MonoBehaviour
 
     private IEnumerator PrepareMouseToRun()
     {
+        DialogueUI.Instance.DialogueButton(false);
         yield return new WaitForSeconds(0.5f);
 
         // ✅ เปลี่ยน Sprite ของหนูเป็นที่ตั้งไว้
@@ -213,6 +216,10 @@ public class CatMinigame : MonoBehaviour
             rewardRenderer.color = Color.Lerp(startColor, targetColor, elapsedTime / fadeDuration);
             yield return null;
         }
+
+        DialogueUI.Instance.DialogueButton(true);
+
+
     }
 
     private Vector3 BezierCurve(Vector3 p0, Vector3 p1, Vector3 p2, float t)

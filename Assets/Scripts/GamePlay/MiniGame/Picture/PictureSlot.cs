@@ -28,6 +28,8 @@ public class PictureSlot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Time.timeScale == 0f) return;
+
         if (PictureMinigame.Instance.PictureMinigameDone) return;
         if (isSliding) return;
         isDragging = true;

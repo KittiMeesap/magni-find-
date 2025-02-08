@@ -33,6 +33,8 @@ public class InteractableOldBattery : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Time.timeScale == 0f) return;
+
         if (ToolManager.Instance.CurrentMode == "Hand")
         {
             isDragging = true;
@@ -57,6 +59,7 @@ public class InteractableOldBattery : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
         // ✅ เพิ่มเงื่อนไข: ถ้าไม่ได้ลากอยู่ ค่อยเปลี่ยนเป็น highlightedSprite
         if (!isDragging && MinigameManager.Instance.IsPlayingMinigame && (ToolManager.Instance.CurrentMode == "Hand") && CameraMinigame.Instance.OldBatteryRemoved == false) 
         {

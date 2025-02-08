@@ -141,7 +141,7 @@ public class CameraController : MonoBehaviour
         if (isMinigameActive) return;
         isMinigameActive = true;
 
-        transform.position = new Vector3(0, 0, -10);
+        transform.position = new Vector3(0, 15, -10);
         mainCamera.orthographicSize = defaultCameraSize;
     }
 

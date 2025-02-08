@@ -8,6 +8,8 @@ public class VinylDisc : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (Time.timeScale == 0f) return;
+
         if (!TurntableMinigame.Instance.CanInsertVinyl) return; // ✅ ป้องกันลากเข้าไปซ้ำ
         isDragging = true;
         offset = transform.position - GetMouseWorldPos();

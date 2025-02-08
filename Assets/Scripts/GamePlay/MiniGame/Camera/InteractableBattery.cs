@@ -89,6 +89,7 @@ public class InteractableBattery : MonoBehaviour
 
     private IEnumerator MoveToTarget()
     {
+        DialogueUI.Instance.DialogueButton(false);
         isMoving = true;
         Vector3 startPos = transform.position;
         float elapsedTime = 0f;
@@ -110,6 +111,7 @@ public class InteractableBattery : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (Time.timeScale == 0f) return;
         if (MinigameManager.Instance.IsPlayingMinigame && (ToolManager.Instance.CurrentMode == "Magnifier") && !isMoving && CameraMinigame.Instance.HasBatteryInserted == false)
         {
             if (spriteRenderer != null && highlightedSprite != null)
@@ -128,6 +130,7 @@ public class InteractableBattery : MonoBehaviour
 
     private void OnMouseExit()
     {
+
         if (spriteRenderer != null)
         {
             spriteRenderer.sprite = defaultSprite;

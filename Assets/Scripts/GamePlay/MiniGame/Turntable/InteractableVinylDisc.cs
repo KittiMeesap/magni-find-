@@ -28,6 +28,7 @@ public class VinylDisc : MonoBehaviour
         if (Time.timeScale == 0f) return;
 
         if (!TurntableMinigame.Instance.CanInsertVinyl) return; // ✅ ป้องกันลากเข้าไปซ้ำ
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Hand);
         isDragging = true;
         offset = transform.position - GetMouseWorldPos();
     }

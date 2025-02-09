@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Speaker : MonoBehaviour
 {
@@ -7,16 +8,18 @@ public class Speaker : MonoBehaviour
     [SerializeField] private Vector3 minScale = new Vector3(0.8f, 0.8f, 0.8f);
     [SerializeField] private Vector3 maxScale = new Vector3(1.2f, 1.2f, 1.2f);
     [SerializeField] private GameObject soundSymbol;
+    [SerializeField] private VinylDisc vinylDisc;
 
     private int currentLevel = 1;
     private int minLevel = 1;
     private int maxLevel = 5;
     private bool canScale = false;
-    private bool isMouseOver = false; // ✅ ตรวจสอบว่าเมาส์อยู่บนลำโพงหรือไม่
+    private bool isMouseOver = false;
+    private bool isScaling = false; // ✅ ป้องกันการกดซ้ำระหว่างย่อขยาย
 
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite defaultSprite;       // ✅ Sprite ปกติ
-    [SerializeField] private Sprite highlightedSprite;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
+    [SerializeField] private Sprite defaultSprite;
+    [SerializeField] private Sprite highlightedSprite;
 
     private void Awake()
     {
@@ -39,39 +42,50 @@ public class Speaker : MonoBehaviour
 
     private void Update()
     {
-        if (!canScale || !isMouseOver) return; // ✅ ต้องเปิดระบบ และเมาส์อยู่บน Object
+        if (!canScale || !isMouseOver || isScaling) return; // ✅ ป้องกันการเปลี่ยนขนาดซ้ำซ้อน
 
-        if (ToolManager.Instance.CurrentMode == "Magnifier") // ✅ ต้องเป็นโหมด Magnifier
+        if (ToolManager.Instance.CurrentMode == "Magnifier")
         {
-            if (Input.GetMouseButtonDown(0)) // ✅ คลิกซ้าย -> ขยาย
+            if (Input.GetMouseButtonDown(0))
             {
                 SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Upsize);
-                ChangeSpeakerSize(1);
+                StartCoroutine(SmoothScaleCoroutine(1));
             }
-            else if (Input.GetMouseButtonDown(1)) // ✅ คลิกขวา -> ย่อ
+            else if (Input.GetMouseButtonDown(1))
             {
                 SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Smallsize);
-                ChangeSpeakerSize(-1);
+                StartCoroutine(SmoothScaleCoroutine(-1));
             }
         }
     }
 
-    private void ChangeSpeakerSize(int change)
+    private IEnumerator SmoothScaleCoroutine(int change)
     {
-        currentLevel = Mathf.Clamp(currentLevel + change, minLevel, maxLevel);
+        isScaling = true;
+        int targetLevel = Mathf.Clamp(currentLevel + change, minLevel, maxLevel);
+
+        Vector3 startScale = transform.localScale;
+        Vector3 targetScale = Vector3.Lerp(minScale, maxScale, (float)(targetLevel - minLevel) / (maxLevel - minLevel));
+
+        float duration = 0.3f; // ✅ ใช้เวลา 0.3 วินาทีในการย่อขยาย
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
+
+            // ✅ ปรับระดับเสียงของมินิเกมแบบ Smooth
+            float volume = Mathf.Lerp(0f, 1f, (float)(targetLevel - minLevel) / (maxLevel - minLevel));
+            SoundManager.Instance.SetMinigameVolume(volume);
+
+            yield return null;
+        }
+
+        transform.localScale = targetScale;
+        currentLevel = targetLevel;
+        isScaling = false;
         UpdateSpeakerSize();
-    }
-
-    private void UpdateSpeakerSize()
-    {
-        float t = (float)(currentLevel - minLevel) / (maxLevel - minLevel);
-        transform.localScale = Vector3.Lerp(minScale, maxScale, t);
-
-        // ✅ ปรับ Alpha ของ Sound Symbol ตามระดับเสียง
-        float alpha = Mathf.Lerp(0f, 1f, t);
-        soundSymbol.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
-
-        SoundManager.Instance.SetMinigameVolume(alpha);
     }
 
     public void EnableScaling(bool enable)
@@ -79,7 +93,7 @@ public class Speaker : MonoBehaviour
         canScale = enable;
     }
 
-    public int CurrentLevel { get { return currentLevel; } } // ✅ เช็คระดับเสียงปัจจุบัน
+    public int CurrentLevel { get { return currentLevel; } }
 
     public void SetInitialVolume(int level)
     {
@@ -87,7 +101,6 @@ public class Speaker : MonoBehaviour
         UpdateSpeakerSize();
     }
 
-    // ✅ ฟังก์ชันช่วยคำนวณระดับเสียงตามระดับของลำโพง
     public float GetVolumeMultiplier()
     {
         return (float)(currentLevel - minLevel) / (maxLevel - minLevel);
@@ -126,7 +139,6 @@ public class Speaker : MonoBehaviour
     private void OnMouseExit()
     {
         if (Time.timeScale == 0f) return;
-
         isMouseOver = false;
         if (spriteRenderer != null && defaultSprite != null)
         {
@@ -134,4 +146,16 @@ public class Speaker : MonoBehaviour
         }
     }
 
+
+    private void UpdateSpeakerSize()
+    {
+        float t = (float)(currentLevel - minLevel) / (maxLevel - minLevel);
+        //transform.localScale = Vector3.Lerp(minScale, maxScale, t);
+
+        // ✅ ปรับ Alpha ของ Sound Symbol ตามระดับเสียง
+        float alpha = Mathf.Lerp(0f, 1f, t);
+        soundSymbol.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
+
+        //SoundManager.Instance.SetMinigameVolume(alpha);
+    }
 }

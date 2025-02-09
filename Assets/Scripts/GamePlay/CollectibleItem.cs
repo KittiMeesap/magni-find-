@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 public class CollectibleItem : MonoBehaviour
 {
@@ -41,7 +42,10 @@ public class CollectibleItem : MonoBehaviour
                 progressManager.MarkAsFound(itemIndex);
                 Debug.Log($"Item {name} collected!");
                 Destroy(gameObject);
-                MinigameManager.Instance.OnRewardCollected();
+                if (MinigameManager.Instance.IsPlayingMinigame)
+                {
+                    MinigameManager.Instance.OnRewardCollected();
+                }
             }
         }
     }
@@ -50,7 +54,7 @@ public class CollectibleItem : MonoBehaviour
     {
         if (Time.timeScale == 0f) return;
 
-        if (MinigameManager.Instance.IsPlayingMinigame && (ToolManager.Instance.CurrentMode == "Hand"))
+        if ((ToolManager.Instance.CurrentMode == "Hand"))
         {
             if (spriteRenderer != null && highlightedSprite != null)
             {

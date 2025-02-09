@@ -75,7 +75,6 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (Time.timeScale == 0f) return;
 
         if (!isSnapped)
         {

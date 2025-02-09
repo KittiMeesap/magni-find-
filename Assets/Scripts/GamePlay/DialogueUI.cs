@@ -49,6 +49,8 @@ public class DialogueUI : MonoBehaviour
     {
         if (dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Space))
         {
+            if (!closeButton.gameObject.activeSelf) return;
+            //if (!closeButton.isActiveAndEnabled) return;
             HideDialogue();
         }
     }

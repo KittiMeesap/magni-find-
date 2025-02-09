@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class BirdMinigame : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class BirdMinigame : MonoBehaviour
 
     private Vector3 initialTrayPosition;
     private Quaternion initialTrayRotation;
+
+    [SerializeField] private GameObject ring;
 
     private void Awake()
     {
@@ -213,6 +216,7 @@ public class BirdMinigame : MonoBehaviour
         // ✅ แจ้งว่า Minigame เสร็จแล้ว
         MinigameManager.Instance.CompleteMinigame();
         DialogueUI.Instance.DialogueButton(true);
+        ring.SetActive(true);
     }
 
     public IEnumerator ShakeTray()

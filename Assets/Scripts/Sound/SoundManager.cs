@@ -5,8 +5,15 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource bgmSource; // ✅ สำหรับเล่น BGM
+    [SerializeField] private AudioSource mainBGMSource; // ✅ สำหรับเล่น BGM
     [SerializeField] private AudioSource sfxSource; // ✅ สำหรับเล่น SFX (Effect)
+    [SerializeField] private AudioSource minigameBGMSource;
+
+
+    [Header("Audio Clip")]
+    public AudioClip sfx_Hand;
+    public AudioClip sfx_Upsize;
+    public AudioClip sfx_Smallsize;
 
     private float bgmVolume = 1f;
     private float sfxVolume = 1f;
@@ -30,33 +37,33 @@ public class SoundManager : MonoBehaviour
     public void PlayBGM(AudioClip bgmClip = null)
     {
         if (bgmClip == null) bgmClip = GameController.Instance.DefaultBGM;
-        if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return; // ✅ ไม่เล่นซ้ำถ้าเล่นอยู่แล้ว
+        if (mainBGMSource.clip == bgmClip && mainBGMSource.isPlaying) return; // ✅ ไม่เล่นซ้ำถ้าเล่นอยู่แล้ว
 
-        bgmSource.clip = bgmClip;
-        bgmSource.loop = true; // ✅ ให้เล่นวนซ้ำไปเรื่อยๆ
-        bgmSource.volume = bgmVolume;
-        bgmSource.Play();
+        mainBGMSource.clip = bgmClip;
+        mainBGMSource.loop = true; // ✅ ให้เล่นวนซ้ำไปเรื่อยๆ
+        mainBGMSource.volume = bgmVolume;
+        mainBGMSource.Play();
     }
 
     public void PauseBGM()
     {
-        if (bgmSource.isPlaying)
+        if (mainBGMSource.isPlaying)
         {
-            bgmSource.Pause(); // ✅ หยุดเพลงชั่วคราว
+            mainBGMSource.Pause(); // ✅ หยุดเพลงชั่วคราว
         }
     }
 
     public void ResumeBGM()
     {
-        if (!bgmSource.isPlaying)
+        if (!mainBGMSource.isPlaying)
         {
-            bgmSource.UnPause(); // ✅ เล่นต่อจากที่หยุดไว้
+            mainBGMSource.UnPause(); // ✅ เล่นต่อจากที่หยุดไว้
         }
     }
 
     public void StopBGM()
     {
-        bgmSource.Stop(); // ✅ หยุดและรีเซ็ตไปตำแหน่งเริ่มต้น
+        mainBGMSource.Stop(); // ✅ หยุดและรีเซ็ตไปตำแหน่งเริ่มต้น
     }
 
     public void PlaySFX(AudioClip clip)
@@ -75,7 +82,7 @@ public class SoundManager : MonoBehaviour
     public void SetBGMVolume(float volume)
     {
         bgmVolume = Mathf.Clamp01(volume);
-        bgmSource.volume = bgmVolume;
+        mainBGMSource.volume = bgmVolume;
         PlayerPrefs.SetFloat("BGMVolume", bgmVolume);
     }
 
@@ -93,7 +100,36 @@ public class SoundManager : MonoBehaviour
     {
         bgmVolume = PlayerPrefs.GetFloat("BGMVolume", 1f);
         sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);
-        bgmSource.volume = bgmVolume;
+        mainBGMSource.volume = bgmVolume;
         sfxSource.volume = sfxVolume;
+    }
+
+    public void PlayMinigameBGM(AudioClip minigameClip ,float volumeMultiplier = 1f)
+    {
+        if (mainBGMSource.isPlaying)
+        {
+            bgmVolume = mainBGMSource.volume;
+            mainBGMSource.Pause();
+        }
+
+        minigameBGMSource.clip = minigameClip;
+        minigameBGMSource.volume = volumeMultiplier; // เริ่มต้นที่เสียงดังสุด
+        minigameBGMSource.loop = true;
+        minigameBGMSource.Play();
+    }
+
+    public void StopMinigameBGM()
+    {
+        minigameBGMSource.Stop();
+        if (mainBGMSource.clip != null)
+        {
+            mainBGMSource.volume = bgmVolume;
+            mainBGMSource.UnPause();
+        }
+    }
+
+    public void SetMinigameVolume(float volume)
+    {
+        minigameBGMSource.volume = Mathf.Clamp(volume, 0f, 1f);
     }
 }

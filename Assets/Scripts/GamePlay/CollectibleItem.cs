@@ -39,6 +39,7 @@ public class CollectibleItem : MonoBehaviour
 
             if (progressManager != null)
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Hand);
                 progressManager.MarkAsFound(itemIndex);
                 Debug.Log($"Item {name} collected!");
                 Destroy(gameObject);

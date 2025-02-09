@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.VersionControl;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -133,4 +134,9 @@ public class DialogueUI : MonoBehaviour
         //closeButton.interactable = status;
     }
 
+    public void DialogueUpdate(string message)
+    {
+        dialogueText.text = message;
+    }
 }
+

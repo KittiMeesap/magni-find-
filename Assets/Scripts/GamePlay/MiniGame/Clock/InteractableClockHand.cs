@@ -66,10 +66,12 @@ public class InteractableClockHand : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
+                    SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Hand);
                     HandleLeftClick();
                 }
                 else if (Input.GetMouseButtonDown(1))
                 {
+                    SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Hand);
                     HandleRightClick();
                 }
             }

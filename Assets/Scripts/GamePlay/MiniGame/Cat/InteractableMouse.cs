@@ -31,10 +31,12 @@ public class InteractableMouse : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Upsize);
                 StartSmoothScale(0.1f);
             }
             else if (Input.GetMouseButtonDown(1))
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Smallsize);
                 StartSmoothScale(-0.1f);
             }
         }

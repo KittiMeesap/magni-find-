@@ -1,9 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ProgressManager : MonoBehaviour
 {
-    public Image[] questIcons;
+    public Image[] questIcons; // ✅ ไอคอนของภารกิจ
+    public Sprite[] defaultSprites; // ✅ ภาพตอนยังไม่เจอ
+    public Sprite[] foundSprites; // ✅ ภาพตอนเจอแล้ว
+
     private bool[] foundItems;
     public GameObject winScreen;
 
@@ -50,7 +53,8 @@ public class ProgressManager : MonoBehaviour
     {
         for (int i = 0; i < questIcons.Length; i++)
         {
-            questIcons[i].color = foundItems[i] ? Color.white : Color.black;
+            // ✅ ถ้ามีไอเทมให้เปลี่ยนเป็น foundSprites
+            questIcons[i].sprite = foundItems[i] ? foundSprites[i] : defaultSprites[i];
         }
     }
 

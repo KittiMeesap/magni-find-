@@ -63,20 +63,6 @@ public class MinigameManager : MonoBehaviour
             currentMinigame.SetActive(true);
         }
 
-        /*
-        if (minigameTransform != null)
-        {
-            if (useFadeIn)
-            {
-                StartCoroutine(FadeIn(minigameTransform));
-            }
-            else
-            {
-                StartCoroutine(ZoomIn(minigameTransform));
-            }
-        }
-        */
-
         Debug.Log("Minigame started!");
     }
 

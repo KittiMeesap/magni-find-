@@ -43,10 +43,12 @@ public class InteractableBattery : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Upsize);
             StartCoroutine(SmoothScale(0.1f));
         }
         else if (Input.GetMouseButtonDown(1))
         {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Smallsize);
             StartCoroutine(SmoothScale(-0.1f));
         }
     }

@@ -63,6 +63,7 @@ public class InteractableClockNumber : MonoBehaviour
 
         if (ToolManager.Instance.CurrentMode == "Hand" && !isSnapped)
         {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Hand);
             isDragging = true;
             selectedNumber = this;
 
@@ -117,10 +118,12 @@ public class InteractableClockNumber : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Upsize);
                 StartCoroutine(ModifyScaleSmoothly(0.1f)); // ✅ ทำให้สมูท
             }
             else if (Input.GetMouseButtonDown(1))
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Smallsize);
                 StartCoroutine(ModifyScaleSmoothly(-0.1f)); // ✅ ทำให้สมูท
             }
         }

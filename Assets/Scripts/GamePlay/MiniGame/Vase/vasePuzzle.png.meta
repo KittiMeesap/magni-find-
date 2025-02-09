@@ -149,6 +149,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -161,7 +174,7 @@ TextureImporter:
         width: 617
         height: 272
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +191,12 @@ TextureImporter:
       name: vasePuzzle_1
       rect:
         serializedVersion: 2
-        x: 1633
-        y: 14
-        width: 1090
-        height: 2136
-      alignment: 9
-      pivot: {x: 0.5, y: 0.36}
+        x: 1032
+        y: 1907
+        width: 26
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,12 +213,12 @@ TextureImporter:
       name: vasePuzzle_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 1389
-        width: 640
-        height: 300
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1633
+        y: 13
+        width: 1090
+        height: 2138
+      alignment: 9
+      pivot: {x: 0.5, y: 0.36}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -222,12 +235,12 @@ TextureImporter:
       name: vasePuzzle_3
       rect:
         serializedVersion: 2
-        x: 84
-        y: 981
-        width: 620
-        height: 274
+        x: 64
+        y: 1388
+        width: 640
+        height: 301
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -244,12 +257,12 @@ TextureImporter:
       name: vasePuzzle_4
       rect:
         serializedVersion: 2
-        x: 57
-        y: 593
-        width: 306
-        height: 360
+        x: 785
+        y: 1221
+        width: 822
+        height: 684
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -266,12 +279,12 @@ TextureImporter:
       name: vasePuzzle_5
       rect:
         serializedVersion: 2
-        x: 534
-        y: 589
-        width: 320
-        height: 342
+        x: 84
+        y: 981
+        width: 620
+        height: 273
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -288,12 +301,12 @@ TextureImporter:
       name: vasePuzzle_6
       rect:
         serializedVersion: 2
-        x: 983
-        y: 584
-        width: 484
-        height: 295
+        x: 56
+        y: 593
+        width: 308
+        height: 360
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -310,12 +323,12 @@ TextureImporter:
       name: vasePuzzle_7
       rect:
         serializedVersion: 2
-        x: 37
-        y: 129
-        width: 346
-        height: 399
+        x: 535
+        y: 589
+        width: 319
+        height: 342
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -332,12 +345,12 @@ TextureImporter:
       name: vasePuzzle_8
       rect:
         serializedVersion: 2
-        x: 515
-        y: 125
-        width: 359
-        height: 381
+        x: 982
+        y: 586
+        width: 484
+        height: 293
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -354,12 +367,12 @@ TextureImporter:
       name: vasePuzzle_9
       rect:
         serializedVersion: 2
-        x: 963
-        y: 122
-        width: 522
-        height: 333
+        x: 37
+        y: 129
+        width: 347
+        height: 400
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -368,6 +381,50 @@ TextureImporter:
       bones: []
       spriteID: cee04bc7eb20a2440800000000000000
       internalID: 4911741360760164076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vasePuzzle_10
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 124
+        width: 360
+        height: 383
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e7b672c69b64464395b288cfb69764d
+      internalID: -791629770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vasePuzzle_11
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 122
+        width: 522
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad4872968a351a94faa044ba308bdbf1
+      internalID: 1448291770
       vertices: []
       indices: 
       edges: []
@@ -388,6 +445,8 @@ TextureImporter:
     nameFileIdTable:
       vasePuzzle_0: -4220485133833863943
       vasePuzzle_1: -9200008273795036207
+      vasePuzzle_10: -791629770
+      vasePuzzle_11: 1448291770
       vasePuzzle_2: -7996973162343522046
       vasePuzzle_3: -1986074867699153982
       vasePuzzle_4: -482089095478507760

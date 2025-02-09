@@ -8,6 +8,7 @@ public class PhotoButton : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Sprite defaultSprite;
     [SerializeField] private Sprite highlightedSprite;
+    [SerializeField] private AudioClip cameraclip;
 
     private void Awake()
     {
@@ -26,14 +27,15 @@ public class PhotoButton : MonoBehaviour
         {
             bool canGoLeft = buttonType == ButtonType.Left && CameraMinigame.Instance.CurrentPhotoIndex > 0;
             bool canGoRight = buttonType == ButtonType.Right && CameraMinigame.Instance.CurrentPhotoIndex < CameraMinigame.Instance.Photos.Count - 1;
-
             if (canGoLeft)
             {
                 CameraMinigame.Instance.PreviousPhoto();
+                SoundManager.Instance.PlaySFX(cameraclip);
             }
             else if (canGoRight)
             {
                 CameraMinigame.Instance.NextPhoto();
+                SoundManager.Instance.PlaySFX(cameraclip);
             }
         }
     }

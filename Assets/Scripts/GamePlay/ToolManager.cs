@@ -100,27 +100,7 @@ public class ToolManager : MonoBehaviour
                     SetToolMode("Eye");
                 }
             }
-
-            else if (SceneManager.GetActiveScene().name == "MainMenu")
-            {
-                if (CurrentMode == "Hand")
-                {
-                    SetToolMode("Magnifier");
-                }
-                else
-                {
-                    SetToolMode("Hand");
-                }
-                return;
-            }
-
-            else if (CurrentMode != "Eye")
-            {
-                SetToolMode("Eye");
-            }
         }
-        
-        
     }
 
     

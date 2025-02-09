@@ -38,6 +38,7 @@ public class InteractableCat : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0)) // ✅ คลิกซ้าย -> แมวอ้วน
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Upsize);
                 Debug.Log("คลิกซ้าย -> เปลี่ยนเป็นแมวอ้วน");
 
                 StartCoroutine(FadeChangeSprite(fatCatSprite, () =>
@@ -50,6 +51,7 @@ public class InteractableCat : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(1)) // ✅ คลิกขวา -> แมวผอม
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Smallsize);
                 Debug.Log("คลิกขวา -> เปลี่ยนเป็นแมวผอม");
                 StartCoroutine(FadeChangeSprite(thinCatSprite, () =>
                 {

@@ -31,11 +31,13 @@ public class InteractableApple : MonoBehaviour
             // ✅ คลิกซ้าย -> ขยาย
             if (Input.GetMouseButtonDown(0))
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Upsize);
                 ModifyScale(scaleStep);
             }
             // ✅ คลิกขวา -> ลดขนาด
             else if (Input.GetMouseButtonDown(1))
             {
+                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Smallsize);
                 ModifyScale(-scaleStep);
             }
         }
@@ -54,6 +56,7 @@ public class InteractableApple : MonoBehaviour
         // ✅ เริ่มการลาก ถ้าอยู่ในโหมด Hand และยังไม่ถูกวาง
         if (ToolManager.Instance.CurrentMode == "Hand" && BirdMinigame.Instance.CanPickUpApple && !isPlacedInTray)
         {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Hand);
             isDragging = true;
             spriteRenderer.sortingOrder = originalSortingOrder + 3;
         }

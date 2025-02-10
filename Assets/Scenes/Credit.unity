@@ -396,6 +396,12 @@ MonoBehaviour:
   mainBGMSource: {fileID: 505401063}
   sfxSource: {fileID: 1238667018}
   minigameBGMSource: {fileID: 619736636}
+  mainmenuBGM: {fileID: 0}
+  gameplayBGM: {fileID: 0}
+  storyBGM: {fileID: 0}
+  dialogueBGM: {fileID: 0}
+  creditBGM: {fileID: 0}
+  defaultBGM: {fileID: 8300000, guid: c9123a34250fb0a41808667d49081672, type: 3}
   sfx_Hand: {fileID: 8300000, guid: 2a884b17c5a2a574292b96cbd56267ec, type: 3}
   sfx_Upsize: {fileID: 8300000, guid: 87085f48e8c8cdb4d871df71bca5fefe, type: 3}
   sfx_Smallsize: {fileID: 8300000, guid: fc900041abad7c549b4b20d709773abf, type: 3}
@@ -1153,7 +1159,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainMenu
+          m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1957569175}

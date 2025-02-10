@@ -101,7 +101,7 @@ public class DialogueCutscene : MonoBehaviour
     {
         // ใช้ SceneManager เพื่อเปลี่ยนไปยังซีนเกม
         // กำหนดชื่อซีนของเกมที่คุณต้องการให้โหลด
-        SceneManager.LoadScene("Gameplay");  // "GameScene" คือตัวอย่างชื่อซีนที่คุณต้องการ
+        SceneTransitionManager.Instance.LoadScene("Gameplay");
     }
 
     // หากคุณต้องการให้การกดปุ่มถัดไปหลังจากไดอาล็อคหมดไปทำการเปลี่ยนซีน

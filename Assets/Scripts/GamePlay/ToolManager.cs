@@ -65,6 +65,8 @@ public class ToolManager : MonoBehaviour
 
     private void ToggleToolMode()
     {
+        
+
         //กันเปลี่ยนเครื่องมือตอนออกเข้ามินิเกม
         if (CameraController.Instance != null && CameraController.Instance.IsZooming) return;
 
@@ -101,6 +103,8 @@ public class ToolManager : MonoBehaviour
                 }
             }
         }
+
+        
     }
 
     

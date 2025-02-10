@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
+    private string lastSceneName;
+    private HashSet<string> continuousScenes = new HashSet<string> { "Win", "Credit" }; // ตั้งค่าชื่อ Scene ที่ต้องเล่นเพลงต่อกัน
+
 
     [Header("Audio Sources")]
     [SerializeField] private AudioSource mainBGMSource; // ✅ สำหรับเล่น BGM
@@ -11,6 +16,11 @@ public class SoundManager : MonoBehaviour
 
 
     [Header("Audio Clip")]
+    [SerializeField] private AudioClip mainmenuBGM;
+    [SerializeField] private AudioClip gameplayBGM;
+    [SerializeField] private AudioClip storyBGM;
+    [SerializeField] private AudioClip dialogueBGM;
+    [SerializeField] private AudioClip creditBGM;
     [SerializeField] private AudioClip defaultBGM;
     public AudioClip sfx_Hand;
     public AudioClip sfx_Upsize;
@@ -24,7 +34,8 @@ public class SoundManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // ✅ ทำให้ SoundManager คงอยู่ทุก Scene
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded; // ✅ ฟัง event เมื่อเปลี่ยน Scene
         }
         else
         {
@@ -32,9 +43,41 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        LoadVolumeSettings(); // ✅ โหลดค่าการตั้งค่าเสียงที่บันทึกไว้
-        PlaySFX(defaultBGM);
+        LoadVolumeSettings();
+        //PlayBGM(defaultBGM);
     }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (continuousScenes.Contains(scene.name) && continuousScenes.Contains(lastSceneName))
+        {
+            // ✅ ถ้า Scene ใหม่และ Scene ก่อนหน้าอยู่ในกลุ่มที่เล่นต่อกัน ให้ Resume BGM
+            ResumeBGM();
+        }
+        else
+        {
+            // ✅ เปลี่ยนเพลงใหม่สำหรับ Scene อื่น ๆ
+            PlayBGM(GetBGMForScene(scene.name));
+        }
+
+        lastSceneName = scene.name; // ✅ อัปเดต Scene ล่าสุด
+    }
+
+    private AudioClip GetBGMForScene(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "Tutorial": return mainmenuBGM;
+            case "Gameplay": return gameplayBGM;
+            case "Win": return creditBGM;
+            case "Credit": return creditBGM;
+            case "Story Scene": return storyBGM;
+            case "Dialogue": return dialogueBGM;
+            default: return defaultBGM;
+        }
+    }
+
+
 
     public void PlayBGM(AudioClip bgmClip = null)
     {

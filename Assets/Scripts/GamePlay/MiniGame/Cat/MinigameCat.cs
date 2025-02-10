@@ -32,6 +32,7 @@ public class CatMinigame : MonoBehaviour
     [SerializeField] private AudioClip sfx_Mouse;
     [SerializeField] private AudioClip sfx_MouseRun;
     [SerializeField] private AudioClip sfx_CatRun;
+    [SerializeField] private AudioClip sfx_Reward;
 
 
     private void Awake()
@@ -208,6 +209,7 @@ public class CatMinigame : MonoBehaviour
 
     private IEnumerator FadeInReward()
     {
+        SoundManager.Instance.PlaySFX(sfx_Reward);
         rewardItem.SetActive(true);
         SpriteRenderer rewardRenderer = rewardItem.GetComponent<SpriteRenderer>();
 

@@ -235,7 +235,7 @@ public class BirdMinigame : MonoBehaviour
         ring.SetActive(true);
         dialogue.dialogueText = "\"Something just fell from that bird??\"";
         DialogueUI.Instance.DialogueUpdate(dialogue.dialogueText);
-        dialogueHint.dialogueText = "\"The Ring is gone\"";
+        dialogueHint.dialogueText = "\"What a beautiful ring.\"";
         interactObject.CheckMinigameDone();
     }
 

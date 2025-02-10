@@ -28,6 +28,8 @@ public class TurntableMinigame : MonoBehaviour
     private bool isSpinning = false;
     private float spinSpeed = 180f;
 
+    [SerializeField] AudioClip sfx_Drop;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -57,6 +59,7 @@ public class TurntableMinigame : MonoBehaviour
         CanInsertVinyl = false;
         CanPressPower = true;
         Debug.Log("แผ่นเสียงถูกใส่เข้าไปแล้ว!");
+        SoundManager.Instance.PlaySFX(sfx_Drop);
 
         // ✅ ย้ายแผ่นเสียงไปที่ตำแหน่ง x = 2 และขยาย Scale เป็น 1.2
         StartCoroutine(MoveAndScaleObject(vinylDiscAll.transform, new Vector3(2f, vinylDiscAll.transform.position.y, vinylDiscAll.transform.position.z), new Vector3(1.2f, 1.2f, 1.2f)));

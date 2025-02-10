@@ -953,6 +953,7 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 0}
+  sfx_OpenDialogue: {fileID: 0}
 --- !u!114 &60279848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1313,7 +1314,7 @@ Transform:
   m_GameObject: {fileID: 88272591}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.63, y: -13.61, z: 0}
+  m_LocalPosition: {x: 17.24, y: -3.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1701,6 +1702,7 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 0}
+  sfx_OpenDialogue: {fileID: 8300000, guid: d99d09cd094631444a88efb5cecb52f3, type: 3}
 --- !u!61 &110950026
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1798,6 +1800,7 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 0}
+  sfx_OpenDialogue: {fileID: 0}
 --- !u!114 &111438368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3425,6 +3428,7 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: Eh, why isn't this working?
   itemObject: {fileID: 0}
+  sfx_OpenDialogue: {fileID: 0}
 --- !u!114 &240347096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9529,6 +9533,7 @@ MonoBehaviour:
   - {fileID: -5229334279812962398, guid: f6c02562a69bccc438a657e3173d7fa2, type: 3}
   - {fileID: 8697585977777225148, guid: f6c02562a69bccc438a657e3173d7fa2, type: 3}
   - {fileID: 6093005389987635686, guid: f6c02562a69bccc438a657e3173d7fa2, type: 3}
+  hideUI: {fileID: 324449345}
 --- !u!4 &829215129
 Transform:
   m_ObjectHideFlags: 0
@@ -9717,7 +9722,7 @@ MonoBehaviour:
   vinylDisc: {fileID: 1462377805}
   defaultSprite: {fileID: -6920055674490405095, guid: 7c8afca675782174fa09b3eb77e78b70, type: 3}
   highlightedSprite: {fileID: 8287454852738619277, guid: 7c8afca675782174fa09b3eb77e78b70, type: 3}
-  sfx_ButtonOn: {fileID: 0}
+  sfx_ButtonOn: {fileID: 8300000, guid: 754765000ee742843baf3a7e744da45a, type: 3}
   sfx_ButtonOff: {fileID: 0}
 --- !u!212 &870319667
 SpriteRenderer:
@@ -10104,6 +10109,7 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 0}
+  sfx_OpenDialogue: {fileID: 0}
 --- !u!114 &959446297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11132,8 +11138,8 @@ MonoBehaviour:
   highlightedSprite: {fileID: -8087525050899628084, guid: 2391534e47bef554b82e02d00225f22b, type: 3}
   fadeDuration: 0.5
   minAlpha: 0.5
-  sfx_Catfat: {fileID: 0}
-  sfx_Catthin: {fileID: 0}
+  sfx_Catfat: {fileID: 8300000, guid: d99d09cd094631444a88efb5cecb52f3, type: 3}
+  sfx_Catthin: {fileID: 8300000, guid: 31b9701e1bcf8aa41b1268ea93f91fb2, type: 3}
 --- !u!95 &1001775989
 Animator:
   serializedVersion: 7
@@ -12288,6 +12294,7 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 869784175}
+  sfx_OpenDialogue: {fileID: 8300000, guid: 0e1fd314905b09040ab252ba7ec18701, type: 3}
 --- !u!114 &1302298020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12547,6 +12554,7 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 1811931570}
+  sfx_OpenDialogue: {fileID: 8300000, guid: 9a42ff54b91f4fb42a0396966d1607fb, type: 3}
 --- !u!114 &1347089457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12719,6 +12727,7 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 0}
+  sfx_OpenDialogue: {fileID: 0}
 --- !u!114 &1350702232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13358,6 +13367,7 @@ MonoBehaviour:
   hasMagnifierMessage: 1
   dialogueTextSpecial: "\u201CEh, why isn't this working?\""
   itemObject: {fileID: 0}
+  sfx_OpenDialogue: {fileID: 0}
 --- !u!61 &1383975118
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13555,7 +13565,7 @@ Transform:
   m_GameObject: {fileID: 1423451339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.87, y: -7.71, z: 0}
+  m_LocalPosition: {x: 16.95, y: -3.3100004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14567,7 +14577,7 @@ MonoBehaviour:
   slideDistance: 1.2
   slideSpeed: 8
   nextIndex: 0
-  sfx_Slide: {fileID: 0}
+  sfx_Slide: {fileID: 8300000, guid: f66f81e24ccae724f954a6a15a0663fc, type: 3}
 --- !u!212 &1557784974
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14725,7 +14735,7 @@ MonoBehaviour:
   slideDistance: 1.2
   slideSpeed: 8
   nextIndex: 0
-  sfx_Slide: {fileID: 0}
+  sfx_Slide: {fileID: 8300000, guid: f66f81e24ccae724f954a6a15a0663fc, type: 3}
 --- !u!212 &1564460774
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16459,7 +16469,7 @@ MonoBehaviour:
   slideDistance: 1.2
   slideSpeed: 8
   nextIndex: 0
-  sfx_Slide: {fileID: 0}
+  sfx_Slide: {fileID: 8300000, guid: f66f81e24ccae724f954a6a15a0663fc, type: 3}
 --- !u!212 &1738522966
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16807,7 +16817,7 @@ MonoBehaviour:
   fadeOverlay: {fileID: 1750592401}
   fadeDuration: 1.5
   waitIn: 0
-  waitOutBefore: 0
+  waitOutBefore: 3
   waitOutAfter: 0
 --- !u!1 &1753817883
 GameObject:
@@ -17337,12 +17347,12 @@ MonoBehaviour:
   targetDialogueSystem: {fileID: 1383975116}
   rewardItemPrefab: {fileID: 755485559}
   rewardItemSlideDistance: 5
-  animationDuration: 1
+  animationDuration: 0.8
   frogKingTransform: {fileID: 1533289765}
   frogQueenTransform: {fileID: 1899142808}
   frogKnightTransform: {fileID: 160556211}
   dialogue: {fileID: 1383975116}
-  sfx_finishVase: {fileID: 0}
+  sfx_finishVase: {fileID: 8300000, guid: 671d8926963193b4ebca35c23ee482b1, type: 3}
 --- !u!114 &1860011840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17398,7 +17408,7 @@ MonoBehaviour:
   totalParts: 15
   interactObject: {fileID: 240347096}
   dialogue: {fileID: 240347095}
-  finishClock: {fileID: 0}
+  sfx_finishClock: {fileID: 8300000, guid: 9b00243fb476a1e4ba65e20f144f25bb, type: 3}
 --- !u!114 &1860011841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17448,9 +17458,9 @@ MonoBehaviour:
   sizeTolerance: 0.05
   snapDistance: 0.5
   dialogue: {fileID: 60279847}
-  sfx_CameraOn: {fileID: 0}
-  sfx_RemoveOldBattery: {fileID: 0}
-  sfx_BatteryInsert: {fileID: 0}
+  sfx_CameraOn: {fileID: 8300000, guid: 2ba170a07f143524e8db21439a7594c9, type: 3}
+  sfx_RemoveOldBattery: {fileID: 8300000, guid: 70a8c4dde694e9e4a8346c94d7ee8686, type: 3}
+  sfx_BatteryInsert: {fileID: 8300000, guid: 8cb08f77901f6f14ebbc8da4f0d8d102, type: 3}
 --- !u!114 &1860011843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17478,9 +17488,10 @@ MonoBehaviour:
   correctMouseScale: {x: 0.6, y: 0.6, z: 0.6}
   interactObject: {fileID: 110950019}
   dialogue: {fileID: 110950023}
-  sfx_Mouse: {fileID: 0}
-  sfx_MouseRun: {fileID: 0}
-  sfx_CatRun: {fileID: 0}
+  sfx_Mouse: {fileID: 8300000, guid: 55d62d949c7bc4446a52db7dd89f614b, type: 3}
+  sfx_MouseRun: {fileID: 8300000, guid: d35f9aebbf38e0f4287493ad12412282, type: 3}
+  sfx_CatRun: {fileID: 8300000, guid: 014346521458df04098f3c4c5d06e6af, type: 3}
+  sfx_Reward: {fileID: 8300000, guid: ed84a01d8b7d63449aa3def90b7c8ad0, type: 3}
 --- !u!114 &1860011844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17505,7 +17516,7 @@ MonoBehaviour:
   newPictureObject: {fileID: 2060452570}
   fadeDuration: 1
   interactObject: {fileID: 959446297}
-  sfx_FadePicture: {fileID: 0}
+  sfx_FadePicture: {fileID: 8300000, guid: ed84a01d8b7d63449aa3def90b7c8ad0, type: 3}
 --- !u!114 &1860011845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17537,11 +17548,11 @@ MonoBehaviour:
   rotationSpeed: 720
   ring: {fileID: 696910181}
   interactObject: {fileID: 111438368}
-  sfx_AppleFall: {fileID: 0}
-  sfx_AppleTray: {fileID: 0}
-  sfx_BirdEating: {fileID: 0}
-  sfx_BirdAfterEat: {fileID: 0}
-  sfx_RingFall: {fileID: 0}
+  sfx_AppleFall: {fileID: 8300000, guid: 07ddeeaa737dbe347921fd84e988568e, type: 3}
+  sfx_AppleTray: {fileID: 8300000, guid: 83b4ccb08ba53a74cab8c2a7feffd48a, type: 3}
+  sfx_BirdEating: {fileID: 8300000, guid: 5cb91aa0ca7fbc44fbaa53b7c8112cb2, type: 3}
+  sfx_BirdAfterEat: {fileID: 8300000, guid: 8af70544c2433d34aae320b94fbf02b6, type: 3}
+  sfx_RingFall: {fileID: 8300000, guid: 07ddeeaa737dbe347921fd84e988568e, type: 3}
 --- !u!114 &1860011846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17565,6 +17576,7 @@ MonoBehaviour:
   minigameBGM: {fileID: 8300000, guid: c9123a34250fb0a41808667d49081672, type: 3}
   needle: {fileID: 1686406443}
   dialogue: {fileID: 1350702231}
+  sfx_Drop: {fileID: 8300000, guid: 230e98c9f076dbb4d990aae6ce2465a7, type: 3}
 --- !u!1 &1880922725
 GameObject:
   m_ObjectHideFlags: 0
@@ -19970,6 +19982,7 @@ MonoBehaviour:
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 1173801554}
+  sfx_OpenDialogue: {fileID: 8300000, guid: 770526c3e76d114459a38061aacfd11e, type: 3}
 --- !u!114 &2102446676
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject); // ✅ ทำให้ SoundManager คงอยู่ทุก Scene
+            DontDestroyOnLoad(gameObject); // ✅ ทำให้ SoundManager คงอยู่ทุก Scene
         }
         else
         {

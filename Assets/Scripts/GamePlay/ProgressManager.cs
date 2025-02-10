@@ -6,6 +6,7 @@ public class ProgressManager : MonoBehaviour
     public Image[] questIcons; // ✅ ไอคอนของภารกิจ
     public Sprite[] defaultSprites; // ✅ ภาพตอนยังไม่เจอ
     public Sprite[] foundSprites; // ✅ ภาพตอนเจอแล้ว
+    [SerializeField] GameObject hideUI;
 
     private bool[] foundItems;
 
@@ -65,5 +66,7 @@ public class ProgressManager : MonoBehaviour
     {
         Debug.Log("You win!");
         SceneTransitionManager.Instance.LoadScene("Win");
+        hideUI.SetActive(false);
+
     }
 }

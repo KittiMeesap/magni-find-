@@ -3041,6 +3041,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeOverlay: {fileID: 1184600035}
   fadeDuration: 1
+  waitIn: 0
+  waitOutBefore: 0
+  waitOutAfter: 0
 --- !u!114 &1010481268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3903,9 +3906,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

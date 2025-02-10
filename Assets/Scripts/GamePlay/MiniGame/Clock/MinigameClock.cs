@@ -38,7 +38,7 @@ public class ClockMinigame : MonoBehaviour
     [SerializeField] private InteractObject interactObject;
     [SerializeField] private DialogueSystem dialogue;
 
-    [SerializeField] private AudioClip finishClock;
+    [SerializeField] private AudioClip sfx_finishClock;
 
     private void Awake()
     {
@@ -174,7 +174,6 @@ public class ClockMinigame : MonoBehaviour
 
     private IEnumerator HandleMinigameCompletion()
     {
-        SoundManager.Instance.PlaySFX(finishClock);
         DialogueUI.Instance.DialogueButton(false);
         Debug.Log("Clock Minigame completed successfully! Starting animation...");
 
@@ -205,6 +204,7 @@ public class ClockMinigame : MonoBehaviour
         // ✅ เลื่อน Clock Storage ลงมา
         if (clockStorageSprite != null)
         {
+            SoundManager.Instance.PlaySFX(sfx_finishClock);
             clockStorageSprite.SetActive(true);
             Vector3 initialStoragePosition = clockStorageSprite.transform.localPosition;
             Vector3 targetStoragePosition = initialStoragePosition - new Vector3(0, clockStorageSlideDistance, 0);

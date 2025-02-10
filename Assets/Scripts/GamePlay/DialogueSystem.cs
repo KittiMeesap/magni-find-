@@ -7,10 +7,14 @@ public class DialogueSystem : MonoBehaviour
     public string dialogueText;
     public bool hasMagnifierMessage;
     public string dialogueTextSpecial;
-
-
-
     public GameObject itemObject;
+
+    [Header("SFX")]
+    [SerializeField] private AudioClip sfx_OpenDialogue;
+
+
+
+    
 
 
     public void ShowDialogue()
@@ -19,6 +23,7 @@ public class DialogueSystem : MonoBehaviour
         {
             if (DialogueUI.Instance != null)
             {
+                SoundManager.Instance.PlaySFX(sfx_OpenDialogue);
                 DialogueUI.Instance.ShowDialogue(dialogueTextSpecial, itemObject);
             }
             else
@@ -30,6 +35,7 @@ public class DialogueSystem : MonoBehaviour
         {
             if (DialogueUI.Instance != null)
             {
+                SoundManager.Instance.PlaySFX(sfx_OpenDialogue);
                 DialogueUI.Instance.ShowDialogue(dialogueText, itemObject);
             }
             else

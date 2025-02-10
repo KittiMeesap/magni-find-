@@ -103,7 +103,6 @@ public class VaseMinigame : MonoBehaviour
 
     private IEnumerator HandleMinigameCompletion()
     {
-        SoundManager.Instance.PlaySFX(sfx_finishVase);
         Debug.Log("Vase Minigame completed successfully! Starting animation...");
 
         Vector3 initialScale = vaseTransform.localScale;
@@ -126,6 +125,7 @@ public class VaseMinigame : MonoBehaviour
         vaseTransform.localScale = targetScale;
         vaseTransform.localPosition = targetPosition;
 
+        SoundManager.Instance.PlaySFX(sfx_finishVase);
         Debug.Log("Vase animation completed. Now making the reward float up...");
 
         if (rewardItemPrefab != null)

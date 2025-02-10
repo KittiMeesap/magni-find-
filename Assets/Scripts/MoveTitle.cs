@@ -112,7 +112,7 @@ public class MoveTitle : MonoBehaviour
 
         StartCoroutine(MoveObjectToPosition(guideTutorial2Transform, new Vector3(4.55f, guideTutorial2Transform.position.y, guideTutorial2Transform.position.z), 1f));
         StartCoroutine(MoveObjectToPosition(playMinigameTransform, new Vector3(-4f, playMinigameTransform.position.y, playMinigameTransform.position.z), 1f));
-        StartCoroutine(MoveUIToPosition(startButtonRect, new Vector2(-400f, startButtonRect.anchoredPosition.y), 1f));
+        StartCoroutine(MoveUIToPosition(startButtonRect, new Vector2(300f, startButtonRect.anchoredPosition.y), 1f));
 
         yield return new WaitForSeconds(1f);
     }

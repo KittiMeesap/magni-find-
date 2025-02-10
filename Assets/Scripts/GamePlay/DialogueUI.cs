@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.VersionControl;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -14,7 +13,6 @@ public class DialogueUI : MonoBehaviour
     public Image CharImage;
     private GameObject currentItemObject;
     public bool IsOpenDialog = false;
-
 
     public Image itemImage;
 
@@ -51,11 +49,9 @@ public class DialogueUI : MonoBehaviour
         if (dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Space))
         {
             if (!closeButton.gameObject.activeSelf) return;
-            //if (!closeButton.isActiveAndEnabled) return;
             HideDialogue();
         }
     }
-
 
     public void ShowDialogue(string message, GameObject itemObject = null)
     {
@@ -64,30 +60,25 @@ public class DialogueUI : MonoBehaviour
         dialogueText.text = message;
         dialoguePanel.SetActive(true);
 
-        // ???????????????????????????
         if (currentItemObject != null)
         {
             currentItemObject.SetActive(false);
         }
 
-        // ?????????? itemObject ???????????
         if (itemObject != null)
         {
-            itemObject.SetActive(true); // ???????????????? itemObject
+            itemObject.SetActive(true);
 
             currentItemObject = itemObject;
 
-            // ?????????? itemObject ?? SpriteRenderer ???? Image ???????
             SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
             if (spriteRenderer != null)
             {
-                // ???????????? Image UI ??????????????????
                 itemImage.sprite = spriteRenderer.sprite;
-                itemImage.gameObject.SetActive(true); // ????????????
+                itemImage.gameObject.SetActive(true);
             }
             else
             {
-                // ???????? SpriteRenderer ??????? Image
                 Image image = itemObject.GetComponent<Image>();
                 if (image != null)
                 {
@@ -96,13 +87,13 @@ public class DialogueUI : MonoBehaviour
                 }
                 else
                 {
-                    itemImage.gameObject.SetActive(false); // ???????????? SpriteRenderer ???? Image
+                    itemImage.gameObject.SetActive(false);
                 }
             }
         }
         else
         {
-            itemImage.gameObject.SetActive(false); // ??????????????? itemObject
+            itemImage.gameObject.SetActive(false);
         }
     }
 

@@ -1,0 +1,978 @@
+fileFormatVersion: 2
+guid: d18df509fec08b845b8e662927e75ce2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -759207132081929497
+    second: clockPuzzle_0
+  - first:
+      213: 235195355780825333
+    second: clockPuzzle_1
+  - first:
+      213: 5545481107140290660
+    second: clockPuzzle_2
+  - first:
+      213: -1282167539488166844
+    second: clockPuzzle_3
+  - first:
+      213: 6830779878611735900
+    second: clockPuzzle_4
+  - first:
+      213: -1694216872907847617
+    second: clockPuzzle_5
+  - first:
+      213: -2197391998650352256
+    second: clockPuzzle_6
+  - first:
+      213: 2744537351934405259
+    second: clockPuzzle_7
+  - first:
+      213: 812882978996473330
+    second: clockPuzzle_8
+  - first:
+      213: 3923766676346881780
+    second: clockPuzzle_9
+  - first:
+      213: 7137070058224335626
+    second: clockPuzzle_10
+  - first:
+      213: 6255374685076001474
+    second: clockPuzzle_11
+  - first:
+      213: 7002187619707655
+    second: clockPuzzle_12
+  - first:
+      213: -8889442090672902028
+    second: clockPuzzle_13
+  - first:
+      213: -1284717062477083527
+    second: clockPuzzle_14
+  - first:
+      213: -297884650374323113
+    second: clockPuzzle_15
+  - first:
+      213: -515929806858938573
+    second: clockPuzzle_16
+  - first:
+      213: 3072116056759406283
+    second: clockPuzzle_17
+  - first:
+      213: -7646547053030116225
+    second: clockPuzzle_18
+  - first:
+      213: 1776832284613517329
+    second: clockPuzzle_19
+  - first:
+      213: -7058746885984223068
+    second: clockPuzzle_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 180
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: clockPuzzle_0
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 2035
+        width: 84
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e24055c221c675f0800000000000000
+      internalID: -759207132081929497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_1
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 2028
+        width: 107
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f043221ee4934300800000000000000
+      internalID: 235195355780825333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_2
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 2020
+        width: 114
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 468acbb8fa185fc40800000000000000
+      internalID: 5545481107140290660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_3
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 2032
+        width: 113
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44c65428a63d43ee0800000000000000
+      internalID: -1282167539488166844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_4
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 2024
+        width: 101
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c55d98bcb1ecbce50800000000000000
+      internalID: 6830779878611735900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_5
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 2033
+        width: 104
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f38caddfabeec78e0800000000000000
+      internalID: -1694216872907847617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_6
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 2031
+        width: 103
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08df8289e9b4181e0800000000000000
+      internalID: -2197391998650352256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_7
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 2030
+        width: 107
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8a67de2e2e861620800000000000000
+      internalID: 2744537351934405259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_8
+      rect:
+        serializedVersion: 2
+        x: 1615
+        y: 2032
+        width: 103
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fdcb0733c0f74b00800000000000000
+      internalID: 812882978996473330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_9
+      rect:
+        serializedVersion: 2
+        x: 1812
+        y: 2035
+        width: 175
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f6cb2dc005047630800000000000000
+      internalID: 3923766676346881780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_10
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 2037
+        width: 147
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0bb9857767fb0360800000000000000
+      internalID: 7137070058224335626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_11
+      rect:
+        serializedVersion: 2
+        x: 2245
+        y: 2030
+        width: 171
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c21de8322e8fc650800000000000000
+      internalID: 6255374685076001474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_12
+      rect:
+        serializedVersion: 2
+        x: 2483
+        y: 1930
+        width: 162
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70b29b9d370e81000800000000000000
+      internalID: 7002187619707655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_13
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 1906
+        width: 84
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 470390e448b52a480800000000000000
+      internalID: -8889442090672902028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_14
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 1898
+        width: 107
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97c8b2e63a4cb2ee0800000000000000
+      internalID: -1284717062477083527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_15
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 1893
+        width: 114
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 754a56e1d73bddbf0800000000000000
+      internalID: -297884650374323113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_16
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 1902
+        width: 113
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 337132df29c07d8f0800000000000000
+      internalID: -515929806858938573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_17
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 1895
+        width: 101
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bce0befd64952aa20800000000000000
+      internalID: 3072116056759406283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_18
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 1904
+        width: 104
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7474d9e7f102e590800000000000000
+      internalID: -7646547053030116225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_19
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 1902
+        width: 103
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 110a5dd7c8398a810800000000000000
+      internalID: 1776832284613517329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_20
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 1900
+        width: 107
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a004852b1b4a0e90800000000000000
+      internalID: -7058746885984223068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_21
+      rect:
+        serializedVersion: 2
+        x: 1615
+        y: 1903
+        width: 103
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61f8ef91d6a0bb840ba0eb908a29d081
+      internalID: -37213293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_22
+      rect:
+        serializedVersion: 2
+        x: 1812
+        y: 1905
+        width: 175
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8f19ba122d229044bbad572ec185c63
+      internalID: 578802890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_23
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 1908
+        width: 147
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 492cc3c782fea1945a668f51013378a3
+      internalID: 1598767573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_24
+      rect:
+        serializedVersion: 2
+        x: 2245
+        y: 1900
+        width: 171
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a966af68c996454c86475f0b9d44012
+      internalID: -2133803025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_25
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1323
+        width: 279
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 830bcd3e6db51094db6544e9d4e66de7
+      internalID: 1270343490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_26
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 1313
+        width: 233
+        height: 576
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3613e17be152d644cb02bb6acdcb9543
+      internalID: 940600057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_27
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 1304
+        width: 238
+        height: 548
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abceb48694f3f6343a6d5f9af9fbb0a4
+      internalID: 1663600307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_28
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 1312
+        width: 302
+        height: 521
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea15ce535f97330409ff62746452ec3a
+      internalID: 96178733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_29
+      rect:
+        serializedVersion: 2
+        x: 1383
+        y: 1304
+        width: 253
+        height: 595
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4e8d188e8538b8478606f3d75cc4ae4
+      internalID: 1150353182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_30
+      rect:
+        serializedVersion: 2
+        x: 1698
+        y: 1295
+        width: 257
+        height: 568
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dedf6bea2bae4104ba25e5f4c6ba28ee
+      internalID: 846973096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_31
+      rect:
+        serializedVersion: 2
+        x: 2050
+        y: 100
+        width: 1618
+        height: 1618
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3957872ddc3cee14c8ac5ca74d35ac19
+      internalID: 1580657330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockPuzzle_32
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 155
+        width: 1541
+        height: 1095
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e22ec59522cd1034cb37777d78ee93d5
+      internalID: 277919231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f509cb7dce1c86a4dbd0099618d4f652
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      clockPuzzle_0: -759207132081929497
+      clockPuzzle_1: 235195355780825333
+      clockPuzzle_10: 7137070058224335626
+      clockPuzzle_11: 6255374685076001474
+      clockPuzzle_12: 7002187619707655
+      clockPuzzle_13: -8889442090672902028
+      clockPuzzle_14: -1284717062477083527
+      clockPuzzle_15: -297884650374323113
+      clockPuzzle_16: -515929806858938573
+      clockPuzzle_17: 3072116056759406283
+      clockPuzzle_18: -7646547053030116225
+      clockPuzzle_19: 1776832284613517329
+      clockPuzzle_2: 5545481107140290660
+      clockPuzzle_20: -7058746885984223068
+      clockPuzzle_21: -37213293
+      clockPuzzle_22: 578802890
+      clockPuzzle_23: 1598767573
+      clockPuzzle_24: -2133803025
+      clockPuzzle_25: 1270343490
+      clockPuzzle_26: 940600057
+      clockPuzzle_27: 1663600307
+      clockPuzzle_28: 96178733
+      clockPuzzle_29: 1150353182
+      clockPuzzle_3: -1282167539488166844
+      clockPuzzle_30: 846973096
+      clockPuzzle_31: 1580657330
+      clockPuzzle_32: 277919231
+      clockPuzzle_4: 6830779878611735900
+      clockPuzzle_5: -1694216872907847617
+      clockPuzzle_6: -2197391998650352256
+      clockPuzzle_7: 2744537351934405259
+      clockPuzzle_8: 812882978996473330
+      clockPuzzle_9: 3923766676346881780
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

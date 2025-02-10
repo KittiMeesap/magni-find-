@@ -19,6 +19,7 @@ public class IntroScene : MonoBehaviour
     public void Start()
     {
         currentPanel = 0;
+        ShowingNextPanel();
     }
 
     public void ShowingNextPanel()

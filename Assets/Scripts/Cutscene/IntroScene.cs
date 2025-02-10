@@ -36,10 +36,9 @@ public class IntroScene : MonoBehaviour
             StartCoroutine(CameraFollowing(() =>
             {
                 currentPanel++;
-                // หากถึง Panel สุดท้าย ให้แสดงปุ่มเพื่อไปยังซีน Dialogue
                 if (currentPanel >= cutscenePanel.Length)
                 {
-                    nextButton.onClick.AddListener(LoadDialogueScene); // เพิ่ม event listener สำหรับปุ่ม
+                    nextButton.onClick.AddListener(LoadDialogueScene);
                 }
             }));
         }
@@ -68,14 +67,13 @@ public class IntroScene : MonoBehaviour
             mainCamera.transform.position = targetPosition;
             onComplete?.Invoke();
 
-            nextButton.gameObject.SetActive(true); // แสดงปุ่มเมื่อคัตซีนเสร็จ
+            nextButton.gameObject.SetActive(true);
         }
     }
 
-    // ฟังก์ชันโหลดซีน Dialogue
+ 
     public void LoadDialogueScene()
     {
-        // กำหนดชื่อซีนที่คุณต้องการจะไปที่นี่
-        SceneManager.LoadScene("Dialogue"); // เปลี่ยนชื่อซีนตามที่คุณสร้าง
+        SceneManager.LoadScene("Dialogue"); 
     }
 }

@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
 
 
     [Header("Audio Clip")]
+    [SerializeField] private AudioClip defaultBGM;
     public AudioClip sfx_Hand;
     public AudioClip sfx_Upsize;
     public AudioClip sfx_Smallsize;
@@ -32,11 +33,12 @@ public class SoundManager : MonoBehaviour
         }
 
         LoadVolumeSettings(); // ✅ โหลดค่าการตั้งค่าเสียงที่บันทึกไว้
+        PlaySFX(defaultBGM);
     }
 
     public void PlayBGM(AudioClip bgmClip = null)
     {
-        if (bgmClip == null) bgmClip = GameController.Instance.DefaultBGM;
+        if (bgmClip == null) bgmClip = defaultBGM;
         if (mainBGMSource.clip == bgmClip && mainBGMSource.isPlaying) return; // ✅ ไม่เล่นซ้ำถ้าเล่นอยู่แล้ว
 
         mainBGMSource.clip = bgmClip;

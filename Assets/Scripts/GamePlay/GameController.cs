@@ -7,12 +7,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private ProgressManager progressManager;
     [SerializeField] private CollectibleItem[] collectibleItems;
 
-    [SerializeField] private AudioClip defaultBGM;
-    public AudioClip DefaultBGM => defaultBGM;
 
     private void Start()
     {
-        SoundManager.Instance.PlayBGM(defaultBGM);
 
         if (progressManager == null)
         {

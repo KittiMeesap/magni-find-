@@ -340,12 +340,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -912,6 +912,12 @@ MonoBehaviour:
   mainBGMSource: {fileID: 1835930636}
   sfxSource: {fileID: 1457094371}
   minigameBGMSource: {fileID: 1767487733}
+  mainmenuBGM: {fileID: 0}
+  gameplayBGM: {fileID: 0}
+  storyBGM: {fileID: 0}
+  dialogueBGM: {fileID: 0}
+  creditBGM: {fileID: 0}
+  defaultBGM: {fileID: 0}
   sfx_Hand: {fileID: 8300000, guid: 2a884b17c5a2a574292b96cbd56267ec, type: 3}
   sfx_Upsize: {fileID: 8300000, guid: 87085f48e8c8cdb4d871df71bca5fefe, type: 3}
   sfx_Smallsize: {fileID: 8300000, guid: fc900041abad7c549b4b20d709773abf, type: 3}

@@ -2403,6 +2403,8 @@ MonoBehaviour:
   snapYOffset: 1
   scaleDuration: 0.1
   highlightedSprite: {fileID: 7207057899275254544, guid: f2a8be9da098352499fb86b61601f4e4, type: 3}
+  FrogTarget: {fileID: 0}
+  FrogTargethighlightedSprite: {fileID: 0}
 --- !u!61 &160556214
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14374,6 +14376,8 @@ MonoBehaviour:
   snapYOffset: 0.4
   scaleDuration: 0.1
   highlightedSprite: {fileID: -8771118261186212892, guid: f2a8be9da098352499fb86b61601f4e4, type: 3}
+  FrogTarget: {fileID: 0}
+  FrogTargethighlightedSprite: {fileID: 0}
 --- !u!61 &1533289768
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15016,7 +15020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1617387560
 Transform:
   m_ObjectHideFlags: 0
@@ -16053,7 +16057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1725279292
 Transform:
   m_ObjectHideFlags: 0
@@ -18015,6 +18019,8 @@ MonoBehaviour:
   snapYOffset: 1
   scaleDuration: 0.1
   highlightedSprite: {fileID: 5960837015773588388, guid: f2a8be9da098352499fb86b61601f4e4, type: 3}
+  FrogTarget: {fileID: 0}
+  FrogTargethighlightedSprite: {fileID: 0}
 --- !u!212 &1899142810
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -20,6 +20,8 @@ public class PictureSlot : MonoBehaviour
     public delegate void SlotCorrect();
     public event SlotCorrect OnSlotCorrect;
 
+    [SerializeField] private AudioClip sfx_Slide;
+
     private void Awake()
     {
         pictureRenderer.sprite = pictures[currentIndex];
@@ -65,7 +67,7 @@ public class PictureSlot : MonoBehaviour
     private IEnumerator SlidePictureAnimation()
     {
         isSliding = true;
-
+        SoundManager.Instance.PlaySFX(sfx_Slide);
         float elapsedTime = 0f;
         Vector3 initialPosition = pictureRenderer.transform.localPosition;
 

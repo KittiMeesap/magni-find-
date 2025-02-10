@@ -46,6 +46,12 @@ public class BirdMinigame : MonoBehaviour
 
     [SerializeField] private InteractObject interactObject;
 
+    [SerializeField] private AudioClip sfx_AppleFall;
+    [SerializeField] private AudioClip sfx_AppleTray;
+    [SerializeField] private AudioClip sfx_BirdEating;
+    [SerializeField] private AudioClip sfx_BirdAfterEat;
+    [SerializeField] private AudioClip sfx_RingFall;
+
     private void Awake()
     {
         if (Instance != null)
@@ -96,6 +102,7 @@ public class BirdMinigame : MonoBehaviour
         DialogueUI.Instance.DialogueButton(false);
 
         yield return new WaitForSeconds(1f);
+        SoundManager.Instance.PlaySFX(sfx_AppleFall);
         float elapsedTime = 0f;
         Vector3 startPos = apple.transform.position;
         Vector3 endPos = appleFallPosition.position;
@@ -130,6 +137,7 @@ public class BirdMinigame : MonoBehaviour
 
         apple.transform.position = appleTrayPosition.position; // ✅ แค่ย้ายตำแหน่ง ไม่ปิด Object
         CanPickUpApple = false; // ✅ ป้องกันการลากอีก
+        SoundManager.Instance.PlaySFX(sfx_AppleFall);
         StartCoroutine(BirdEatApple());
     }
 
@@ -159,6 +167,7 @@ public class BirdMinigame : MonoBehaviour
 
         bird.transform.position = birdEatPosition.position;
         bird.GetComponent<InteractableBird>().SetBirdState("eating");
+        SoundManager.Instance.PlaySFX(sfx_BirdEating);
 
         yield return new WaitForSeconds(1f); // ✅ รออีก 1 วิ ก่อนแอปเปิ้ลค่อยๆ หายไป
         StartCoroutine(FadeOutApple());
@@ -183,6 +192,7 @@ public class BirdMinigame : MonoBehaviour
         }
 
         apple.SetActive(false);
+        SoundManager.Instance.PlaySFX(sfx_BirdAfterEat);
         DialogueUI.Instance.DialogueButton(true);
     }
 
@@ -190,6 +200,7 @@ public class BirdMinigame : MonoBehaviour
     private IEnumerator DropReward()
     {
         rewardItem.SetActive(true);
+        SoundManager.Instance.PlaySFX(sfx_RingFall);
         float elapsedTime = 0f;
         Vector3 startPos = rewardItem.transform.position;
         Vector3 endPos = rewardFallPosition.position;

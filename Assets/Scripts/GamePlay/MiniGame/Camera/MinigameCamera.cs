@@ -37,6 +37,10 @@ public class CameraMinigame : MonoBehaviour
 
     [SerializeField] private DialogueSystem dialogue;
 
+    [SerializeField] private AudioClip sfx_CameraOn;
+    [SerializeField] private AudioClip sfx_RemoveOldBattery;
+    [SerializeField] private AudioClip sfx_BatteryInsert;
+
     private void Awake()
     {
         if (Instance != null) { Destroy(gameObject); }
@@ -69,6 +73,7 @@ public class CameraMinigame : MonoBehaviour
         if (!oldBatteryRemoved && oldBattery != null)
         {
             oldBatteryRemoved = true;
+            SoundManager.Instance.PlaySFX(sfx_RemoveOldBattery);
             StartCoroutine(FadeOutOldBattery());
         }
     }
@@ -106,6 +111,7 @@ public class CameraMinigame : MonoBehaviour
 
     private IEnumerator FadeInNewBattery()
     {
+        
         SpriteRenderer newBatteryRenderer = newBattery.GetComponent<SpriteRenderer>();
         if (newBatteryRenderer == null) yield break;
 
@@ -128,6 +134,7 @@ public class CameraMinigame : MonoBehaviour
     {
         if (!hasBatteryInserted && oldBatteryRemoved && IsBatterySizeCorrect() && IsBatteryPositionCorrect())
         {
+            SoundManager.Instance.PlaySFX(sfx_BatteryInsert);
             hasBatteryInserted = true;
             newBattery.transform.position = batterySlot.transform.position;
             StartCoroutine(FadeToNewCamera()); // ✅ เปลี่ยนกล้อง
@@ -166,6 +173,7 @@ public class CameraMinigame : MonoBehaviour
         cameraObject.SetActive(false);
         cameraFinish.SetActive(true);
 
+
         // ✅ เฟดกล้องใหม่ (รวมลูกๆ)
         yield return StartCoroutine(FadeInWithChildren(cameraFinish));
 
@@ -202,6 +210,7 @@ public class CameraMinigame : MonoBehaviour
 
     private IEnumerator FadeInWithChildren(GameObject obj)
     {
+        SoundManager.Instance.PlaySFX(sfx_CameraOn);
         SpriteRenderer[] renderers = obj.GetComponentsInChildren<SpriteRenderer>();
         float elapsedTime = 0f;
 

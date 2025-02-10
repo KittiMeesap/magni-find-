@@ -25,9 +25,11 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
     [SerializeField] private GameObject FrogTarget;
     private Sprite FrogTargetdefaultSprite;
     [SerializeField] private Sprite FrogTargethighlightedSprite;
+    private Vector3 saveTranform;
 
     private void Awake()
     {
+        saveTranform = transform.position;
         if (FrogTarget != null)
         {
             FrogTargetspriteRenderer = FrogTarget.GetComponent<SpriteRenderer>();
@@ -89,6 +91,10 @@ public class InteractableObjectVaseMinigame : MonoBehaviour
     private void OnMouseUp()
     {
         isDragging = false;
+        if(!isSnapped)
+        {
+            transform.position = saveTranform;
+        }
     }
 
     private void OnMouseOver()

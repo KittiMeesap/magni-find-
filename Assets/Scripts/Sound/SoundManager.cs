@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // ✅ ทำให้ SoundManager คงอยู่ทุก Scene
+            //DontDestroyOnLoad(gameObject); // ✅ ทำให้ SoundManager คงอยู่ทุก Scene
         }
         else
         {
@@ -131,5 +131,6 @@ public class SoundManager : MonoBehaviour
     public void SetMinigameVolume(float volume)
     {
         minigameBGMSource.volume = Mathf.Clamp(volume, 0f, 1f);
+        minigameBGMSource.pitch = Mathf.Clamp(volume, 0f, 1f);
     }
 }

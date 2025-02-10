@@ -1,16 +1,22 @@
 fileFormatVersion: 2
-guid: bac234e3846745b46b052e12fc7cadc5
+guid: 331c70721e9e9b744832c3f4c76884b5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5762253726855295494
-    second: interactItem_0
+      213: -1897824962324530231
+    second: pianoicon_0
   - first:
-      213: 4127099165173971235
-    second: interactItem_1
+      213: -5989970733189940089
+    second: pianoicon_1
   - first:
-      213: 8863225887381006997
-    second: interactItem_2
+      213: 8255674711267854844
+    second: pianoicon_2
+  - first:
+      213: 4932336136829807745
+    second: pianoicon_3
+  - first:
+      213: 5476192027418680028
+    second: pianoicon_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -57,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,19 +122,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -142,7 +135,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WindowsStoreApps
+    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -158,199 +151,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: interact_Item_Clock
+      name: pianoicon_0
       rect:
         serializedVersion: 2
-        x: 1320
-        y: 848
-        width: 152
-        height: 152
+        x: 39
+        y: 2054
+        width: 435
+        height: 434
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 05bbece2c950a49449eb0fcaf459e9d6
-      internalID: -883930457
+      spriteID: 9cbf6ca704299a5e0800000000000000
+      internalID: -1897824962324530231
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: interact_Item_Paper
+      name: pianoicon_1
       rect:
         serializedVersion: 2
-        x: 1168
-        y: 624
-        width: 104
-        height: 72
+        x: 39
+        y: 1531
+        width: 435
+        height: 433
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 5e7e49206683f8f48b62be54abf8923c
-      internalID: -566025859
+      spriteID: 78c3a39ba595fdca0800000000000000
+      internalID: -5989970733189940089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: interact_Item_Book
+      name: pianoicon_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 680
-        width: 208
-        height: 216
+        x: 25
+        y: 1021
+        width: 462
+        height: 463
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 170ffdcb44f39c34ba1883871fbeb87e
-      internalID: 1738883743
+      spriteID: cf9cb42d86c029270800000000000000
+      internalID: 8255674711267854844
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: interact_Item_Vase
+      name: pianoicon_3
       rect:
         serializedVersion: 2
-        x: 536
-        y: 336
-        width: 168
-        height: 264
+        x: 30
+        y: 531
+        width: 453
+        height: 453
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2b0b1142a2776ce418f6913153a43118
-      internalID: -121691112
+      spriteID: 18c2094759d237440800000000000000
+      internalID: 4932336136829807745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: interact_Item_Rat
+      name: pianoicon_4
       rect:
         serializedVersion: 2
-        x: 808
-        y: 192
-        width: 208
-        height: 64
+        x: 39
+        y: 57
+        width: 435
+        height: 434
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 9205e845bea7a6e4ab8a6a91ff07333a
-      internalID: -1715506733
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: interact_Item_Cat
-      rect:
-        serializedVersion: 2
-        x: 1472
-        y: 88
-        width: 288
-        height: 192
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78faf274103048649857b84fbd2df2ac
-      internalID: -1094442492
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hidden_Item_Ball
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 473d8b6bb8aa09641ac95bc60fb53a1b
-      internalID: 1854284394
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hidden_Item_Bear
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 8
-        width: 96
-        height: 152
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8b6a04d0cc5ed5b4b85c00341ffb0b2a
-      internalID: -1568931150
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hidden_Item_Rat
-      rect:
-        serializedVersion: 2
-        x: 328
-        y: 32
-        width: 168
-        height: 152
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 389077ab0c00d6f4f9fe25ae55e71672
-      internalID: -225391359
+      spriteID: cdadd1482a75ffb40800000000000000
+      internalID: 5476192027418680028
       vertices: []
       indices: 
       edges: []
@@ -359,7 +264,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 841664125a11d674dab6c9e9d7e9bced
+    spriteID: 866e0c748fbc6b24a9e8d60cf6a65363
     internalID: 0
     vertices: []
     indices: 
@@ -369,15 +274,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hidden_Item_Ball: 1854284394
-      Hidden_Item_Bear: -1568931150
-      Hidden_Item_Rat: -225391359
-      interact_Item_Book: 1738883743
-      interact_Item_Cat: -1094442492
-      interact_Item_Clock: -883930457
-      interact_Item_Paper: -566025859
-      interact_Item_Rat: -1715506733
-      interact_Item_Vase: -121691112
+      pianoicon_0: -1897824962324530231
+      pianoicon_1: -5989970733189940089
+      pianoicon_2: 8255674711267854844
+      pianoicon_3: 4932336136829807745
+      pianoicon_4: 5476192027418680028
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

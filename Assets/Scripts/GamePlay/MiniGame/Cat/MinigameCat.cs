@@ -29,6 +29,10 @@ public class CatMinigame : MonoBehaviour
     [SerializeField] private InteractObject interactObject;
     [SerializeField] private DialogueSystem dialogue;
 
+    [SerializeField] private AudioClip sfx_Mouse;
+    [SerializeField] private AudioClip sfx_MouseRun;
+    [SerializeField] private AudioClip sfx_CatRun;
+
 
     private void Awake()
     {
@@ -70,6 +74,7 @@ public class CatMinigame : MonoBehaviour
 
     public IEnumerator FadeInMouse()
     {
+        SoundManager.Instance.PlaySFX(sfx_Mouse);
         DialogueUI.Instance.DialogueButton(false);
         mouse.SetActive(true);
         SpriteRenderer mouseSR = mouse.GetComponent<SpriteRenderer>();
@@ -152,6 +157,7 @@ public class CatMinigame : MonoBehaviour
 
     private IEnumerator MoveMouseToTarget()
     {
+        SoundManager.Instance.PlaySFX(sfx_MouseRun);
         isMouseRunning = true;
         float moveDuration = 2f;
         float elapsedTime = 0f;
@@ -176,6 +182,7 @@ public class CatMinigame : MonoBehaviour
 
     private IEnumerator MoveCatToMouse()
     {
+        SoundManager.Instance.PlaySFX(sfx_CatRun);
         float moveDuration = 2f;
         float elapsedTime = 0f;
         Vector3 startPos = cat.transform.position;

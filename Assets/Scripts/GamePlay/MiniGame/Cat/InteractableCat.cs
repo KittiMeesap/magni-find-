@@ -18,6 +18,9 @@ public class InteractableCat : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.5f; // ✅ ระยะเวลาในการเปลี่ยน sprite ให้เนียน
     [SerializeField] private float minAlpha = 0.5f; // ✅ ค่าโปร่งใสต่ำสุด (ทำให้แมวไม่จางจนหายไป)
 
+    [SerializeField] private AudioClip sfx_Catfat;
+    [SerializeField] private AudioClip sfx_Catthin;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -38,7 +41,7 @@ public class InteractableCat : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0)) // ✅ คลิกซ้าย -> แมวอ้วน
             {
-                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Upsize);
+                SoundManager.Instance.PlaySFX(sfx_Catfat);
                 Debug.Log("คลิกซ้าย -> เปลี่ยนเป็นแมวอ้วน");
 
                 StartCoroutine(FadeChangeSprite(fatCatSprite, () =>
@@ -51,7 +54,7 @@ public class InteractableCat : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(1)) // ✅ คลิกขวา -> แมวผอม
             {
-                SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Smallsize);
+                SoundManager.Instance.PlaySFX(sfx_Catthin);
                 Debug.Log("คลิกขวา -> เปลี่ยนเป็นแมวผอม");
                 StartCoroutine(FadeChangeSprite(thinCatSprite, () =>
                 {

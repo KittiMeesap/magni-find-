@@ -8,7 +8,6 @@ public class ProgressManager : MonoBehaviour
     public Sprite[] foundSprites; // ✅ ภาพตอนเจอแล้ว
 
     private bool[] foundItems;
-    public GameObject winScreen;
 
     public static ProgressManager Instance { get; private set; } // Singleton
 
@@ -28,11 +27,6 @@ public class ProgressManager : MonoBehaviour
     {
         foundItems = new bool[questIcons.Length];
         UpdateQuestUI();
-
-        if (winScreen != null)
-        {
-            winScreen.SetActive(false);
-        }
     }
 
     public void MarkAsFound(int index)
@@ -67,12 +61,9 @@ public class ProgressManager : MonoBehaviour
         return true;
     }
 
-    private void HandleWinCondition()
+    public void HandleWinCondition()
     {
         Debug.Log("You win!");
-        if (winScreen != null)
-        {
-            winScreen.SetActive(true);
-        }
+        SceneTransitionManager.Instance.LoadScene("Win");
     }
 }

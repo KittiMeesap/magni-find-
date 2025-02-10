@@ -4,7 +4,7 @@ public class PlayMinigame : MonoBehaviour
 {
     public static PlayMinigame Instance { get; private set; }
 
-    private int totalParts = 4;
+    [SerializeField] private int totalParts = 4;
     private int completedParts = 0;
     private int savedCompletedParts = 0;
 
@@ -22,11 +22,10 @@ public class PlayMinigame : MonoBehaviour
     [SerializeField] private Transform aShadowTransform;
     [SerializeField] private Transform yShadowTransform;
 
-    [SerializeField] private GameObject startButton; // ปุ่ม Start
-    [SerializeField] private GameObject exitButton; // ปุ่ม Exit
 
     private bool isMinigameCompleted = false;
     private Transform draggingLetter = null;
+
 
     private void Awake()
     {
@@ -39,9 +38,6 @@ public class PlayMinigame : MonoBehaviour
             Instance = this;
         }
 
-        // ซ่อนปุ่ม Start และ Exit ตั้งแต่แรก
-        startButton.SetActive(false);
-        exitButton.SetActive(false);
     }
 
     private void Update()
@@ -50,9 +46,10 @@ public class PlayMinigame : MonoBehaviour
 
         if (isMinigameCompleted && Input.GetKeyDown(KeyCode.Space))
         {
+            SceneTransitionManager.Instance.LoadScene("MainMenu");
             // แสดงปุ่ม Start และ Exit เมื่อกด Spacebar
-            startButton.SetActive(true);
-            exitButton.SetActive(true);
+            //startButton.SetActive(true);
+            //exitButton.SetActive(true);
 
             // ทำลาย PlayMinigame
             Destroy(gameObject);  // ลบ object ของ PlayMinigame หลังจากกด Spacebar
@@ -112,23 +109,27 @@ public class PlayMinigame : MonoBehaviour
     {
         Transform shadowTarget = null;
 
-        // Map the letter to its corresponding shadow target
         if (letter == pTransform) shadowTarget = pShadowTransform;
         else if (letter == lTransform) shadowTarget = lShadowTransform;
         else if (letter == aTransform) shadowTarget = aShadowTransform;
         else if (letter == yTransform) shadowTarget = yShadowTransform;
 
-        // If shadow target exists
         if (shadowTarget != null)
         {
-            // Check if the letter is close enough to its shadow
             if (Vector3.Distance(letter.position, shadowTarget.position) <= snapDistance)
             {
-                // Only snap if the scale is correct
                 if (letter.localScale == correctScale)
                 {
-                    letter.position = shadowTarget.position; // Snap to shadow position
-                    CompletePart(); // Mark the part as completed
+                    letter.position = shadowTarget.position;
+
+                    // ✅ ปิด Collider2D เพื่อป้องกันการลากออก
+                    Collider2D letterCollider = letter.GetComponent<Collider2D>();
+                    if (letterCollider != null)
+                    {
+                        letterCollider.enabled = false;
+                    }
+
+                    CompletePart();
                 }
                 else
                 {
@@ -141,6 +142,10 @@ public class PlayMinigame : MonoBehaviour
             }
         }
     }
+
+
+
+
 
     public void CheckLetterPlacement(InteractableObjectPlayMinigame letter)
     {
@@ -173,6 +178,7 @@ public class PlayMinigame : MonoBehaviour
         {
             isMinigameCompleted = true;
             Debug.Log("All letters placed correctly. Press Spacebar to continue.");
+            SceneTransitionManager.Instance.LoadScene("MainMenu");
             playTransform.gameObject.SetActive(true); // Activate the completion screen
         }
     }

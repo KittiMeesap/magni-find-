@@ -38,6 +38,8 @@ public class ClockMinigame : MonoBehaviour
     [SerializeField] private InteractObject interactObject;
     [SerializeField] private DialogueSystem dialogue;
 
+    [SerializeField] private AudioClip finishClock;
+
     private void Awake()
     {
         if (Instance != null)
@@ -172,6 +174,7 @@ public class ClockMinigame : MonoBehaviour
 
     private IEnumerator HandleMinigameCompletion()
     {
+        SoundManager.Instance.PlaySFX(finishClock);
         DialogueUI.Instance.DialogueButton(false);
         Debug.Log("Clock Minigame completed successfully! Starting animation...");
 

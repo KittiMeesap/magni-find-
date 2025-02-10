@@ -24,6 +24,9 @@ public class PictureMinigame : MonoBehaviour
     private bool pictureMinigameDone = false;
     public bool PictureMinigameDone => pictureMinigameDone;
 
+    [SerializeField] private AudioClip sfx_FadePicture;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -73,6 +76,7 @@ public class PictureMinigame : MonoBehaviour
     // ✅ เฟดภาพเก่าให้เหลือ 50% → เฟดภาพใหม่ + แว่นตาซ้อนขึ้นมา → ปิดภาพเก่า
     private IEnumerator FadeOldPictureAndShowNew()
     {
+        SoundManager.Instance.PlaySFX(sfx_FadePicture);
         SpriteRenderer oldSR = oldPictureObject.GetComponent<SpriteRenderer>();
         SpriteRenderer newSR = newPictureObject.GetComponent<SpriteRenderer>();
         SpriteRenderer rewardSR = rewardItem.GetComponent<SpriteRenderer>();

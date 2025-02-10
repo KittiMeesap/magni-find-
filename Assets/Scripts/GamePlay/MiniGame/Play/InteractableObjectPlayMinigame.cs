@@ -14,11 +14,8 @@ public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler
     public float snapYOffset = 0.0f; // Y offset for snap position
 
     private bool isDragging = false;
-    private bool isSnapped = false; // Block dragging after snapping
+    private bool isSnapped = false; // ✅ ห้ามดึงออกหลัง snap
     private bool isSelected = false; // Flag to track if object is selected
-
-    [SerializeField] private Material defaultMaterial; // Default material
-    [SerializeField] private Material highlightMaterial; // Highlight material during interaction
 
     private RectTransform rectTransform;
     private Canvas canvas;
@@ -33,16 +30,18 @@ public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        // ถ้าตัวอักษรถูก snap ไปแล้ว ห้ามลาก
+        if (isSnapped) return;
+
         // Record the position where the pointer clicked
         originalPointerPosition = eventData.position;
         isDragging = true;
 
         // Check if the current mode is "Hand"
-        if (!isSnapped && ToolManager.Instance.CurrentMode == "Hand")
+        if (ToolManager.Instance.CurrentMode == "Hand")
         {
             isSelected = true; // Mark as selected
             ToolManager.Instance.SetSelectedObject(gameObject); // Set selected object
-            ChangeMaterial(highlightMaterial); // Highlight object during dragging
             Debug.Log("Object clicked: " + gameObject.name); // Log when clicked
         }
 
@@ -80,27 +79,17 @@ public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler
         if (ToolManager.Instance.CurrentMode == "Hand")
         {
             isDragging = false; // Stop dragging
-            ChangeMaterial(defaultMaterial); // Revert material when dragging stops
             Debug.Log("Object released: " + gameObject.name); // Log when released
 
             // Check letter placement when dragging ends
             if (PlayMinigame.Instance != null)
             {
-                // ส่งตัวเองเป็น `InteractableObjectPlayMinigame` แทน
+                // ส่งตัวเองเป็น InteractableObjectPlayMinigame แทน
                 PlayMinigame.Instance.CheckLetterPlacement(this);
             }
         }
     }
 
-    private void ChangeMaterial(Material newMaterial)
-    {
-        // Update material of the object
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null && newMaterial != null)
-        {
-            spriteRenderer.material = newMaterial;
-        }
-    }
 
     private void ModifyScale(float scaleChange)
     {
@@ -113,10 +102,14 @@ public class InteractableObjectPlayMinigame : MonoBehaviour, IPointerDownHandler
 
         transform.localScale = newScale;
 
-        // เปลี่ยนวัสดุเป็น highlightMaterial ระหว่างการ Resize
-        ChangeMaterial(highlightMaterial);
-
         Debug.Log($"Modified scale of {gameObject.name} to {newScale}");
+    }
+
+    // ✅ เมื่อ snap แล้วให้ห้ามดึงออก
+    public void MarkAsSnapped()
+    {
+        isSnapped = true;
+        Debug.Log($"{gameObject.name} is now snapped and locked.");
     }
 
     // Function to zoom the UI object

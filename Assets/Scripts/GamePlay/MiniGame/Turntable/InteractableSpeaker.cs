@@ -7,8 +7,6 @@ public class Speaker : MonoBehaviour
 
     [SerializeField] private Vector3 minScale = new Vector3(0.8f, 0.8f, 0.8f);
     [SerializeField] private Vector3 maxScale = new Vector3(1.2f, 1.2f, 1.2f);
-    [SerializeField] private GameObject soundSymbol;
-    [SerializeField] private VinylDisc vinylDisc;
 
     private int currentLevel = 1;
     private int minLevel = 1;
@@ -147,15 +145,16 @@ public class Speaker : MonoBehaviour
     }
 
 
+    [SerializeField] private SpriteRenderer soundSymbolRenderer; // ✅ ใช้เปลี่ยน Sprite ของ soundSymbol
+    [SerializeField] private Sprite[] soundLevelSprites; // ✅ เก็บ Sprite 1-5 ตามระดับเสียง
     private void UpdateSpeakerSize()
     {
         float t = (float)(currentLevel - minLevel) / (maxLevel - minLevel);
-        //transform.localScale = Vector3.Lerp(minScale, maxScale, t);
 
-        // ✅ ปรับ Alpha ของ Sound Symbol ตามระดับเสียง
-        float alpha = Mathf.Lerp(0f, 1f, t);
-        soundSymbol.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
-
-        //SoundManager.Instance.SetMinigameVolume(alpha);
+        // ✅ เปลี่ยน Sprite ตามระดับเสียง
+        if (soundSymbolRenderer != null && soundLevelSprites.Length == 5)
+        {
+            soundSymbolRenderer.sprite = soundLevelSprites[currentLevel - 1];
+        }
     }
 }

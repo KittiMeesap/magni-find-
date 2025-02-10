@@ -90,11 +90,6 @@ public class TurntableMinigame : MonoBehaviour
         Debug.Log("เครื่องเล่นเปิดแล้ว!");
         soundSymbol.SetActive(true);
         Speaker.Instance.EnableScaling(true);
-
-        if (Speaker.Instance.CurrentLevel == 0)
-        {
-            Speaker.Instance.SetInitialVolume(1);
-        }
         needle.GetComponent<SpriteRenderer>().sortingOrder += 2;
         StartCoroutine(StartTurntableSequence());
     }

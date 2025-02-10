@@ -10,6 +10,9 @@ public class PowerButton : MonoBehaviour
     [SerializeField] private Sprite defaultSprite;       // ✅ Sprite ปกติ
     [SerializeField] private Sprite highlightedSprite;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
 
+    [SerializeField] private AudioClip sfx_ButtonOn;
+    [SerializeField] private AudioClip sfx_ButtonOff;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,10 +35,12 @@ public class PowerButton : MonoBehaviour
 
         if (isOn)
         {
+            SoundManager.Instance.PlaySFX(sfx_ButtonOn);
             TurntableMinigame.Instance.TurnOn();
         }
         else
         {
+            SoundManager.Instance.PlaySFX(sfx_ButtonOff);
             TurntableMinigame.Instance.TurnOff();
         }
     }

@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VinylDisc : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class VinylDisc : MonoBehaviour
     public Transform TrayPosition => trayPosition;
 
     private SpriteRenderer spriteRenderer;
+    private Vector3 originalPosition; // ✅ เก็บตำแหน่งก่อนลาก
 
     [SerializeField] private Sprite defaultSprite;       // ✅ Sprite ปกติ
     [SerializeField] private Sprite highlightedSprite;   // ✅ Sprite เมื่อเอาเมาส์ไปวาง
@@ -22,12 +22,15 @@ public class VinylDisc : MonoBehaviour
         {
             defaultSprite = spriteRenderer.sprite;
         }
+
+        originalPosition = transform.position; // ✅ บันทึกตำแหน่งเริ่มต้น
     }
+
     private void OnMouseDown()
     {
         if (Time.timeScale == 0f) return;
-
         if (!TurntableMinigame.Instance.CanInsertVinyl) return; // ✅ ป้องกันลากเข้าไปซ้ำ
+
         SoundManager.Instance.PlaySFX(SoundManager.Instance.sfx_Hand);
         isDragging = true;
         offset = transform.position - GetMouseWorldPos();
@@ -44,10 +47,16 @@ public class VinylDisc : MonoBehaviour
     private void OnMouseUp()
     {
         isDragging = false;
-        if (Vector3.Distance(transform.position, trayPosition.position) < 1.0f) // ✅ ถ้าอยู่ใกล้ถาด
+
+        // ✅ ถ้าห่างจาก trayPosition เกิน 1.0f ให้กลับไปที่ตำแหน่งเดิมทันที
+        if (Vector3.Distance(transform.position, trayPosition.position) < 1.0f)
         {
             transform.position = trayPosition.position;
             TurntableMinigame.Instance.InsertVinyl();
+        }
+        else
+        {
+            transform.position = originalPosition; // ✅ กลับไปที่ตำแหน่งเดิมทันที
         }
     }
 

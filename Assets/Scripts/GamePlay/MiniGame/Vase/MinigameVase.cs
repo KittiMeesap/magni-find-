@@ -33,6 +33,8 @@ public class VaseMinigame : MonoBehaviour
 
     [SerializeField] private DialogueSystem dialogue;
 
+    [SerializeField] private AudioClip sfx_finishVase;
+
     private void Awake()
     {
         if (Instance != null)
@@ -101,6 +103,7 @@ public class VaseMinigame : MonoBehaviour
 
     private IEnumerator HandleMinigameCompletion()
     {
+        SoundManager.Instance.PlaySFX(sfx_finishVase);
         Debug.Log("Vase Minigame completed successfully! Starting animation...");
 
         Vector3 initialScale = vaseTransform.localScale;

@@ -2401,7 +2401,7 @@ MonoBehaviour:
   correctScale: {x: 0.8, y: 0.8, z: 0.8}
   scaleTolerance: 0
   scaleStep: 0.1
-  minScale: {x: 0.1, y: 0.1, z: 0.1}
+  minScale: {x: 0.5, y: 0.5, z: 0.5}
   maxScale: {x: 1, y: 1, z: 1}
   snapYOffset: 1
   scaleDuration: 0.1
@@ -6259,7 +6259,6 @@ MonoBehaviour:
   - {fileID: 749684772}
   - {fileID: 1691546447}
   - {fileID: 385068753}
-  defaultBGM: {fileID: 8300000, guid: 61e5e0260b2004141a80c330f5e7d5c4, type: 3}
 --- !u!114 &476194210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11519,6 +11518,7 @@ MonoBehaviour:
   mainBGMSource: {fileID: 1209101466}
   sfxSource: {fileID: 22155766}
   minigameBGMSource: {fileID: 546835099}
+  defaultBGM: {fileID: 8300000, guid: 61e5e0260b2004141a80c330f5e7d5c4, type: 3}
   sfx_Hand: {fileID: 8300000, guid: 2a884b17c5a2a574292b96cbd56267ec, type: 3}
   sfx_Upsize: {fileID: 8300000, guid: 87085f48e8c8cdb4d871df71bca5fefe, type: 3}
   sfx_Smallsize: {fileID: 8300000, guid: fc900041abad7c549b4b20d709773abf, type: 3}
@@ -14381,7 +14381,7 @@ MonoBehaviour:
   correctScale: {x: 0.5, y: 0.5, z: 0.5}
   scaleTolerance: 0
   scaleStep: 0.1
-  minScale: {x: 0.1, y: 0.1, z: 0.1}
+  minScale: {x: 0.5, y: 0.5, z: 0.5}
   maxScale: {x: 1, y: 1, z: 1}
   snapYOffset: 0.4
   scaleDuration: 0.1
@@ -18026,7 +18026,7 @@ MonoBehaviour:
   correctScale: {x: 1, y: 1, z: 1}
   scaleTolerance: 0
   scaleStep: 0.1
-  minScale: {x: 0.1, y: 0.1, z: 0.1}
+  minScale: {x: 0.5, y: 0.5, z: 0.5}
   maxScale: {x: 1, y: 1, z: 1}
   snapYOffset: 1
   scaleDuration: 0.1

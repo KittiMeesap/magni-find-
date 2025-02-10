@@ -21,14 +21,6 @@ public class PauseMenu : MonoBehaviour
         settingsPanel.SetActive(false); // ✅ ปิดเมนูไว้ก่อน
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePauseMenu();
-        }
-    }
-
     public void TogglePauseMenu()
     {
         isPaused = !isPaused;

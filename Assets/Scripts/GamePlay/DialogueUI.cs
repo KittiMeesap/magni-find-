@@ -46,7 +46,7 @@ public class DialogueUI : MonoBehaviour
 
     private void Update()
     {
-        if (dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        if (dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
         {
             if (!closeButton.gameObject.activeSelf) return;
             HideDialogue();

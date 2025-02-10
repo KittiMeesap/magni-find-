@@ -35,13 +35,6 @@ public class MinigameManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (IsPlayingMinigame && Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseMinigame();
-        }
-    }
 
     public void StartMinigame(GameObject minigameObject, Transform objectTransform, GameObject reward, bool useFadeIn = false)
     {

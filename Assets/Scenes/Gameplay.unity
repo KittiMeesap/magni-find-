@@ -2152,7 +2152,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 1167817714, guid: 9536b14a0c99c5c4cb24054a6b287e24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2190,7 +2190,7 @@ Transform:
   m_GameObject: {fileID: 160556210}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.79, y: -1.65, z: 0}
+  m_LocalPosition: {x: -1.08, y: -0.2, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2268,7 +2268,7 @@ MonoBehaviour:
   correctScale: {x: 0.8, y: 0.8, z: 0.8}
   scaleTolerance: 0
   scaleStep: 0.1
-  minScale: {x: 0.5, y: 0.5, z: 0.5}
+  minScale: {x: 0.3, y: 0.3, z: 0.3}
   maxScale: {x: 1, y: 1, z: 1}
   snapYOffset: 1
   scaleDuration: 0.1
@@ -2859,7 +2859,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: -624178397, guid: 9536b14a0c99c5c4cb24054a6b287e24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3068,7 +3068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dcdcf3a4d45e86478565001b06cb868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueText: '"Is the clock broken? Should I take a closer look?"'
+  dialogueText: '"These clock hands have strange symbols. What do they mean?"'
   hasMagnifierMessage: 0
   dialogueTextSpecial: Eh, why isn't this working?
   itemObject: {fileID: 0}
@@ -9832,7 +9832,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 204701722, guid: 9536b14a0c99c5c4cb24054a6b287e24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -12888,7 +12888,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: -1076468699, guid: 9536b14a0c99c5c4cb24054a6b287e24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -13194,7 +13194,7 @@ Transform:
   m_GameObject: {fileID: 1533289764}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.77, y: -0.36, z: 0}
+  m_LocalPosition: {x: 2.68, y: 2.22, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -13272,7 +13272,7 @@ MonoBehaviour:
   correctScale: {x: 0.5, y: 0.5, z: 0.5}
   scaleTolerance: 0
   scaleStep: 0.1
-  minScale: {x: 0.5, y: 0.5, z: 0.5}
+  minScale: {x: 0.3, y: 0.3, z: 0.3}
   maxScale: {x: 1, y: 1, z: 1}
   snapYOffset: 0.4
   scaleDuration: 0.1
@@ -13460,11 +13460,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pictureRenderer: {fileID: 1557784974}
   pictures:
+  - {fileID: -3031866633220685253, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 7687786061428138174, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 8836467170573994871, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 2145124969438295541, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: 2399650723779825181, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: -1339158342737399068, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: -6463667809311501458, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: 321713477926953682, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
-  correctIndex: 3
+  - {fileID: -3242018141300262019, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: -4726495363153510710, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: -5871082671621250026, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 3947737388301701579, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  correctIndex: 7
   slideDistance: 1.2
   slideSpeed: 8
   nextIndex: 0
@@ -13513,7 +13521,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 2399650723779825181, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  m_Sprite: {fileID: -3031866633220685253, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13562,7 +13570,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.96, y: 1.85}
+    oldSize: {x: 1.95, y: 1.85}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13618,11 +13626,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pictureRenderer: {fileID: 1564460774}
   pictures:
+  - {fileID: -3031866633220685253, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 7687786061428138174, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 8836467170573994871, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 2145124969438295541, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 2399650723779825181, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: -1339158342737399068, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: -6463667809311501458, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 321713477926953682, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: -3242018141300262019, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: -4726495363153510710, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: -5871082671621250026, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: 3947737388301701579, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
-  correctIndex: 3
+  correctIndex: 11
   slideDistance: 1.2
   slideSpeed: 8
   nextIndex: 0
@@ -13671,7 +13687,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -3242018141300262019, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  m_Sprite: {fileID: -3031866633220685253, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14157,15 +14173,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7772189708486689781, guid: ae5d61013bcd6c4408f92f1f88174d4d, type: 3}
+  m_Sprite: {fileID: 7772189708486689781, guid: fdc8fa5efd4b593448b424fdd4c03b19, type: 3}
   m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 9.6, y: 5.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1675269365
@@ -14245,7 +14261,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: -492230788, guid: 9536b14a0c99c5c4cb24054a6b287e24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -14758,7 +14774,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 1536770098, guid: 9536b14a0c99c5c4cb24054a6b287e24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -15356,6 +15372,14 @@ MonoBehaviour:
   - {fileID: 7687786061428138174, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: 8836467170573994871, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   - {fileID: 2145124969438295541, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 2399650723779825181, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: -1339158342737399068, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: -6463667809311501458, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 321713477926953682, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: -3242018141300262019, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: -4726495363153510710, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: -5871082671621250026, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
+  - {fileID: 3947737388301701579, guid: 23ff705c60c850f4fa367423218e26c9, type: 3}
   correctIndex: 3
   slideDistance: 1.2
   slideSpeed: 8
@@ -15741,7 +15765,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 1964768968, guid: 9536b14a0c99c5c4cb24054a6b287e24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -16539,7 +16563,7 @@ Transform:
   m_GameObject: {fileID: 1899142807}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.69, y: 2.42, z: 0}
+  m_LocalPosition: {x: 2.66, y: -1.92, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -16562,7 +16586,7 @@ MonoBehaviour:
   correctScale: {x: 1, y: 1, z: 1}
   scaleTolerance: 0
   scaleStep: 0.1
-  minScale: {x: 0.5, y: 0.5, z: 0.5}
+  minScale: {x: 0.3, y: 0.3, z: 0.3}
   maxScale: {x: 1, y: 1, z: 1}
   snapYOffset: 1
   scaleDuration: 0.1
@@ -18392,7 +18416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dcdcf3a4d45e86478565001b06cb868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueText: '"Hmm, a Post-it note. I wonder who wrote this?"'
+  dialogueText: '"Numbers and symbols... they seem familiar."'
   hasMagnifierMessage: 0
   dialogueTextSpecial: 
   itemObject: {fileID: 1173801554}
@@ -18627,7 +18651,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 320603132, guid: 9536b14a0c99c5c4cb24054a6b287e24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.078431375}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
